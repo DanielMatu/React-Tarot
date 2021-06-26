@@ -1,0 +1,28 @@
+.dashboard-center-container {
+    display:flex;
+    justify-content: space-evenly;
+    margin-top:20rem;
+
+    .dashboard-center-option{
+        text-align: center;
+        padding: $m-size;
+        width: 40rem;
+        height: 40rem;
+        //background: rgba(110, 50, 220, 0.6);
+        background: rgba(30,10,60, 0.8);
+        border: 1px solid $light-blue;
+
+        .dashboard-center-option-header{
+            color:$light-blue;
+            font-size: 36px;
+            padding: $m-size 0;
+        }
+
+        .dashboard-center-option-image{
+            width: 30rem;
+            height: 15rem;
+        }
+    }
+}
+
+
