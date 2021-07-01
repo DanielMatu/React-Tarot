@@ -7,9 +7,12 @@ const config = {
     projectId: process.env.FIREBASE_PROJECT_ID,
     storageBucket: process.env.FIREBASE_STORAGE_BUCKET,
     messagingSenderId: process.env.FIREBASE_MESSAGING_SENDER_ID,
-    appId: "1:424196086944:web:24e400b97919b9edda3dc5",
-    measurementId: "G-GVEVKEHW93"
+    appId: "1:224496153994:web:ddf5c5598270701145c473",
+    measurementId: "G-Q9C5YMPSMS"
 };
+
+console.log('heres config')
+console.log(config)
 
 firebase.initializeApp(config);
 

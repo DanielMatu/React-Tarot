@@ -18,7 +18,12 @@
     }
 }
 
-
+.hamburger-line {
+    margin: 6px 0;
+    background-color:white;
+    width: 35px;
+    height: 5px;
+}
 
 .hamburger-dropdown-item {
     width: 100vw;
@@ -31,12 +36,7 @@
     .hamburger{
         padding: $m-size;
     }
-    .hamburger-line {
-        margin: 6px 0;
-        background-color:white;
-        width: 35px;
-        height: 5px;
-    }
+
 
     .main-nav {
         display: none;
