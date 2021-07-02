@@ -34,7 +34,7 @@ const config = {
   devtool:'eval-cheap-source-map' ,
   plugins: [
     new HtmlWebpackPlugin({
-      template: path.join(__dirname, '../boilerplate v2/public/index.html'),
+      template: path.join(__dirname, 'public/index.html'),
     }),
 
     new MiniCssExtractPlugin(),
