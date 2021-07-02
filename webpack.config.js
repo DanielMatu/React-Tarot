@@ -21,7 +21,7 @@ if (process.env.NODE_ENV === 'test'){
 const config = {
   entry: "./src/app.js",
   output: {
-    path: path.resolve(__dirname, "dist"),
+    path: path.join(__dirname, "public/dist"),
   },
   devServer: {
     open: true,
