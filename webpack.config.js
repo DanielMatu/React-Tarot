@@ -28,6 +28,9 @@ const config = {
     host: "localhost",
     historyApiFallback: true
   },
+  stats: {
+    children:true
+  },
   devtool:'eval-cheap-source-map' ,
   plugins: [
     new HtmlWebpackPlugin({
