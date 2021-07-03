@@ -1,5 +1,5 @@
 import React from 'react';
-import BackgroundVideo from './BackgroundVideo'
+import img from '../../public/images/read-book.png';
 
 const DashboardPage = () => (
     <div>
@@ -16,7 +16,7 @@ const DashboardPage = () => (
                 CREATE JOURNAL ENTRY
             </div>  
             <div className='dashboard-center-option-image' id="read-book-img"/>
-
+            <img src={img} />
         </div>  
     </div>
  

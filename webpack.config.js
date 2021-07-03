@@ -5,6 +5,8 @@ const HtmlWebpackPlugin = require("html-webpack-plugin");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const webpack = require('webpack')
 const WorkboxWebpackPlugin = require("workbox-webpack-plugin");
+const CopyPlugin = require("copy-webpack-plugin");
+
 
 const isProduction = process.env.NODE_ENV == "production";
 
@@ -49,6 +51,12 @@ const config = {
       'process.env.FIREBASE_MESSAGING_SENDER_ID': JSON.stringify(process.env.FIREBASE_MESSAGING_SENDER_ID)
     }), 
 
+    new CopyPlugin({
+      patterns: [
+        { from: path.join(__dirname, "public/images"), to: path.join(__dirname, "public/dist")},
+      ],
+    }),
+
   ],
   module: {
     rules: [
@@ -70,14 +78,13 @@ const config = {
         type: "asset",
       },
       {
-        test: /\.(mp4|gif)$/,
+        test: /\.(mp4|svg|png|jpe?g|gif)$/,
         use: {
           loader: "file-loader",
-          options: {
-            attrs: [":src"]
-          }
         }
       },
+
+      
 
       // Add your rules for custom modules here
       // Learn more about loaders from https://webpack.js.org/loaders/
