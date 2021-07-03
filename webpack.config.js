@@ -32,7 +32,7 @@ const config = {
     historyApiFallback: true
   },
   stats: {
-    children:true
+    children:false
   },
   devtool:'eval-cheap-source-map' ,
   plugins: [
@@ -53,7 +53,7 @@ const config = {
 
     new CopyPlugin({
       patterns: [
-        { from: path.join(__dirname, "public/images"), to: path.join(__dirname, "public/dist")},
+        { from: path.join(__dirname, "public/images"), to: path.join(__dirname, "public/dist/img")},
       ],
     }),
 
@@ -77,12 +77,7 @@ const config = {
         test: /\.(eot|svg|ttf|woff|woff2|png|jpg|gif)$/i,
         type: "asset",
       },
-      {
-        test: /\.(mp4|svg|png|jpe?g|gif)$/,
-        use: {
-          loader: "file-loader",
-        }
-      },
+
 
       
 
