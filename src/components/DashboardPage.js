@@ -1,4 +1,5 @@
 import React from 'react';
+import img from '../../public/images/read-book.png';
 
 
 const DashboardPage = () => (
@@ -14,9 +15,11 @@ const DashboardPage = () => (
 
         </div>
         <div className='dashboard-center-option'>
+            <video src = "../../public/images/bg-sea.mp4" />
             <div className='dashboard-center-option-header'>
                 CREATE JOURNAL ENTRY
             </div> 
+            <img src={img} /> 
             <div className='dashboard-center-option-image' id="read-book-img"/>
         </div>  
     </div>
