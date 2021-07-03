@@ -4,6 +4,9 @@
     margin-top:20rem;
 
     .dashboard-center-option{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
         text-align: center;
         padding: $m-size;
         width: 40rem;
@@ -21,6 +24,21 @@
         .dashboard-center-option-image{
             width: 30rem;
             height: 15rem;
+        }
+
+        #eye-look-img {
+            background: url("../../public/images/eye-look.png");
+            background-size: cover;
+            height: 16rem;
+
+        }
+
+        #read-book-img {
+            background: url("../../public/images/read-book.png");
+            background-size: cover;
+            height: 19rem;
+            width: 23rem;
+
         }
     }
 }
