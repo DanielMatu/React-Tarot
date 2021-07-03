@@ -15,7 +15,7 @@ const DashboardPage = () => (
 
         </div>
         <div className='dashboard-center-option'>
-            <video src = "../../public/images/bg-sea.mp4" />
+            <video src = "../../public/videos/bg-sea.mp4" />
             <div className='dashboard-center-option-header'>
                 CREATE JOURNAL ENTRY
             </div> 

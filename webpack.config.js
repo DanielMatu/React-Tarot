@@ -88,7 +88,6 @@ const config = {
       },
 
 
-
       
 
       // Add your rules for custom modules here
