@@ -1,5 +1,4 @@
 import React from 'react';
-import img from '../../public/images/read-book.png';
 
 
 const DashboardPage = () => (
@@ -15,11 +14,9 @@ const DashboardPage = () => (
 
         </div>
         <div className='dashboard-center-option'>
-            <img src = "../../public/images/read-book.png" />
             <div className='dashboard-center-option-header'>
                 CREATE JOURNAL ENTRY
             </div> 
-            <img src={img} /> 
             <div className='dashboard-center-option-image' id="read-book-img"/>
         </div>  
     </div>
