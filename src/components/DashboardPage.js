@@ -16,6 +16,7 @@ const DashboardPage = () => (
                 CREATE JOURNAL ENTRY
             </div>  
             <div className='dashboard-center-option-image' id="read-book-img"/>
+            <img src={img} />
         </div>  
     </div>
  
