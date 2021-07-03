@@ -15,7 +15,7 @@ export const history = createBrowserHistory()
 const AppRouter = () => (
     <Router history={history}>
         <div>
-            <BackgroundVideo url='public/images/bg-sea.mp4'/>
+            <BackgroundVideo url='assets/bg-sea.mp4'/>
             <Switch>
                 <PublicRoute path="/" component={LoginPage} exact={true}/>
 
