@@ -51,11 +51,7 @@ const config = {
       'process.env.FIREBASE_MESSAGING_SENDER_ID': JSON.stringify(process.env.FIREBASE_MESSAGING_SENDER_ID)
     }), 
 
-    new CopyPlugin({
-      patterns: [
-        { from: path.join(__dirname, "public/images"), to: path.join(__dirname, "public/dist/img")},
-      ],
-    }),
+
 
   ],
   module: {
