@@ -13,6 +13,7 @@ const DashboardPage = () => (
 
         </div>
         <div className='dashboard-center-option'>
+            <img src = "../../public/images/read-book.png" />
             <div className='dashboard-center-option-header'>
                 CREATE JOURNAL ENTRY
             </div> 
