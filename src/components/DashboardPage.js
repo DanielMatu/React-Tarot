@@ -17,6 +17,7 @@ const DashboardPage = () => (
                 <img src='public/images/read-book.png'></img>
             </div>  
             <div className='dashboard-center-option-image' id="read-book-img"/>
+            <img src='public/images/read-book.png'></img>
 
         </div>  
     </div>
