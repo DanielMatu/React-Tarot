@@ -32,7 +32,7 @@ const config = {
     historyApiFallback: true
   },
   stats: {
-    children:false
+    children:true
   },
   devtool:'eval-cheap-source-map' ,
   plugins: [
@@ -69,11 +69,19 @@ const config = {
         test: /\.s[ac]ss$/i,
         use: [stylesHandler, "css-loader", "sass-loader"],
       },
-      {
-        test: /\.(eot|svg|ttf|woff|woff2|png|jpg|gif)$/i,
-        type: "asset",
-      },
 
+
+      {
+        test: /\.(mp4|svg|png|jpe?g|gif)$/,
+        use: {
+          loader: "file-loader",
+          options: {
+            name: '[name].[ext]',
+            outputPath: 'img/',
+            publicPath: 'img/'
+          }
+        }
+      },
 
       
 

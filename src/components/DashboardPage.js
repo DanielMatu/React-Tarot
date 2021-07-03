@@ -1,6 +1,7 @@
 import React from 'react';
 import img from '../../public/images/read-book.png';
 
+
 const DashboardPage = () => (
     <div>
     <div className='dashboard-center-container'>
@@ -14,9 +15,9 @@ const DashboardPage = () => (
         <div className='dashboard-center-option'>
             <div className='dashboard-center-option-header'>
                 CREATE JOURNAL ENTRY
-            </div>  
+            </div> 
+            <img src={img} /> 
             <div className='dashboard-center-option-image' id="read-book-img"/>
-            <img src={img} />
         </div>  
     </div>
  
