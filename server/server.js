@@ -8,7 +8,6 @@ app.use(express.static(publicPath))
 
 console.log('process.env')
 console.log(process.env)
-console.log(process.env.FIREBASE_DATABASE_URL)
 
 app.get('*', (req, res) => {
     res.sendFile(path.join(publicPath, 'index.html'))
