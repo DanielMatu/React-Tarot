@@ -1,6 +1,5 @@
 import React from 'react';
 import img from '../../public/images/read-book.png';
-import distImg from '../../public/dist/img/read-book.png'
 
 
 const DashboardPage = () => (
@@ -12,7 +11,6 @@ const DashboardPage = () => (
             <div className='dashboard-center-option-header'>
                 RECEIVE A FORTUNE
             </div>
-            <img src={distImg} />
             <div className='dashboard-center-option-image' id="eye-look-img"/>
 
         </div>
