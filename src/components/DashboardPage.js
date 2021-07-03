@@ -5,7 +5,6 @@ const DashboardPage = () => (
     <div>
     <div className='dashboard-center-container'>
         <div className='dashboard-center-option'>
-        <img src='dist/img/read-book.png' />
 
             <div className='dashboard-center-option-header'>
                 RECEIVE A FORTUNE
