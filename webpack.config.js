@@ -31,6 +31,9 @@ const config = {
     host: "localhost",
     historyApiFallback: true
   },
+  node: {
+    __dirname: true
+},
   stats: {
     children:true
   },

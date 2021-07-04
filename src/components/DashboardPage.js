@@ -5,7 +5,6 @@ const DashboardPage = () => (
     <div>
     <div className='dashboard-center-container'>
         <div className='dashboard-center-option'>
-
             <div className='dashboard-center-option-header'>
                 RECEIVE A FORTUNE
             </div>
