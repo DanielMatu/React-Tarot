@@ -4,6 +4,7 @@ import { Router, Route, Switch, Link, NavLink } from 'react-router-dom';
 import { createBrowserHistory } from 'history'
 
 import DashboardPage from '../components/DashboardPage'
+import JournalPage from '../components/calendar/JournalPage'
 import NotFoundPage from '../components/NotFoundPage';
 import LoginPage from '../components/LoginPage'
 import BackgroundVideo from '../components/BackgroundVideo'
@@ -22,7 +23,7 @@ const AppRouter = () => (
                 <PublicRoute path="/" component={LoginPage} exact={true}/>
 
                 <PrivateRoute path="/dashboard" component={DashboardPage}/>
-                <PrivateRoute path="/journal" component={DashboardPage}/>
+                <PrivateRoute path="/journal" component={JournalPage}/>
                 <PrivateRoute path="/fortunes" component={DashboardPage}/>
 
                 <Route component= {NotFoundPage} />

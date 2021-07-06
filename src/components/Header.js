@@ -6,12 +6,12 @@ import { startLogout } from '../actions/auth'
 
 export const Header = ({ startLogout }) => {
 
-    // const [test1, test2] = useState(0)
+    const [dropdownActive, setDropdownActive] = useState(false)
     return (
         <header className="header">
             <div className = "content-container">
                 <div className="header__content">
-                    <div className='hamburger'>
+                    <div className='hamburger' onClick={() => setDropdownActive(!dropdownActive)}>
                         <div className='hamburger-line'></div>
                         <div className='hamburger-line'></div>
                         <div className='hamburger-line'></div>
@@ -29,7 +29,10 @@ export const Header = ({ startLogout }) => {
                 </div>
             </div>
 
-            <div className='hamburger-dropdown'>
+            {
+                dropdownActive
+                &&
+                <div className='hamburger-dropdown'>
                 <Link className="header__title hamburger-dropdown-item" to="/dashboard">
                     <h1>HOME</h1> 
                 </Link>
@@ -40,6 +43,8 @@ export const Header = ({ startLogout }) => {
                     <h2>FORTUNES</h2>
                 </Link>
             </div>
+            }
+
 
         </header>
     )

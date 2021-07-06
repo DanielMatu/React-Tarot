@@ -9,14 +9,17 @@ import './styles/styles.scss'
 import 'react-dates/lib/css/_datepicker.css'
 import { firebase } from './firebase/firebase'
 import LoadingPage from './components/LoadingPage'
+import DateContextProvider from './contexts/date-context'
+import UserContextProvider from './contexts/user-context'
 
 const store = configureStore()
 
 const jsx = (
     
     <Provider store={store}>
-
-        <AppRouter />
+        <DateContextProvider>
+            <AppRouter />
+        </DateContextProvider>
     </Provider>
 )
 let hasRendered = false;
