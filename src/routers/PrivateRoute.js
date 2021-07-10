@@ -1,27 +1,31 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import { connect } from 'react-redux'
 import { Route, Redirect } from 'react-router-dom'
 import Header from '../components/Header';
-import BackgroundVideo from '../components/BackgroundVideo';
+import { UserContext } from '../contexts/user-context'
 
 
-export const PrivateRoute = ({ 
-    isAuthenticated, 
-    component: Component,
-    ...rest
-}) => (
-    <Route {...rest} component={(props) => (
-        isAuthenticated ? (
-            <div>
-                <Header />
+export const PrivateRoute = ({  
+                                component: Component,
+                                ...rest
+                            }) => 
+    {
+        const [ state, login, logout ] = useContext(UserContext)
+        const { uid } = state 
+        return (
+            <Route {...rest} component={(props) => (
+                uid ? (
+                    <div>
+                        <Header />
 
-                <Component {...props}/>
-            </div>
-        ) : (
-            <Redirect to="/" />
+                        <Component {...props}/>
+                    </div>
+                ) : (
+                    <Redirect to="/" />
+                )
+            )}/>
         )
-    )}/>
-)
+}
 
 const mapStateToProps = (state) => ({
     isAuthenticated: !!state.auth.uid

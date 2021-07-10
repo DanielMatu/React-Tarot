@@ -14,17 +14,21 @@ import UserContextProvider from './contexts/user-context'
 
 const store = configureStore()
 
-const jsx = (
+const generateJSX = (uid) => (
     
     <Provider store={store}>
-        <DateContextProvider>
-            <AppRouter />
-        </DateContextProvider>
+        <UserContextProvider uid={uid}>
+            <DateContextProvider>
+                <AppRouter />
+            </DateContextProvider>
+        </UserContextProvider>
     </Provider>
 )
+let jsx
 let hasRendered = false;
-const renderApp = () => {
+const renderApp = (uid) => {
     if (!hasRendered) {
+        jsx = generateJSX(uid)
         ReactDOM.render(jsx, document.getElementById('app'))
         hasRendered = true
     }
@@ -33,18 +37,15 @@ const renderApp = () => {
 ReactDOM.render(<LoadingPage /> , document.getElementById('app'))
 
 
-
 firebase.auth().onAuthStateChanged((user) => {
     if (user) {
-        store.dispatch(login(user.uid))
-        console.log('uuid', user.uid)
-        renderApp()
+        let uid = user.uid
+        renderApp(uid)
         if (history.location.pathname === '/') {
             history.push('/dashboard')
         }
 
     } else {
-        store.dispatch(logout())
         renderApp()
         history.push('/')
     }

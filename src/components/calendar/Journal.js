@@ -1,44 +1,49 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import Day from './Day.js'
-
-// month = { daysOfMonth, monthName, numDays }
-// day = ({ dayNum, arrOfEntries })
-
-// {
-//     "1": { 
-//         []
-//     }
-// }
-
-const generateEmptyMonth = (numDays) => {
-    let daysOfMonth = []
-    for (let i = 0; i < numDays; i++) {
-        const stringifiedDayNumber = String(i + 1)
-        daysOfMonth.push({dayNumber: stringifiedDayNumber, entryPreviews:['one entry']})
-    }
-    return daysOfMonth
-}
+import { DateContext } from '../../contexts/date-context'
+import { UserContext } from '../../contexts/user-context'
+import { getMonthAndNumDays } from '../../actions/calendarUpdatingFuncs'
 
 const Journal = (props) => {
 
-    const {monthName, numDays, daysOfMonth = generateEmptyMonth(numDays)} = props
-    // console.log ('heres the days of month')
-    // console.log(daysOfMonth)
-    // console.log('heres the spread days of month')
-    // console.log(...daysOfMonth)
+    const [ userState, login, logout ] = useContext(UserContext)
+    const { uid } = userState
+    const [state, monthInc, monthDec, yearInc, yearDec] = useContext(DateContext)
+    let [ numericalMonth, year, calendar ] = state
+    let [ month, numDays ] = getMonthAndNumDays(numericalMonth)
+    let daysOfMonth = calendar[year][month]
+
     return (
+
         <div className='calendar-container'>
-            
+
+            <div className='calendar-header'>
+                <div className='calendar-year-display'>
+                    <div className='year-label'>Year:</div>
+                    <button className='date-nav-button' onClick={yearDec}> &lt; </button>
+                    <div className='calendar-year'>{ year } </div>
+                    <button className='date-nav-button' onClick={yearInc}> &gt; </button>
+                </div>
+                <div className='calendar-month-display'>
+                    <div className='month-label'>Month:</div>
+                    <button className='date-nav-button' onClick={monthDec}> &lt; </button>
+                    <div className='calendar-month'>{ month } </div>
+                    <button className='date-nav-button' onClick={monthInc}> &gt; </button>
+                </div>
+            </div>
+
             <div className="calendar">
-                { monthName } 
                 {
-                    daysOfMonth.map((day, index) => (
-                        <Day key={index} {...day}/>
+                    daysOfMonth.map((day) => (
+                        <Day {...day}/>
                     ))
                 }
+
             </div>
         
         </div>
+
+
     )
 
 }

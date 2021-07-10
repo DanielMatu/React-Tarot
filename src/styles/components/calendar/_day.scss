@@ -1,7 +1,36 @@
 .day-container {
-    width: 15rem;
-    height: 15rem;
-    background: green;
-    border: 1px solid black;
+    color: white;
+    width: 19rem;
+    height: 19rem;
+    background: #4416abd4;
+    border: 1px solid #9586df;
+    margin-bottom: 2px;
     padding: 1.5rem;
+}
+
+.day-number{
+    margin-bottom: 1rem;
+    background: #13002382
+}
+
+.entry-preview {
+    font-size: 20px;
+    background: #2196f3;
+    padding: 0.5rem 2rem;
+    border-radius: 50px;
+    display: flex;
+    justify-content:space-between;
+}
+
+.entry-title {
+    
+}
+
+.remove-entry-button {
+    color: white;
+    background:#20207a;
+    padding: 0.05rem 1rem;
+    border-radius: 50%;
+    font-weight: bold;
+    border: none;
 }

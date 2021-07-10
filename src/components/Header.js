@@ -1,12 +1,22 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux'
-import { startLogout } from '../actions/auth'
+import AppRouter, { history } from '../routers/AppRouter'
+import { UserContext } from '../contexts/user-context'
+import { firebase, googleAuthProvider } from '../firebase/firebase'
 
+export const Header = () => {
+    const [ state, login, logout ] = useContext(UserContext)
 
-export const Header = ({ startLogout }) => {
 
     const [dropdownActive, setDropdownActive] = useState(false)
+    firebase.auth().onAuthStateChanged((user) => {
+        if (user){
+        } else {
+            logout()
+            history.push('/')
+        }
+    })
     return (
         <header className="header">
             <div className = "content-container">
@@ -25,7 +35,7 @@ export const Header = ({ startLogout }) => {
                     <Link className='header__title main-nav' to='/fortunes'>
                         <h2>FORTUNES</h2>
                     </Link>
-                    <button className="button button--link main-nav" onClick={startLogout}>LOG OUT</button>
+                    <button className="button button--link main-nav" onClick={() => console.log(state)}>LOG OUT</button>
                 </div>
             </div>
 
@@ -42,6 +52,12 @@ export const Header = ({ startLogout }) => {
                 <Link className='header__title hamburger-dropdown-item' to='/fortunes'>
                     <h2>FORTUNES</h2>
                 </Link>
+                <button 
+                    className="button button--link hamburger-dropdown-item" 
+                    onClick={() => firebase.auth().signOut()}
+                    >
+                    <h3>LOG OUT</h3>
+                </button>
             </div>
             }
 
