@@ -79,16 +79,20 @@ const DateContextProvider = (props) => {
                                      newYear: getDecrementedYear(year)
                                  }
                             })
-    const removeEntry = (dayNumber, entry) => {
+    const removeEntry = (dayNumber, index) => {
 
-        const [stringMonth, numDays] = getMonthAndNumDays(month) 
-        const entryPreviews = calendar[year][stringMonth][dayNumber - 1]['entryPreviews']
-        const newEntryPreviews = entryPreviews.filter((ele) => ele !== entry )
-        calendar[year][stringMonth][dayNumber - 1]['entryPreviews'] = newEntryPreviews
+        const [stringMonth, numDays] = getMonthAndNumDays(month)
+        const entries = calendar[year][stringMonth][dayNumber - 1]['entries']
+        let newEntries = entries.splice(index, 1)
+        calendar[year][stringMonth][dayNumber - 1]['entries'] = newEntries
+
+        // entries.map((entry) => entryPreviews.push(entry.preview))
+        // const newEntryPreviews = entryPreviews.filter((ele) => ele !== entry )
+        // calendar[year][stringMonth][dayNumber - 1]['entries'] = newEntryPreviews
 
         const confirmed = confirm("Are you sure you want to delete this journal entry?");
         if (confirmed){
-            db.ref(`users/${uid}/calendar/${year}/${stringMonth}/${dayNumber - 1}/entryPreviews`).set(newEntryPreviews).then(() => {
+            db.ref(`users/${uid}/calendar/${year}/${stringMonth}/${dayNumber - 1}/entries`).set(newEntries).then(() => {
                 dispatch({ type: 'UPDATE_DAY', payload: { calendar }})
             })
         }
