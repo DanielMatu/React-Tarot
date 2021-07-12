@@ -34,8 +34,8 @@ const Journal = (props) => {
 
             <div className="calendar">
                 {
-                    daysOfMonth.map((day) => (
-                        <Day {...day}/>
+                    daysOfMonth.map((day, id) => (
+                        <Day key={id} {...day}/>
                     ))
                 }
 

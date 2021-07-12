@@ -10,7 +10,16 @@ const UserContextProvider = (props) => {
     const initialState = { uid }
     const [state, dispatch] = useReducer(UserReducer, initialState)
     const logout = () => dispatch({ type: 'LOGOUT' })
-    const login = (uid) => dispatch({ type: 'LOGIN', payload: {uid}}) 
+    const login = (uid) => dispatch({ type: 'LOGIN', payload: {uid}})
+    const db = firebase.database()
+
+    console.log('creating user')
+    db.ref(`users/${uid}`).once('value', (snapshot) => {
+        if (snapshot.exists()){
+        } else {
+            db.ref(`users/${uid}`).set({})
+        }
+    })
 
     return (
         <UserContext.Provider value={[state, login, logout]}>

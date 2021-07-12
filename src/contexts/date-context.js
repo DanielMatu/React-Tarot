@@ -5,7 +5,8 @@ import {
     getDecrementedMonthAndYear,
     getIncrementedYear,
     getDecrementedYear,
-    initializeCalendar
+    initializeCalendar,
+    getMonthAndNumDays
 } from '../actions/calendarUpdatingFuncs'
 import { firebase } from '../firebase/firebase'
 import { UserContext } from './user-context'
@@ -16,25 +17,14 @@ export { DateContext }
 
 
 
-const DateContextProvider = ({ children }) => {
+const DateContextProvider = (props) => {
 
-    
+    let { calendar, children } = props
     const [ userState, login, logout ] = useContext(UserContext)
 
     let { uid } = userState
     console.log('uid from date-context')
     console.log(uid)
-
-
-    // shouldnt be here
-    let calendar = initializeCalendar()
-    db.ref(`users/${uid}/calendar`).set(calendar)
-
-    // read calendar from database
-    db.ref(`users/${uid}/calendar`).once('value', (snapshot) => {
-        calendar = snapshot.val()
-    })
-
 
     const date = new Date()
     let month = date.getMonth() + 1
@@ -42,9 +32,6 @@ const DateContextProvider = ({ children }) => {
 
     const initialState = [month, year, calendar]
     const [ state, dispatch ] = useReducer(DateReducer, initialState)
-
-
-
 
 
     useEffect(() => {
@@ -92,11 +79,26 @@ const DateContextProvider = ({ children }) => {
                                      newYear: getDecrementedYear(year)
                                  }
                             })
-    // const yearDec = () => console.log('year is decremented')
+    const removeEntry = (dayNumber, entry) => {
+
+        const [stringMonth, numDays] = getMonthAndNumDays(month) 
+        const entryPreviews = calendar[year][stringMonth][dayNumber - 1]['entryPreviews']
+        const newEntryPreviews = entryPreviews.filter((ele) => ele !== entry )
+        calendar[year][stringMonth][dayNumber - 1]['entryPreviews'] = newEntryPreviews
+
+        const confirmed = confirm("Are you sure you want to delete this journal entry?");
+        if (confirmed){
+            db.ref(`users/${uid}/calendar/${year}/${stringMonth}/${dayNumber - 1}/entryPreviews`).set(newEntryPreviews).then(() => {
+                dispatch({ type: 'UPDATE_DAY', payload: { calendar }})
+            })
+        }
+
+
+    }
 
 
     return (
-        <DateContext.Provider value={ [state, monthInc, monthDec, yearInc, yearDec] }>
+        <DateContext.Provider value={ [state, monthInc, monthDec, yearInc, yearDec, removeEntry] }>
             {
                 children
             }

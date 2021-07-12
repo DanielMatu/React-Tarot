@@ -28,6 +28,15 @@ const DateReducer = (state, action) => {
             return [
                 ...state
             ]
+        case "UPDATE_DAY":
+            // let {calendar, year, stringMonth, dayNumber, newEntryPreviews } = action.payload
+            // let newCalendar = calendar
+            // newCalendar[year][stringMonth][dayNumber - 1]['entryPreviews'] = newEntryPreviews
+            // state[2] = newCalendar
+            state[2] = action.payload.calendar
+            return [
+                ...state
+            ]
     }
 }
 

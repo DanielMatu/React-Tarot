@@ -20,10 +20,10 @@ const Day = ( props ) => {
         <div className='day-container'>
             <div className='day-number'>{ dayNumber }</div>
             {
-                entryPreviews.map((entry) => (
-                    <div className='entry-preview'>
+                entryPreviews.map((entry, id) => (
+                    <div key={id} className='entry-preview'>
                         <div className='entry-title'>{entry}</div>
-                        <button className='remove-entry-button' onClick={() => removeEntry(year, month, day, entry)}>&#8722;</button>
+                        <button className='remove-entry-button' onClick={() => removeEntry(dayNumber, entry)}>&#8722;</button>
                     </div>
                 ))
                 // console.log(entryPreviews)
