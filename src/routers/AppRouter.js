@@ -5,6 +5,7 @@ import { createBrowserHistory } from 'history'
 
 import DashboardPage from '../components/DashboardPage'
 import JournalPage from '../components/calendar/JournalPage'
+import CreateJournalEntryPage from '../components/calendar/CreateJournalEntryPage'
 import NotFoundPage from '../components/NotFoundPage';
 import LoginPage from '../components/LoginPage'
 import BackgroundVideo from '../components/BackgroundVideo'
@@ -24,6 +25,7 @@ const AppRouter = () => (
 
                 <PrivateRoute path="/dashboard" component={DashboardPage}/>
                 <PrivateRoute path="/journal" component={JournalPage}/>
+                <PrivateRoute path='/create' component={CreateJournalEntryPage}/>
                 <PrivateRoute path="/fortunes" component={DashboardPage}/>
 
                 <Route component= {NotFoundPage} />
