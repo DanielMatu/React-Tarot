@@ -1,4 +1,4 @@
-import React, { useReducer, useContext, createContext } from 'react'
+import React, { useEffect, useReducer, useContext, createContext } from 'react'
 import DateReducer from './date-reducer'
 import { 
     getIncrementedMonthAndYear, 
@@ -13,13 +13,8 @@ const db = firebase.database()
 const DateContext = createContext()
 export { DateContext }
 
-// shouldnt be here
-const calendar = initializeCalendar()
 
-// causing error
-const randomFunc = async () => {
 
-}
 
 const DateContextProvider = ({ children }) => {
 
@@ -29,42 +24,64 @@ const DateContextProvider = ({ children }) => {
     let { uid } = userState
     console.log('uid from date-context')
     console.log(uid)
-    let testVar
+
+
+    // shouldnt be here
+    let calendar = initializeCalendar()
+    db.ref(`users/${uid}/calendar`).set(calendar)
+
+    // read calendar from database
+    db.ref(`users/${uid}/calendar`).once('value', (snapshot) => {
+        calendar = snapshot.val()
+    })
+
+
     const date = new Date()
-    const month = date.getMonth() + 1
-    const year = date.getFullYear()
-    const uidStringFromFirebase = firebase.database().ref().once('value').then(function(dataSnapshot) {
-         console.log('datasnapshot')
-         console.log(dataSnapshot)
-         testVar = dataSnapshot
-      });
-      console.log('heres testvar')
-      console.log(testVar)
+    let month = date.getMonth() + 1
+    let year = date.getFullYear()
 
     const initialState = [month, year, calendar]
     const [ state, dispatch ] = useReducer(DateReducer, initialState)
+
+
+
+
+
+    useEffect(() => {
+        month = state[0]
+        year = state[1]
+        calendar = state[2]
+    }, [state]);
+
+    useEffect(() => {
+        console.log('year changed22')
+    }, [state[0]]);
+
+    useEffect(() => {
+        console.log('month changed22')
+    }, [state[1]]);
+
     const monthInc = () => {
                             dispatch(
                             { 
                                 type: 'MONTH_INC', 
                                 payload: {
-                                    newMonthAndYear: getIncrementedMonthAndYear(state[0], state[1])
+                                    newMonthAndYear: getIncrementedMonthAndYear(month, year)
                                 }
                             })
-                            db.ref('users/calendar')
     }
     const monthDec = () => dispatch(
                             { 
                                 type: 'MONTH_DEC', 
                                 payload: {
-                                    newMonthAndYear: getDecrementedMonthAndYear(state[0], state[1])
+                                    newMonthAndYear: getDecrementedMonthAndYear(month, year)
                                 }
                             })
     const yearInc = () => dispatch(
                             { 
                                 type: 'YEAR_INC', 
                                 payload: {
-                                    newYear: getIncrementedYear(state[1])
+                                    newYear: getIncrementedYear(year)
                                 }
                             })
 
@@ -72,7 +89,7 @@ const DateContextProvider = ({ children }) => {
                             { 
                                  type: 'YEAR_DEC',
                                  payload: {
-                                     newYear: getDecrementedYear(state[1])
+                                     newYear: getDecrementedYear(year)
                                  }
                             })
     // const yearDec = () => console.log('year is decremented')

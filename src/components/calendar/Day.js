@@ -8,7 +8,7 @@ import { getMonthAndNumDays } from '../../actions/calendarUpdatingFuncs'
 // journalEntryPreviews = {name : 'journal1'}
 const Day = ( props ) => {
     const { dayNumber } = props
-    const [state, monthInc, monthDec, yearInc, yearDec] = useContext(DateContext)
+    const [state, monthInc, monthDec, yearInc, yearDec, removeEntry] = useContext(DateContext)
     let [ numericalMonth, year, calendar ] = state
     let [ month, numDays ] = getMonthAndNumDays(numericalMonth)
 
@@ -23,7 +23,7 @@ const Day = ( props ) => {
                 entryPreviews.map((entry) => (
                     <div className='entry-preview'>
                         <div className='entry-title'>{entry}</div>
-                        <button className='remove-entry-button'>&#8722;</button>
+                        <button className='remove-entry-button' onClick={() => removeEntry(year, month, day, entry)}>&#8722;</button>
                     </div>
                 ))
                 // console.log(entryPreviews)

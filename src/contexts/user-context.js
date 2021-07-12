@@ -11,6 +11,7 @@ const UserContextProvider = (props) => {
     const [state, dispatch] = useReducer(UserReducer, initialState)
     const logout = () => dispatch({ type: 'LOGOUT' })
     const login = (uid) => dispatch({ type: 'LOGIN', payload: {uid}}) 
+
     return (
         <UserContext.Provider value={[state, login, logout]}>
             {
