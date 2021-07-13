@@ -4,7 +4,7 @@ import { getMonthAndNumDays } from '../../actions/calendarUpdatingFuncs'
 import moment from 'moment'
 import { firebase } from '../../firebase/firebase'
 import { history } from '../../routers/AppRouter'
-
+import TarotAlert from '../TarotAlert'
 
 
 const CreateJournalEntryPage = () => {
@@ -24,16 +24,24 @@ const CreateJournalEntryPage = () => {
     const [body, setBody] = useState('')
     const updateBody = (e) => setBody(e.target.value);
 
+    const [alertActive, setAlertActive] = useState(false) 
+
+
     const submitTodaysEntry = (title, entryDate, body, calendar) => {
         saveTodaysEntry(title, entryDate, body, calendar)
         setTitle("")
         setDate("")
         setBody("")
-        alert('entry saved!')
-        history.push('/dashboard')
+        setAlertActive(true)
+        // history.push('/dashboard')
     }
     return (
         <div className = 'create-entry-wrapper'>
+            {
+                alertActive && 
+                <TarotAlert alertText={"Journal entry saved successfully!"} goBackHandler={() => history.push('/dashboard')}/>
+
+            }
             <div className='create-entry-container'>
                 <div className='half-entry text-entry'>
                     <textarea className='entry-text-area entry-title' placeholder="Enter a title:" value={title} onChange={updateTitle}></textarea>

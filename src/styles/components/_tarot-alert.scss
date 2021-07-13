@@ -1,8 +1,17 @@
+.tarot-alert-overlay {
+    position:fixed;
+    top:0;
+    left:0;
+    width:100vw;
+    height:100vh;
+    background: rgba(black, 0.8);
+}
+
 .tarot-alert-container {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    height: 80vh;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
 
 }
 
@@ -10,7 +19,8 @@
     text-align:center;
     width:50rem;
     height:40rem;
-    background: $dark-purple;
+    background: #350a59a8;
+    border: 1px solid $turqoise;
     padding: 2rem;
 }
 
@@ -26,6 +36,6 @@
     height: 10rem;
     font-size: 25px;
     color: $turqoise;
-    background: $dark-purple;
+    background: #00252c;
     border: 1px solid $turqoise;
 }
