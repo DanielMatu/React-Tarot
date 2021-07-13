@@ -1,4 +1,4 @@
-.page-not-found_container {
+.tarot-alert-container {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -6,7 +6,7 @@
 
 }
 
-.page-not-found_box {
+.tarot-alert-box {
     text-align:center;
     width:50rem;
     height:40rem;
@@ -14,14 +14,14 @@
     padding: 2rem;
 }
 
-.page-not-found_text {
+.tarot-alert-text {
     color: $turqoise;
     font-size: 45px;
     text-align: center;
     padding: 2rem;
 }
 
-.go-back-button {
+.tarot-alert-return {
     width: 20rem;
     height: 10rem;
     font-size: 25px;
