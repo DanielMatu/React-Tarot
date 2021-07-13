@@ -4,6 +4,7 @@ import { getMonthAndNumDays } from '../../actions/calendarUpdatingFuncs'
 import moment from 'moment'
 import { firebase } from '../../firebase/firebase'
 import { history } from '../../routers/AppRouter'
+import { Prompt } from 'react-router'
 import TarotAlert from '../TarotAlert'
 
 
@@ -49,7 +50,12 @@ const CreateJournalEntryPage = () => {
                 <TarotAlert alertText={"Journal entry saved successfully!"} goBackHandler={() => history.push('/dashboard')}/>
 
             }
-
+          <Prompt
+            when={true}
+            message={
+                location => `Your changes haven't been saved, are you sure you want to leave this page?`
+             }
+          />
             <div className='create-entry-container'>
                 <div className='half-entry text-entry'>
                     <textarea className='entry-text-area entry-title' placeholder="Enter a title:" value={title} onChange={updateTitle} required></textarea>
