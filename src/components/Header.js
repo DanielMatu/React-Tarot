@@ -35,7 +35,7 @@ export const Header = () => {
                     <Link className='header__title main-nav' to='/fortunes'>
                         <h2>FORTUNES</h2>
                     </Link>
-                    <button className="button button--link main-nav" onClick={() => console.log(state)}>LOG OUT</button>
+                    <button className="button button--link main-nav" onClick={() => firebase.auth().signOut()}>LOG OUT</button>
                 </div>
             </div>
 

@@ -102,7 +102,7 @@ const generateEmptyMonth = (numDays) => {
     let daysOfMonth = []
     for (let i = 0; i < numDays; i++) {
         const stringifiedDayNumber = String(i + 1)
-        daysOfMonth.push({dayNumber: stringifiedDayNumber, entries:[{preview: 'test'}, {preview:'another'}]})
+        daysOfMonth.push({dayNumber: stringifiedDayNumber, entries:[{preview: 'test', date: 'Jan 42 921', body: "body text"}, {preview:'another', date: 'Jan 42 921', body: "body text"}]})
     }
     return daysOfMonth
 }

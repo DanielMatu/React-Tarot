@@ -22,6 +22,8 @@
 
 .text-entry {
     background: $dark-purple;
+
+    
     .entry-text-area{
         width: 100%;
         height: 7rem;
@@ -30,15 +32,22 @@
         background:rgba(darkorange, 0.5);
         border: 1px solid $turqoise;
         color: $turqoise;
-        font-size: 20px;
-    }
-    .text-area-body {
-        height: 63vh;
+        font-size: 25px;
 
         &:focus {
             box-shadow:none;
             outline: none;
         }
+
+        &::placeholder {
+            color: #42ccc8;
+        }
+    }
+
+    .text-area-body {
+        height: 63vh;
+
+
     }
 
 }

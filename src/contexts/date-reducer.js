@@ -28,7 +28,7 @@ const DateReducer = (state, action) => {
             return [
                 ...state
             ]
-        case "UPDATE_DAY":
+        case "UPDATE_CALENDAR":
             state[2] = action.payload.calendar
             return [
                 ...state

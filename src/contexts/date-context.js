@@ -80,29 +80,41 @@ const DateContextProvider = (props) => {
                                  }
                             })
     const removeEntry = (dayNumber, index) => {
-
         const [stringMonth, numDays] = getMonthAndNumDays(month)
         const entries = calendar[year][stringMonth][dayNumber - 1]['entries']
-        let newEntries = entries.splice(index, 1)
-        calendar[year][stringMonth][dayNumber - 1]['entries'] = newEntries
-
-        // entries.map((entry) => entryPreviews.push(entry.preview))
-        // const newEntryPreviews = entryPreviews.filter((ele) => ele !== entry )
-        // calendar[year][stringMonth][dayNumber - 1]['entries'] = newEntryPreviews
+        let newEntries = [...entries]
+        newEntries.splice(index, 1)
+        console.log('heres newEntries')
+        console.log(newEntries)
 
         const confirmed = confirm("Are you sure you want to delete this journal entry?");
         if (confirmed){
+            calendar[year][stringMonth][dayNumber - 1]['entries'] = newEntries
             db.ref(`users/${uid}/calendar/${year}/${stringMonth}/${dayNumber - 1}/entries`).set(newEntries).then(() => {
-                dispatch({ type: 'UPDATE_DAY', payload: { calendar }})
+                dispatch({ type: 'UPDATE_CALENDAR', payload: { calendar }})
             })
         }
+    }
 
-
+    const saveTodaysEntry = (title, entryDate, body, calendar) => {
+        // firebase.database().ref(`users/${uid}/calendar/${year}/${stringMonth}/${dayNumber - 1}/entries`).set(newEntries)
+        // create year, month day based on todays, then change add an entry to calendar
+        let date = new Date() 
+        let currDayNumber = date.getDate()
+        let currMonth = date.getMonth() + 1
+        let currYear = date.getFullYear()
+        let [ stringCurrMonth, numDays ] = getMonthAndNumDays(currMonth)
+        let todaysEntries = calendar[currYear][stringCurrMonth][currDayNumber - 1]['entries']
+        todaysEntries.push({'preview': title, 'date': entryDate, 'body': body})
+        calendar[currYear][stringCurrMonth][currDayNumber - 1]['entries'] = todaysEntries
+        return firebase.database().ref(`users/${uid}/calendar/${currYear}/${stringCurrMonth}/${currDayNumber - 1}/entries`).set(todaysEntries).then(() => {
+            dispatch({ type: 'UPDATE_CALENDAR', payload: {calendar}})
+        })
     }
 
 
     return (
-        <DateContext.Provider value={ [state, monthInc, monthDec, yearInc, yearDec, removeEntry] }>
+        <DateContext.Provider value={ [state, monthInc, monthDec, yearInc, yearDec, removeEntry, saveTodaysEntry] }>
             {
                 children
             }
