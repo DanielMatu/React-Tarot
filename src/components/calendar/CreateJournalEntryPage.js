@@ -17,7 +17,9 @@ const CreateJournalEntryPage = () => {
     // const entryDate = stringMonth + ' ' + date.getDate().toString() +  ' ' + date.getFullYear()
 
     const [title, setTitle] = useState('');
-    const updateTitle = (e) => setTitle(e.target.value);
+    const updateTitle = (e) => {
+        return setTitle(e.target.value);
+    }
 
     const [entryDate, setDate] = useState(stringMonth + ' ' + date.getDate().toString() +  ' ' + date.getFullYear());
 
@@ -25,14 +27,19 @@ const CreateJournalEntryPage = () => {
     const updateBody = (e) => setBody(e.target.value);
 
     const [alertActive, setAlertActive] = useState(false) 
-
+    const [reqErrActive, setReqErrActive] = useState(false)
 
     const submitTodaysEntry = (title, entryDate, body, calendar) => {
-        saveTodaysEntry(title, entryDate, body, calendar)
-        setTitle("")
-        setDate("")
-        setBody("")
-        setAlertActive(true)
+        if (!title) {
+            setReqErrActive(true)
+        } else {
+            saveTodaysEntry(title, entryDate, body, calendar)
+            setTitle("")
+            setDate("")
+            setBody("")
+            setAlertActive(true)
+        }
+
         // history.push('/dashboard')
     }
     return (
@@ -42,9 +49,14 @@ const CreateJournalEntryPage = () => {
                 <TarotAlert alertText={"Journal entry saved successfully!"} goBackHandler={() => history.push('/dashboard')}/>
 
             }
+
             <div className='create-entry-container'>
                 <div className='half-entry text-entry'>
-                    <textarea className='entry-text-area entry-title' placeholder="Enter a title:" value={title} onChange={updateTitle}></textarea>
+                    <textarea className='entry-text-area entry-title' placeholder="Enter a title:" value={title} onChange={updateTitle} required></textarea>
+                    {
+                        reqErrActive &&
+                        <div className='error-message'>Please enter a title</div>
+                    }
                     <textarea className='entry-text-area entry-date' value={entryDate} readOnly></textarea>
 
                     <textarea className='entry-text-area text-area-body' value={body} onChange={updateBody} >
