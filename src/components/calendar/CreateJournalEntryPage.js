@@ -3,6 +3,7 @@ import { DateContext } from '../../contexts/date-context'
 import { getMonthAndNumDays } from '../../actions/calendarUpdatingFuncs'
 import moment from 'moment'
 import { firebase } from '../../firebase/firebase'
+import { history } from '../../routers/AppRouter'
 
 
 
@@ -13,16 +14,23 @@ const CreateJournalEntryPage = () => {
     const date = new Date()
     let [ stringMonth, numDays ] = getMonthAndNumDays(date.getMonth() + 1) 
 
-    const entryDate = stringMonth + ' ' + date.getDate().toString() +  ' ' + date.getFullYear()
+    // const entryDate = stringMonth + ' ' + date.getDate().toString() +  ' ' + date.getFullYear()
 
     const [title, setTitle] = useState('');
     const updateTitle = (e) => setTitle(e.target.value);
 
+    const [entryDate, setDate] = useState(stringMonth + ' ' + date.getDate().toString() +  ' ' + date.getFullYear());
+
     const [body, setBody] = useState('')
     const updateBody = (e) => setBody(e.target.value);
 
-    const submitEntry = (title, entryDate, body, calendar) => {
+    const submitTodaysEntry = (title, entryDate, body, calendar) => {
         saveTodaysEntry(title, entryDate, body, calendar)
+        setTitle("")
+        setDate("")
+        setBody("")
+        alert('entry saved!')
+        history.push('/dashboard')
     }
     return (
         <div className = 'create-entry-wrapper'>
@@ -40,7 +48,7 @@ const CreateJournalEntryPage = () => {
                     <div className='entry-button view-fortune-button'>
                         VIEW FORTUNE
                     </div>
-                    <div className='entry-button save-button' onClick={() => saveTodaysEntry(title, entryDate, body, calendar)}>
+                    <div className='entry-button save-button' onClick={() => submitTodaysEntry(title, entryDate, body, calendar)}>
                         SAVE
                     </div>
                 </div>

@@ -40,14 +40,6 @@ const DateContextProvider = (props) => {
         calendar = state[2]
     }, [state]);
 
-    useEffect(() => {
-        console.log('year changed22')
-    }, [state[0]]);
-
-    useEffect(() => {
-        console.log('month changed22')
-    }, [state[1]]);
-
     const monthInc = () => {
                             dispatch(
                             { 
@@ -105,6 +97,10 @@ const DateContextProvider = (props) => {
         let currYear = date.getFullYear()
         let [ stringCurrMonth, numDays ] = getMonthAndNumDays(currMonth)
         let todaysEntries = calendar[currYear][stringCurrMonth][currDayNumber - 1]['entries']
+        // firebase gets rid of the field entirely if theres nothing in it, so entries can sometimes be null
+        if (!todaysEntries){
+            todaysEntries = []
+        }
         todaysEntries.push({'preview': title, 'date': entryDate, 'body': body})
         calendar[currYear][stringCurrMonth][currDayNumber - 1]['entries'] = todaysEntries
         return firebase.database().ref(`users/${uid}/calendar/${currYear}/${stringCurrMonth}/${currDayNumber - 1}/entries`).set(todaysEntries).then(() => {
