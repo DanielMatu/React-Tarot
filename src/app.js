@@ -11,6 +11,7 @@ import { firebase } from './firebase/firebase'
 import LoadingPage from './components/LoadingPage'
 import DateContextProvider from './contexts/date-context'
 import UserContextProvider from './contexts/user-context'
+import EntryContextProvider from './contexts/entry-context'
 import { initializeCalendar } from './actions/calendarUpdatingFuncs'
 
 const store = configureStore()
@@ -20,7 +21,9 @@ const generateJSX = (uid, calendar) => (
     <Provider store={store}>
         <UserContextProvider uid={uid}>
             <DateContextProvider calendar={calendar}>
-                <AppRouter />
+                <EntryContextProvider>
+                    <AppRouter />
+                </EntryContextProvider>
             </DateContextProvider>
         </UserContextProvider>
     </Provider>

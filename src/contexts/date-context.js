@@ -71,6 +71,7 @@ const DateContextProvider = (props) => {
                                      newYear: getDecrementedYear(year)
                                  }
                             })
+
     const removeEntry = (dayNumber, index) => {
         const [stringMonth, numDays] = getMonthAndNumDays(month)
         const entries = calendar[year][stringMonth][dayNumber - 1]['entries']
@@ -99,12 +100,16 @@ const DateContextProvider = (props) => {
         if (!todaysEntries){
             todaysEntries = []
         }
+
         todaysEntries.push({'preview': title, 'date': entryDate, 'body': body})
         calendar[currYear][stringCurrMonth][currDayNumber - 1]['entries'] = todaysEntries
-        return firebase.database().ref(`users/${uid}/calendar/${currYear}/${stringCurrMonth}/${currDayNumber - 1}/entries`).set(todaysEntries).then(() => {
-            dispatch({ type: 'UPDATE_CALENDAR', payload: {calendar}})
-        })
+        return firebase.database().ref(`users/${uid}/calendar/${currYear}/${stringCurrMonth}/${currDayNumber - 1}/entries`)
+                                  .set(todaysEntries)
+                                  .then(() => {
+                                        dispatch({ type: 'UPDATE_CALENDAR', payload: {calendar}})
+                                    })
     }
+
 
 
     return (
