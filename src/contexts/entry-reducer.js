@@ -15,21 +15,22 @@ const EntryReducer = (state, action) => {
             return [
                 ...state
             ]
+        case 'UPDATE_ENTRY_INDEX': 
+            state[3] = action.payload.newIndex
+            return [
+                ...state
+            ]
         case 'UPDATE_FORTUNE_EXISTS': 
-            state[3] = action.payload.newFortuneExists
+            state[4] = action.payload.newFortuneExists
             return [
                 ...state
             ]
         case 'UPDATE_IS_EDITING': 
-            state[4] = action.payload.newIsEditing
+            state[5] = action.payload.newIsEditing
             return [
                 ...state
             ]
-        case 'UPDATE_ENTRY': 
-            state[5] = action.payload.newEntry
-            return [
-                ...state
-            ]
+
     }
 }
 

@@ -6,7 +6,7 @@ export { EntryContext }
 const EntryContextProvider = (props) => {
     const { children } = props
                 //     title, date, body, fortuneExists, isEditing, entry
-    const initialState = ['', '', '', false, false, {}]
+    const initialState = ['', '', '', 0, false, false]
     const [state, dispatch] = useReducer(EntryReducer, initialState)
     //                                            type: 'UPDATE_TITLE', payload:{newTitle}
 
@@ -19,15 +19,13 @@ const EntryContextProvider = (props) => {
     } 
     const setDate = (newDate) => dispatch({type: 'UPDATE_DATE', payload:{newDate}})
     const setBody = (newBody) => dispatch({type: 'UPDATE_BODY', payload:{newBody}})
+    const setEntryIndex = (newIndex) => dispatch({type: 'UPDATE_ENTRY_INDEX', payload:{newIndex}})
     const setFortuneExists = (newFortuneExists) => dispatch({type: 'UPDATE_FORTUNE_EXISTS', payload:{newFortuneExists}})
     const setIsEditing = (newIsEditing) => dispatch({type: 'UPDATE_IS_EDITING', payload:{newIsEditing}})
-    const setEntry = (newEntry) => dispatch({type: 'UPDATE_ENTRY', payload:{newEntry}})
 
-    console.log('state after remaining func declarations')
-    console.log(state)
 
     return (
-        <EntryContext.Provider value={ [state, setTitle, setDate, setBody, setFortuneExists, setIsEditing, setEntry] }>
+        <EntryContext.Provider value={ [state, setTitle, setDate, setBody, setEntryIndex, setFortuneExists, setIsEditing] }>
             {console.log('state in provider')}
             {console.log(setTitle)}
             { 

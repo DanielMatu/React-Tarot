@@ -7,7 +7,7 @@ import { getMonthAndNumDays } from '../../actions/calendarUpdatingFuncs'
 
 const Day = ( props ) => {
     const { dayNumber } = props
-    const [state, monthInc, monthDec, yearInc, yearDec, removeEntry, saveTodaysEntry, saveGivenDatesEntry, editEntry] = useContext(DateContext)
+    const [state, monthInc, monthDec, yearInc, yearDec, removeEntry, saveTodaysEntry, navigateToEditEntry, editGivenEntry] = useContext(DateContext)
     let [ numericalMonth, year, calendar ] = state
     let [ month, numDays ] = getMonthAndNumDays(numericalMonth)
 
@@ -23,7 +23,7 @@ const Day = ( props ) => {
                 &&
                 entries.map((entry, id) => (
                     <div key={id} className='entry-preview'>
-                        <div className='entry-title' onClick={() => editEntry(entry)}>{entry.preview}</div>
+                        <div className='entry-title' onClick={() => navigateToEditEntry(id, entry)}>{entry.preview}</div>
                         <button className='remove-entry-button' onClick={() => removeEntry(dayNumber, id)}>&#8722;</button>
                     </div>
                 ))

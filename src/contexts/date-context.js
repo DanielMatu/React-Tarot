@@ -24,11 +24,9 @@ const DateContextProvider = (props) => {
     let { calendar, children } = props
     const [ userState, login, logout ] = useContext(UserContext)
 
-    const [ entryState, setTitle, setDate, setBody, setFortuneExists, setIsEditing ] = useContext(EntryContext)
-    const [ title, entryDate, body, fortuneExists, isEditing, entry ] = entryState
+    const [ entryState, setTitle, setDate, setBody, setEntryIndex, setFortuneExists, setIsEditing ] = useContext(EntryContext)
+    const [ title, entryDate, body, index, fortuneExists, isEditing, entry ] = entryState
 
-    console.log('is this a good ref?')
-    console.log(entry)
 
     let { uid } = userState
     console.log('uid from date-context')
@@ -48,45 +46,16 @@ const DateContextProvider = (props) => {
         calendar = state[2]
     }, [state]);
 
-    const monthInc = () => {
-                            dispatch(
-                            { 
-                                type: 'MONTH_INC', 
-                                payload: {
-                                    newMonthAndYear: getIncrementedMonthAndYear(month, year)
-                                }
-                            })
-    }
-    const monthDec = () => dispatch(
-                            { 
-                                type: 'MONTH_DEC', 
-                                payload: {
-                                    newMonthAndYear: getDecrementedMonthAndYear(month, year)
-                                }
-                            })
-    const yearInc = () => dispatch(
-                            { 
-                                type: 'YEAR_INC', 
-                                payload: {
-                                    newYear: getIncrementedYear(year)
-                                }
-                            })
-
-    const yearDec = () => dispatch(
-                            { 
-                                 type: 'YEAR_DEC',
-                                 payload: {
-                                     newYear: getDecrementedYear(year)
-                                 }
-                            })
+    const monthInc = () => { dispatch({ type: 'MONTH_INC', payload: {newMonthAndYear: getIncrementedMonthAndYear(month, year)} })}
+    const monthDec = () => dispatch({ type: 'MONTH_DEC',  payload: {newMonthAndYear: getDecrementedMonthAndYear(month, year)}})
+    const yearInc = () => dispatch({ type: 'YEAR_INC', payload: {newYear: getIncrementedYear(year)}})
+    const yearDec = () => dispatch({  type: 'YEAR_DEC',payload: { newYear: getDecrementedYear(year)}})
 
     const removeEntry = (dayNumber, index) => {
         const [stringMonth, numDays] = getMonthAndNumDays(month)
         const entries = calendar[year][stringMonth][dayNumber - 1]['entries']
         let newEntries = [...entries]
         newEntries.splice(index, 1)
-        console.log('heres newEntries')
-        console.log(newEntries)
 
         const confirmed = confirm("Are you sure you want to delete this journal entry?");
         if (confirmed){
@@ -118,33 +87,36 @@ const DateContextProvider = (props) => {
                                     })
     }
 
-    const dateToMDY = (givenDate) => {
+    const editGivenEntry = (title, entryDate, body, id, calendar) => {
         let splitDates = entryDate.split(' ')
-        splitDates[1] = parseInt(splitDates[1])
-        console.log('heres splitdates')
-        console.log(splitDates)
+        splitDates[1] = parseInt(splitDates[1] - 1)
         let [ entryMonth, entryDay, entryYear ] = splitDates
-        return [ entryMonth, entryDay, entryYear ]
+        let todaysEntries = calendar[entryYear][entryMonth][entryDay]['entries']
+        todaysEntries[id] =  {'preview': title, 'date': entryDate, 'body': body}
+        calendar[entryYear][entryMonth][entryDay]['entries'] = todaysEntries
+        return firebase.database().ref(`users/${uid}/calendar/${entryYear}/${entryMonth}/${entryDay}/entries`)
+                                  .set(todaysEntries)
+                                  .then(() => {
+                                        dispatch({ type: 'UPDATE_CALENDAR', payload: {calendar}})
+                                    })
     }
 
-    const saveGivenDatesEntry = (title, entryDate, body, calendar) => {
-
-        let [ entryMonth, entryDay, entryYear ] = dateToMDY(entryDate)
-        console.log(calendar[entryYear][entryMonth])
-    }
-
-    const editEntry = (entry) => {
+    // does this need to be here? no
+    const navigateToEditEntry = (id, entry) => {
         setTitle(entry.preview)
         setDate(entry.date)
         setBody(entry.body)
+        setEntryIndex(id)
         setIsEditing(true)
         history.push('/create')
+
+
     }
 
 
 
     return (
-        <DateContext.Provider value={ [state, monthInc, monthDec, yearInc, yearDec, removeEntry, saveTodaysEntry, saveGivenDatesEntry, editEntry] }>
+        <DateContext.Provider value={ [state, monthInc, monthDec, yearInc, yearDec, removeEntry, saveTodaysEntry, navigateToEditEntry, editGivenEntry] }>
             {
                 children
             }

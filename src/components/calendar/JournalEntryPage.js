@@ -15,11 +15,11 @@ const JournalEntryPage = () => {
     // let {passedTitle, passedDate, passedBody, passedFortuneExists} = props 
 
     
-    const [ entryState, setTitle, setDate, setBody, setFortuneExists ] = useContext(EntryContext)
-    const [ title, date, body, fortuneExists, isEditing ] = entryState
+    const [ entryState, setTitle, setDate, setBody, setEntryIndex, setFortuneExists, setIsEditing ] = useContext(EntryContext)
+    const [ title, date, body, index, fortuneExists, isEditing ] = entryState
 
 
-    const [state, monthInc, monthDec, yearInc, yearDec, removeEntry, saveTodaysEntry, saveGivenDatesEntry, editEntry] = useContext(DateContext)
+    const [state, monthInc, monthDec, yearInc, yearDec, removeEntry, saveTodaysEntry, navigateToEditEntry, editGivenEntry] = useContext(DateContext)
     let [ numericalMonth, year, calendar ] = state
 
     const updateTitle = (e) => setTitle(e.target.value);
@@ -28,12 +28,18 @@ const JournalEntryPage = () => {
     const [alertActive, setAlertActive] = useState(false) 
     const [reqErrActive, setReqErrActive] = useState(false)
 
-    const submitEntry = (title, date, body, calendar) => {
-        if (isEditing) {
-            saveGivenDatesEntry(title, date, body, calendar)
+    const submitEdits = (title, date, body, calendar) => {
+        if (!title) {
+            setReqErrActive(true)
         } else {
-            submitTodaysEntry(title, date, body, calendar)
+            editGivenEntry(title, date, body, index, calendar)
+            setTitle("")
+            setDate("")
+            setBody("")
+            setAlertActive(true)
         }
+
+
     }
 
     const submitTodaysEntry = (title, date, body, calendar) => {
@@ -52,7 +58,7 @@ const JournalEntryPage = () => {
         <div className = 'create-entry-wrapper'>
             {
                 alertActive && 
-                <TarotAlert alertText={"Journal entry saved successfully!"} goBackHandler={() => history.push('/dashboard')}/>
+                <TarotAlert alertText={"Journal entry saved successfully!"} goBackHandler={() => history.push('/Journal')}/>
 
             }
           <Prompt
@@ -90,9 +96,19 @@ const JournalEntryPage = () => {
                         </div>
                     }
                     {/* {submitTodaysEntry(title, date, body, calendar)} */}
-                    <div className='entry-button save-button' onClick={() => submitEntry(title, date, body, calendar)}>
-                        SAVE
-                    </div>
+                    {
+                        !isEditing && 
+                        <div className='entry-button save-button' onClick={() => submitTodaysEntry(title, date, body, calendar)}>
+                            SAVE
+                        </div>
+                    }
+                    {
+                        isEditing && 
+                        <div className='entry-button save-button' onClick={() => submitEdits(title, date, body, calendar)}>
+                            SAVE EDITS
+                        </div>
+                    }
+
                 </div>
             </div>
         </div>
