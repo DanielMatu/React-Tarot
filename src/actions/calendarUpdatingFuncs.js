@@ -145,4 +145,3 @@ export const initializeCalendar = () => {
     rangeOfYears.map((year) => calendar[year] = generatedMonthsOfYear)
     return calendar
 }
-

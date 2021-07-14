@@ -15,8 +15,6 @@ const CreateJournalEntryPage = () => {
     const date = new Date()
     let [ stringMonth, numDays ] = getMonthAndNumDays(date.getMonth() + 1) 
 
-    // const entryDate = stringMonth + ' ' + date.getDate().toString() +  ' ' + date.getFullYear()
-
     const [title, setTitle] = useState('');
     const updateTitle = (e) => {
         return setTitle(e.target.value);
@@ -51,7 +49,7 @@ const CreateJournalEntryPage = () => {
 
             }
           <Prompt
-            when={true}
+            when={!alertActive}
             message={
                 location => `Your changes haven't been saved, are you sure you want to leave this page?`
              }

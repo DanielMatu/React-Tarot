@@ -6,7 +6,7 @@ import {
     getIncrementedYear,
     getDecrementedYear,
     initializeCalendar,
-    getMonthAndNumDays
+    getMonthAndNumDays,
 } from '../actions/calendarUpdatingFuncs'
 import { firebase } from '../firebase/firebase'
 import { UserContext } from './user-context'
@@ -89,8 +89,6 @@ const DateContextProvider = (props) => {
     }
 
     const saveTodaysEntry = (title, entryDate, body, calendar) => {
-        // firebase.database().ref(`users/${uid}/calendar/${year}/${stringMonth}/${dayNumber - 1}/entries`).set(newEntries)
-        // create year, month day based on todays, then change add an entry to calendar
         let date = new Date() 
         let currDayNumber = date.getDate()
         let currMonth = date.getMonth() + 1
