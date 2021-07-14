@@ -16,11 +16,10 @@ const JournalEntryPage = () => {
 
     
     const [ entryState, setTitle, setDate, setBody, setFortuneExists ] = useContext(EntryContext)
-    const [ title, date, body, fortuneExists ] = entryState
-    console.log('entrystate')
-    console.log(entryState)
+    const [ title, date, body, fortuneExists, isEditing ] = entryState
 
-    const [state, monthInc, monthDec, yearInc, yearDec, removeEntry, saveTodaysEntry] = useContext(DateContext)
+
+    const [state, monthInc, monthDec, yearInc, yearDec, removeEntry, saveTodaysEntry, saveGivenDatesEntry, editEntry] = useContext(DateContext)
     let [ numericalMonth, year, calendar ] = state
 
     const updateTitle = (e) => setTitle(e.target.value);
@@ -28,6 +27,14 @@ const JournalEntryPage = () => {
 
     const [alertActive, setAlertActive] = useState(false) 
     const [reqErrActive, setReqErrActive] = useState(false)
+
+    const submitEntry = (title, date, body, calendar) => {
+        if (isEditing) {
+            saveGivenDatesEntry(title, date, body, calendar)
+        } else {
+            submitTodaysEntry(title, date, body, calendar)
+        }
+    }
 
     const submitTodaysEntry = (title, date, body, calendar) => {
         if (!title) {
@@ -83,7 +90,7 @@ const JournalEntryPage = () => {
                         </div>
                     }
                     {/* {submitTodaysEntry(title, date, body, calendar)} */}
-                    <div className='entry-button save-button' onClick={() => submitTodaysEntry(title, date, body, calendar)}>
+                    <div className='entry-button save-button' onClick={() => submitEntry(title, date, body, calendar)}>
                         SAVE
                     </div>
                 </div>

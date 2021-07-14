@@ -10,6 +10,8 @@ import {
 } from '../actions/calendarUpdatingFuncs'
 import { firebase } from '../firebase/firebase'
 import { UserContext } from './user-context'
+import { EntryContext } from './entry-context'
+import { history } from '../routers/AppRouter'
 const db = firebase.database()
 const DateContext = createContext()
 export { DateContext }
@@ -21,6 +23,12 @@ const DateContextProvider = (props) => {
 
     let { calendar, children } = props
     const [ userState, login, logout ] = useContext(UserContext)
+
+    const [ entryState, setTitle, setDate, setBody, setFortuneExists, setIsEditing ] = useContext(EntryContext)
+    const [ title, entryDate, body, fortuneExists, isEditing, entry ] = entryState
+
+    console.log('is this a good ref?')
+    console.log(entry)
 
     let { uid } = userState
     console.log('uid from date-context')
@@ -110,10 +118,33 @@ const DateContextProvider = (props) => {
                                     })
     }
 
+    const dateToMDY = (givenDate) => {
+        let splitDates = entryDate.split(' ')
+        splitDates[1] = parseInt(splitDates[1])
+        console.log('heres splitdates')
+        console.log(splitDates)
+        let [ entryMonth, entryDay, entryYear ] = splitDates
+        return [ entryMonth, entryDay, entryYear ]
+    }
+
+    const saveGivenDatesEntry = (title, entryDate, body, calendar) => {
+
+        let [ entryMonth, entryDay, entryYear ] = dateToMDY(entryDate)
+        console.log(calendar[entryYear][entryMonth])
+    }
+
+    const editEntry = (entry) => {
+        setTitle(entry.preview)
+        setDate(entry.date)
+        setBody(entry.body)
+        setIsEditing(true)
+        history.push('/create')
+    }
+
 
 
     return (
-        <DateContext.Provider value={ [state, monthInc, monthDec, yearInc, yearDec, removeEntry, saveTodaysEntry] }>
+        <DateContext.Provider value={ [state, monthInc, monthDec, yearInc, yearDec, removeEntry, saveTodaysEntry, saveGivenDatesEntry, editEntry] }>
             {
                 children
             }

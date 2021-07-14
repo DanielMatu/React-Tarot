@@ -20,11 +20,11 @@ const generateJSX = (uid, calendar) => (
     
     <Provider store={store}>
         <UserContextProvider uid={uid}>
-            <DateContextProvider calendar={calendar}>
-                <EntryContextProvider>
-                    <AppRouter />
-                </EntryContextProvider>
-            </DateContextProvider>
+            <EntryContextProvider>
+                <DateContextProvider calendar={calendar}>
+                        <AppRouter />
+                </DateContextProvider>
+            </EntryContextProvider>
         </UserContextProvider>
     </Provider>
 )

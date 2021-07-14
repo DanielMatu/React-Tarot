@@ -1,11 +1,16 @@
 import React, { useContext, useState } from 'react';
 import { history } from '../routers/AppRouter'
 import { DateContext } from '../contexts/date-context'
+import { EntryContext } from '../contexts/entry-context'
 import { getMonthAndNumDays } from '../actions/calendarUpdatingFuncs';
 
 const DashboardPage = () =>  {
-    const [state, monthInc, monthDec, yearInc, yearDec, removeEntry, saveTodaysEntry, entryAtLimit] = useContext(DateContext)
+    const [state, monthInc, monthDec, yearInc, yearDec, removeEntry, saveTodaysEntry, saveGivenDatesEntry, entryAtLimit] = useContext(DateContext)
     let [ numericalMonth, year, calendar ] = state
+
+    const [ entryState, setTitle, setDate, setBody, setFortuneExists, setIsEditing, setEntry ] = useContext(EntryContext)
+    const [ title, entryDate, body, fortuneExists, isEditing, entry ] = entryState
+
     // let [ month, numDays ] = getMonthAndNumDays(numericalMonth)
     let [ limitReachedVisible, setLimitReachedVisible ] = useState(false)
 
@@ -15,7 +20,13 @@ const DashboardPage = () =>  {
         let currMonth = date.getMonth() + 1
         let currYear = date.getFullYear()
         let [ stringCurrMonth, numDays ] = getMonthAndNumDays(currMonth)
+        console.log('heres entry before set')
+        console.log(entry)
         let todaysEntries = calendar[currYear][stringCurrMonth][currDayNumber - 1]['entries']
+        setEntry(calendar[currYear][stringCurrMonth][currDayNumber - 1]['entries'][title])
+        console.log('heres entry')
+        console.log(entry)
+
         if (!todaysEntries){
             todaysEntries = []
         }

@@ -20,6 +20,16 @@ const EntryReducer = (state, action) => {
             return [
                 ...state
             ]
+        case 'UPDATE_IS_EDITING': 
+            state[4] = action.payload.newIsEditing
+            return [
+                ...state
+            ]
+        case 'UPDATE_ENTRY': 
+            state[5] = action.payload.newEntry
+            return [
+                ...state
+            ]
     }
 }
 
