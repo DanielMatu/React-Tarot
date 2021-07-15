@@ -1,0 +1,43 @@
+.fortune-container {
+    display: flex;
+    justify-content: space-between;
+
+    .fortune-layout {
+        width: 70vw;
+        height: 90.5vh;
+        background: rgba(orange, 0.3);
+    }
+
+    .display-section {
+        width: 30vw; 
+        height: 90.5vh;
+        display: flex;
+        flex-direction:column;
+        align-items: center;
+
+        .display-card-container {
+            background-color: rgba(blue, 0.3);
+            width: 30vw;
+            height: 50rem;
+            display:flex;
+            justify-content:center;
+            .display-card {
+                width: 29rem;
+                height: 50rem;
+            }
+        }
+
+        .display-text {
+            background: rgba(red, 0.3);
+            width: 30vw;
+            height: 30vh;
+            padding: 2rem;
+            font-size: 20px;
+        }
+        .save-button {
+            background: rgba(green, 0.3);
+            width: 30vw;
+            height: 14vh;
+        }
+    }
+}

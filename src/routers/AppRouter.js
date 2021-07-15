@@ -8,6 +8,8 @@ import JournalPage from '../components/calendar/JournalPage'
 import JournalEntryPage from '../components/calendar/JournalEntryPage'
 import NotFoundPage from '../components/NotFoundPage';
 import LoginPage from '../components/LoginPage'
+import FortunePage from '../components/FortunePage'
+
 import BackgroundVideo from '../components/BackgroundVideo'
 import PrivateRoute from './PrivateRoute'
 import PublicRoute from './PublicRoute'
@@ -26,6 +28,7 @@ const AppRouter = () => (
                 <PrivateRoute path="/dashboard" component={DashboardPage}/>
                 <PrivateRoute path="/journal" component={JournalPage}/>
                 <PrivateRoute path='/create' component={JournalEntryPage}/>
+                <PrivateRoute path='/fortune' component={FortunePage}/>
                 <PrivateRoute path="/fortunes" component={DashboardPage}/>
 
                 <Route component= {NotFoundPage} />

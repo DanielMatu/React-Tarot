@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react'
+import React, { useState, useEffect, useContext } from 'react'
 import { DateContext } from '../../contexts/date-context'
 import { EntryContext } from '../../contexts/entry-context'
 
@@ -36,6 +36,13 @@ const JournalEntryPage = () => {
 
     const [alertActive, setAlertActive] = useState(false) 
     const [reqErrActive, setReqErrActive] = useState(false)
+    const [fastNavToFortune, setFastNavToFortune] = useState(false)
+
+    useEffect(() => {
+        if (fastNavToFortune){
+            history.push('/fortune')
+        }
+    }, [fastNavToFortune])
 
     const submitJournalEntry = (submitFunction, ...submitFunctionArgs) => {
         if (!title) {
@@ -58,10 +65,11 @@ const JournalEntryPage = () => {
 
             }
           <Prompt
-            when={!alertActive}
+            when={!alertActive && !fastNavToFortune }
             message={
-                location => `Your changes haven't been saved, are you sure you want to leave this page?`
+                location => `Your changes haven't been saved, are you sure you want to leave this page? also ${fastNavToFortune}`
              }
+
           />
             <div className='create-entry-container' >
                 <div className='half-entry text-entry'>
@@ -81,13 +89,13 @@ const JournalEntryPage = () => {
                 <div className='half-entry bottom-entry'>
                     {
                         fortuneExists && 
-                        <div className='entry-button view-fortune-button'>
+                        <div className='entry-button view-fortune-button' onClick={() => setFastNavToFortune(true)}>
                             VIEW FORTUNE
                         </div>
                     }
                     {
                         !fortuneExists && 
-                        <div className='entry-button view-fortune-button'>
+                        <div className='entry-button view-fortune-button' onClick={() => setFastNavToFortune(true)}>
                             ATTACH NEW FORTUNE
                         </div>
                     }
