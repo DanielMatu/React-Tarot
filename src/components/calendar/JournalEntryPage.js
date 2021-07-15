@@ -28,32 +28,19 @@ const JournalEntryPage = () => {
     const [alertActive, setAlertActive] = useState(false) 
     const [reqErrActive, setReqErrActive] = useState(false)
 
-    const submitEdits = (title, date, body, calendar) => {
+    const submitJournalEntry = (submitFunction, ...submitFunctionArgs) => {
         if (!title) {
             setReqErrActive(true)
         } else {
-            editGivenEntry(title, date, body, index, calendar)
+            submitFunction(...submitFunctionArgs)
             setTitle("")
             setDate("")
             setBody("")
+            setFortuneExists(false)
             setAlertActive(true)
         }
-
-
     }
-
-    const submitTodaysEntry = (title, date, body, calendar) => {
-        if (!title) {
-            setReqErrActive(true)
-        } else {
-            saveTodaysEntry(title, date, body, calendar)
-            setTitle("")
-            setDate("")
-            setBody("")
-            setAlertActive(true)
-        }
-
-    }
+    
     return (
         <div className = 'create-entry-wrapper'>
             {
@@ -67,7 +54,7 @@ const JournalEntryPage = () => {
                 location => `Your changes haven't been saved, are you sure you want to leave this page?`
              }
           />
-            <div className='create-entry-container'>
+            <div className='create-entry-container' >
                 <div className='half-entry text-entry'>
                     <textarea className='entry-text-area entry-title' placeholder="Enter a title:" value={title} onChange={updateTitle} required></textarea>
                     {
@@ -95,16 +82,15 @@ const JournalEntryPage = () => {
                             ATTACH NEW FORTUNE
                         </div>
                     }
-                    {/* {submitTodaysEntry(title, date, body, calendar)} */}
                     {
                         !isEditing && 
-                        <div className='entry-button save-button' onClick={() => submitTodaysEntry(title, date, body, calendar)}>
+                        <div className='entry-button save-button' onClick={() => submitJournalEntry(saveTodaysEntry, title, date, body, calendar)}>
                             SAVE
                         </div>
                     }
                     {
                         isEditing && 
-                        <div className='entry-button save-button' onClick={() => submitEdits(title, date, body, calendar)}>
+                        <div className='entry-button save-button' onClick={() => submitJournalEntry(editGivenEntry, title, date, body, index, calendar)}>
                             SAVE EDITS
                         </div>
                     }
