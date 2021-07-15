@@ -13,6 +13,10 @@ import UserContextProvider from './contexts/user-context'
 import EntryContextProvider from './contexts/entry-context'
 import { initializeCalendar } from './actions/calendarUpdatingFuncs'
 
+window.onload = function () {
+    history.push('/dashboard')
+}
+
 const store = configureStore()
 
 const generateJSX = (uid, calendar) => (

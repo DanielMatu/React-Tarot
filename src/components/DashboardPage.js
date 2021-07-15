@@ -21,6 +21,9 @@ const DashboardPage = () =>  {
         let currYear = date.getFullYear()
         let [ stringCurrMonth, numDays ] = getMonthAndNumDays(currMonth)
         let todaysEntries = calendar[currYear][stringCurrMonth][currDayNumber - 1]['entries']
+        setTitle('')
+        setBody('')
+        setFortuneExists(false)
         setDate(stringCurrMonth + " " + (currDayNumber).toString() + " " + currYear.toString() )
         setIsEditing(false)
         if (!todaysEntries){

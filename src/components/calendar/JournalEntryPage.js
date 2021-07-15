@@ -9,12 +9,18 @@ import { Prompt } from 'react-router'
 import TarotAlert from '../TarotAlert'
 
 
+
 const JournalEntryPage = () => {
 
     // needs component to accept props
     // let {passedTitle, passedDate, passedBody, passedFortuneExists} = props 
 
-    
+    window.onbeforeunload = function() {
+        return 'sure?'
+    }
+
+
+
     const [ entryState, setTitle, setDate, setBody, setEntryIndex, setFortuneExists, setIsEditing ] = useContext(EntryContext)
     const [ title, date, body, index, fortuneExists, isEditing ] = entryState
 
