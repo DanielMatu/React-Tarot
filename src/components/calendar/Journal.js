@@ -4,11 +4,11 @@ import { DateContext } from '../../contexts/date-context'
 import { UserContext } from '../../contexts/user-context'
 import { getMonthAndNumDays } from '../../actions/calendarUpdatingFuncs'
 
-const Journal = (props) => {
+const Journal = () => {
 
     const [ userState, login, logout ] = useContext(UserContext)
     const { uid } = userState
-    const [state, monthInc, monthDec, yearInc, yearDec, removeEntry, saveTodaysEntry, navigateToEditEntry, editGivenEntry] = useContext(DateContext)
+    const [state, monthInc, monthDec, yearInc, yearDec, removeEntry, saveTodaysEntry, editGivenEntry] = useContext(DateContext)
     let [ numericalMonth, year, calendar ] = state
     let [ month, numDays ] = getMonthAndNumDays(numericalMonth)
     let daysOfMonth = calendar[year][month]

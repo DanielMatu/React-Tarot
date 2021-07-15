@@ -19,7 +19,7 @@ const JournalEntryPage = () => {
     const [ title, date, body, index, fortuneExists, isEditing ] = entryState
 
 
-    const [state, monthInc, monthDec, yearInc, yearDec, removeEntry, saveTodaysEntry, navigateToEditEntry, editGivenEntry] = useContext(DateContext)
+    const [state, monthInc, monthDec, yearInc, yearDec, removeEntry, saveTodaysEntry, editGivenEntry] = useContext(DateContext)
     let [ numericalMonth, year, calendar ] = state
 
     const updateTitle = (e) => setTitle(e.target.value);

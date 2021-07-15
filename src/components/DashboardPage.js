@@ -5,7 +5,7 @@ import { EntryContext } from '../contexts/entry-context'
 import { getMonthAndNumDays } from '../actions/calendarUpdatingFuncs';
 
 const DashboardPage = () =>  {
-    const [state, monthInc, monthDec, yearInc, yearDec, removeEntry, saveTodaysEntry, navigateToEditEntry, editGivenEntry] = useContext(DateContext)
+    const [state, monthInc, monthDec, yearInc, yearDec, removeEntry, saveTodaysEntry, editGivenEntry] = useContext(DateContext)
     let [ numericalMonth, year, calendar ] = state
 
     const [ entryState, setTitle, setDate, setBody, setEntryIndex, setFortuneExists, setIsEditing ] = useContext(EntryContext)

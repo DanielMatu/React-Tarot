@@ -1,6 +1,5 @@
 import React, { useContext } from 'react'
 import { connect } from 'react-redux'
-import { startLogin } from '../actions/auth'
 import AppRouter, { history } from '../routers/AppRouter'
 import { UserContext } from '../contexts/user-context'
 import { firebase, googleAuthProvider } from '../firebase/firebase'

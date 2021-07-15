@@ -27,10 +27,7 @@ const DateContextProvider = (props) => {
     const [ entryState, setTitle, setDate, setBody, setEntryIndex, setFortuneExists, setIsEditing ] = useContext(EntryContext)
     const [ title, entryDate, body, index, fortuneExists, isEditing, entry ] = entryState
 
-
     let { uid } = userState
-    console.log('uid from date-context')
-    console.log(uid)
 
     const date = new Date()
     let month = date.getMonth() + 1
@@ -66,7 +63,7 @@ const DateContextProvider = (props) => {
         }
     }
 
-    const saveTodaysEntry = (title, entryDate, body, calendar) => {
+    const saveTodaysEntry = async (title, entryDate, body, calendar) => {
         let date = new Date() 
         let currDayNumber = date.getDate()
         let currMonth = date.getMonth() + 1
@@ -101,22 +98,12 @@ const DateContextProvider = (props) => {
                                     })
     }
 
-    // does this need to be here? no
-    const navigateToEditEntry = (id, entry) => {
-        setTitle(entry.preview)
-        setDate(entry.date)
-        setBody(entry.body)
-        setEntryIndex(id)
-        setIsEditing(true)
-        history.push('/create')
 
-
-    }
 
 
 
     return (
-        <DateContext.Provider value={ [state, monthInc, monthDec, yearInc, yearDec, removeEntry, saveTodaysEntry, navigateToEditEntry, editGivenEntry] }>
+        <DateContext.Provider value={ [state, monthInc, monthDec, yearInc, yearDec, removeEntry, saveTodaysEntry, editGivenEntry] }>
             {
                 children
             }
