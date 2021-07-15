@@ -22,7 +22,10 @@ const JournalEntryPage = () => {
     const [state, monthInc, monthDec, yearInc, yearDec, removeEntry, saveTodaysEntry, editGivenEntry] = useContext(DateContext)
     let [ numericalMonth, year, calendar ] = state
 
-    const updateTitle = (e) => setTitle(e.target.value);
+    // const updateTitle = (e) => (e.target.value.lengh == 8) ? console.log('lmao') : setTitle(e.target.value)
+    // const updateTitle = (e) => (e.target.value.length < 8) ? setTitle(e.target.value) : console.log('its less than 8')
+    const updateTitle = (e) => (e.target.value.length < 10) ? setTitle(e.target.value) : setTitle(e.target.value.substring(0, e.target.value.length - 1))
+
     const updateBody = (e) => setBody(e.target.value);
 
     const [alertActive, setAlertActive] = useState(false) 
@@ -40,7 +43,7 @@ const JournalEntryPage = () => {
             setAlertActive(true)
         }
     }
-    
+
     return (
         <div className = 'create-entry-wrapper'>
             {

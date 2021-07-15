@@ -8,15 +8,7 @@ const EntryContextProvider = (props) => {
                 //     title, date, body, fortuneExists, isEditing, entry
     const initialState = ['', '', '', 0, false, false]
     const [state, dispatch] = useReducer(EntryReducer, initialState)
-    //                                            type: 'UPDATE_TITLE', payload:{newTitle}
-
-    const setTitle = (newTitle) => {
-                            dispatch(
-                            {
-                                type: 'UPDATE_TITLE', payload:{newTitle}
-                            })
-
-    } 
+    const setTitle = (newTitle) => { dispatch({type: 'UPDATE_TITLE', payload:{newTitle}})} 
     const setDate = (newDate) => dispatch({type: 'UPDATE_DATE', payload:{newDate}})
     const setBody = (newBody) => dispatch({type: 'UPDATE_BODY', payload:{newBody}})
     const setEntryIndex = (newIndex) => dispatch({type: 'UPDATE_ENTRY_INDEX', payload:{newIndex}})
@@ -26,8 +18,6 @@ const EntryContextProvider = (props) => {
 
     return (
         <EntryContext.Provider value={ [state, setTitle, setDate, setBody, setEntryIndex, setFortuneExists, setIsEditing] }>
-            {console.log('state in provider')}
-            {console.log(setTitle)}
             { 
                 children 
             }
