@@ -2,8 +2,13 @@
     display: flex;
     justify-content: space-between;
 
+    .deck-section {
+        width: 15vw;
+        height: 90.5vh;
+    }
+
     .fortune-layout {
-        width: 70vw;
+        width: 55vw;
         height: 90.5vh;
         background: rgba(orange, 0.3);
     }

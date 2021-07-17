@@ -8,7 +8,7 @@ import JournalPage from '../components/calendar/JournalPage'
 import JournalEntryPage from '../components/calendar/JournalEntryPage'
 import NotFoundPage from '../components/NotFoundPage';
 import LoginPage from '../components/LoginPage'
-import FortunePage from '../components/FortunePage'
+import FortunePage from '../components/fortune/FortunePage'
 
 import BackgroundVideo from '../components/BackgroundVideo'
 import PrivateRoute from './PrivateRoute'

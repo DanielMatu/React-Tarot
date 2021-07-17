@@ -160,7 +160,7 @@ export const getStandardDeck = () => {
     let standardDeck = []
     let currCard
     for (let i = 0; i < cardNames.length; i++){
-        currCard = {name: cardNames[i], text:cardDescriptions[i] }
+        currCard = {name: cardNames[i], text:cardDescriptions[i], isDummy: false, isRevealed:false }
         standardDeck.push(currCard)
     }
     return standardDeck

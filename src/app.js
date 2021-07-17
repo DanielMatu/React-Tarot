@@ -11,6 +11,8 @@ import LoadingPage from './components/LoadingPage'
 import DateContextProvider from './contexts/date-context'
 import UserContextProvider from './contexts/user-context'
 import EntryContextProvider from './contexts/entry-context'
+import FortuneContextProvider from './contexts/fortune-context'
+
 import { initializeCalendar } from './actions/calendarUpdatingFuncs'
 
 window.onload = function () {
@@ -25,7 +27,9 @@ const generateJSX = (uid, calendar) => (
         <UserContextProvider uid={uid}>
             <EntryContextProvider>
                 <DateContextProvider calendar={calendar}>
+                    <FortuneContextProvider>
                         <AppRouter />
+                    </FortuneContextProvider>
                 </DateContextProvider>
             </EntryContextProvider>
         </UserContextProvider>
