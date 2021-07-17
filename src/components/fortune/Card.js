@@ -7,27 +7,27 @@ const Card = (props) => {
 
     const { row, col, depth, card } = props
     let { name, text, isDummy, isRevealed } = card
-    
-    console.log('heres card')
-    console.log(card)
+
 
     const revealCard = () => {
-        if (!isRevealed){
-            isRevealed = true
-            layout[row][col][depth].isRevealed = isRevealed
+        if (!isDummy){
+            if (!isRevealed){
+                isRevealed = true
+                layout[row][col][depth].isRevealed = isRevealed
+                setLayout(layout)
+            }
             setDisplayCardName(name)
             setDisplayCardText(text)
-            setLayout(layout)
         }
+
     }
 
     return (
         <>  
             <div className='card' onClick={() => revealCard()} 
                                 style={isRevealed ? {backgroundImage: 'url("../../public/images/Tarot/' + name + '.png")', backgroundSize:'cover'} 
-                                                  : {background:'rgba(green,0.3)'}}  >
+                                             : isDummy ? {background:'none'} : {backgroundImage: 'url("../../public/images/Tarot/cardback.png")', backgroundSize:'cover'} }  />
 
-            </div>
 
         </>
 

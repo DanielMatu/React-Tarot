@@ -13,7 +13,7 @@ const FortuneContextProvider = (props) => {
                         [initialCards[3],initialCards[4],initialCards[5],initialCards[6]],
                          [0,initialCards[7],0,initialCards[8]]]
 
-    const initialState = {deck, layout: celticCross, displayCardName:'', displayCardText:''}
+    const initialState = {deck, layout: celticCross, displayCardName:'', displayCardText:'test'}
     const [state, dispatch] = useReducer(FortuneReducer, initialState)
 
 
@@ -27,7 +27,7 @@ const FortuneContextProvider = (props) => {
 
 
     return (
-        <FortuneContext.Provider value={ {state, setLayout, setDisplayCardName, setDisplayCardText, setCards } }>
+        <FortuneContext.Provider value={ {state, setLayout, setDisplayCardName, setDisplayCardText } }>
             { 
                 children 
             }

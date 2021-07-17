@@ -7,11 +7,16 @@ const FortuneReducer = (state, action) => {
                 ...state
             }
         case "UPDATE_DISPLAY_CARD_NAME":
+            console.log('updating name')
+            console.log(action.payload.newDisplayCardName)
             return {
                 displayCardName: action.payload.newDisplayCardName,
                 ...state
             }
         case "UPDATE_DISPLAY_CARD_TEXT":
+            console.log('updating text')
+            console.log(action.payload.newDisplayCardText)
+
             return {
                 displayCardText: action.payload.newDisplayCardText,
                 ...state

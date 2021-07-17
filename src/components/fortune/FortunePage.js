@@ -8,10 +8,10 @@ import Layout from './Layout'
 
 const FortunePage = () => {
     const {state, setLayout, setDisplayCardName, setDisplayCardText} = useContext(FortuneContext)
-    const {deck, layout, displayCardName, displayCardText} = state
+    let {deck, layout, displayCardName, displayCardText} = state
+    console.log('heres state')
+    console.log(state)
 
-
-    const updateText = (e) => setDisplayCardText(e.target.value)
 
     return (
         <div className='fortune-container'>
@@ -22,9 +22,11 @@ const FortunePage = () => {
             <div className='display-section'>
                 <div className='display-card-container'>
                     <div className='display-card' style={{backgroundImage: 'url("../../public/images/Tarot/' + displayCardName + '.png")', backgroundSize:'cover'}}>
+                        {console.log('heres displaycardname')}
+                        {console.log(displayCardName)}
                     </div>
                 </div>
-                <textarea className='display-text' value={displayCardText} onChange={updateText}>
+                <textarea readOnly className='display-text' value={displayCardText}>
                 </textarea>
                 <div className='save-button'>
                 </div>
