@@ -32,15 +32,31 @@
             }
         }
 
-        .display-text {
-            background: rgba($dark-purple, 0.75);
-            color:$turqoise;
+        .display-text-container {
             width: 30vw;
             height: 30vh;
-            padding: 2rem 4rem;
-            font-size: 25px;
-            line-height:2;
-            resize:none;
+            background: rgba($dark-purple, 0.75);
+            display:flex;
+            justify-content: center;
+            align-items:center; 
+
+            .display-text {
+                border: none;
+                color:$turqoise;
+                background:none;
+                width: 28vw;
+                height: 28vh;
+                font-size: 25px;
+                line-height:2;
+                resize:none;
+
+                &:focus {
+                    box-shadow:none;
+                    outline:none;
+                }
+            }
+
+
         }
         .save-button {
             background: rgba(green, 0.3);

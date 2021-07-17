@@ -21,13 +21,12 @@ const FortunePage = () => {
              </div>
             <div className='display-section'>
                 <div className='display-card-container'>
-                    <div className='display-card' style={{backgroundImage: 'url("../../public/images/Tarot/' + displayCardName + '.png")', backgroundSize:'cover'}}>
-                        {console.log('heres displaycardname')}
-                        {console.log(displayCardName)}
-                    </div>
+                    <div className='display-card' style={{backgroundImage: 'url("../../public/images/Tarot/' + displayCardName + '.png")', backgroundSize:'cover'}} />
                 </div>
-                <textarea readOnly className='display-text' value={displayCardText}></textarea>
-                <div className='save-button'></div>
+                <div className='display-text-container'>
+                    <textarea readOnly className='display-text' value={displayCardText}></textarea>
+                </div>
+                <div className='save-button'>SAVE AS JOURNAL ENTRY</div>
             </div>
         </div>
     )
