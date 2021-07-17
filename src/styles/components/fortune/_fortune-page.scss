@@ -33,11 +33,14 @@
         }
 
         .display-text {
-            background: rgba(red, 0.3);
+            background: rgba($dark-purple, 0.75);
+            color:$turqoise;
             width: 30vw;
             height: 30vh;
-            padding: 2rem;
-            font-size: 20px;
+            padding: 2rem 4rem;
+            font-size: 25px;
+            line-height:2;
+            resize:none;
         }
         .save-button {
             background: rgba(green, 0.3);

@@ -9,8 +9,8 @@ import Layout from './Layout'
 const FortunePage = () => {
     const {state, setLayout, setDisplayCardName, setDisplayCardText} = useContext(FortuneContext)
     let {deck, layout, displayCardName, displayCardText} = state
-    console.log('heres state')
-    console.log(state)
+
+
 
 
     return (
@@ -26,10 +26,8 @@ const FortunePage = () => {
                         {console.log(displayCardName)}
                     </div>
                 </div>
-                <textarea readOnly className='display-text' value={displayCardText}>
-                </textarea>
-                <div className='save-button'>
-                </div>
+                <textarea readOnly className='display-text' value={displayCardText}></textarea>
+                <div className='save-button'></div>
             </div>
         </div>
     )

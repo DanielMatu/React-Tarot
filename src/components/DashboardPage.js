@@ -14,18 +14,22 @@ const DashboardPage = () =>  {
     // let [ month, numDays ] = getMonthAndNumDays(numericalMonth)
     let [ limitReachedVisible, setLimitReachedVisible ] = useState(false)
 
-    const navigateToCreateIfUnderLimit = () => {
+    const navigateToCreateIfUnderLimit = (page) => {
         let date = new Date() 
         let currDayNumber = date.getDate()
         let currMonth = date.getMonth() + 1
         let currYear = date.getFullYear()
         let [ stringCurrMonth, numDays ] = getMonthAndNumDays(currMonth)
         let todaysEntries = calendar[currYear][stringCurrMonth][currDayNumber - 1]['entries']
-        setTitle('')
-        setBody('')
-        setFortuneExists(false)
-        setDate(stringCurrMonth + " " + (currDayNumber).toString() + " " + currYear.toString() )
-        setIsEditing(false)
+        if (page == '/create'){
+            setTitle('')
+            setBody('')
+            setFortuneExists(false)
+            setDate(stringCurrMonth + " " + (currDayNumber).toString() + " " + currYear.toString() )
+            setIsEditing(false)
+        } else if (page == '/fortune'){
+        }
+
         if (!todaysEntries){
             todaysEntries = []
         }
@@ -33,20 +37,32 @@ const DashboardPage = () =>  {
             console.log('at limit!')
             setLimitReachedVisible(true)
         } else{
-            history.push('/create')
+            history.push(page)
         }
     }
     return (
         <div>
             <div className='dashboard-center-container'>
-                <div className='dashboard-center-option'>
-                    <div className='dashboard-center-option-header'>
-                        RECEIVE A FORTUNE
-                    </div>
-                    <div className='dashboard-center-option-image' id="eye-look-img"/>
+                <div className='dashboard-center-option' onClick={() => navigateToCreateIfUnderLimit('/fortune')}>
+                    {
+                        !limitReachedVisible &&
+                        <>
+                            <div className='dashboard-center-option-header'>
+                                RECEIVE A FORTUNE
+                            </div>
+                            <div className='dashboard-center-option-image' id="eye-look-img"/>
+                        </>
+
+                    }
+                    {
+                        limitReachedVisible &&
+                        <div className='dashboard-center-option-header'  >
+                            MAXIMUM DAILY ENTRIES (3) REACHED
+                        </div>
+                    }
 
                 </div>
-                <div className='dashboard-center-option' onClick={() => navigateToCreateIfUnderLimit()}>
+                <div className='dashboard-center-option' onClick={() => navigateToCreateIfUnderLimit('/create')}>
                     {
                         !limitReachedVisible &&
                         <>

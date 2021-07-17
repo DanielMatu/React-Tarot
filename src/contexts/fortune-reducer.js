@@ -3,23 +3,22 @@ const FortuneReducer = (state, action) => {
         case "UPDATE_LAYOUT":
             console.log('new layout')
             return {
-                layout: action.payload.newLayout,
-                ...state
+                ...state, 
+                layout: action.payload.newLayout
             }
         case "UPDATE_DISPLAY_CARD_NAME":
-            console.log('updating name')
-            console.log(action.payload.newDisplayCardName)
+            // console.log('updating name')
+            // console.log(action.payload.newDisplayCardName)
             return {
-                displayCardName: action.payload.newDisplayCardName,
-                ...state
+                ...state,
+                displayCardName: action.payload.newDisplayCardName
             }
         case "UPDATE_DISPLAY_CARD_TEXT":
-            console.log('updating text')
-            console.log(action.payload.newDisplayCardText)
-
+            // console.log('updating text')
+            // console.log(action.payload.newDisplayCardText)
             return {
-                displayCardText: action.payload.newDisplayCardText,
-                ...state
+                ...state,
+                displayCardText: action.payload.newDisplayCardText
             }
 
     }
