@@ -15,8 +15,6 @@ const FortunePage = () => {
 
     return (
         <div className='fortune-container'>
-            <div style={{color:'red', backgroundColor:'green'}}>DIIIIV</div>
-            <Temp style={{color:'red', backgroundColor:'green'}}/>
             <div className='deck-section'></div>
             <div className='layout-section'>
                 <Layout />

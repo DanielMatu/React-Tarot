@@ -15,16 +15,17 @@ const Card = (props) => {
         if (!isRevealed){
             isRevealed = true
             layout[row][col][depth].isRevealed = isRevealed
+            setDisplayCardName(name)
+            setDisplayCardText(text)
             setLayout(layout)
         }
     }
 
     return (
         <>  
-            <div className='card' onClick={() => revealCard()}>
-            {
-                name
-            }
+            <div className='card' onClick={() => revealCard()} 
+                                style={isRevealed ? {backgroundImage: 'url("../../public/images/Tarot/' + name + '.png")', backgroundSize:'cover'} 
+                                                  : {background:'rgba(green,0.3)'}}  >
 
             </div>
 

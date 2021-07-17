@@ -17,11 +17,7 @@ const Layout = () => {
                     {
                     row.map((slot, colIndex) => layout[rowIndex][colIndex] !== 0 ? 
 
-                    <Card row={rowIndex} col={colIndex} depth={0} card={layout[rowIndex][colIndex][0]} 
-                            style={true ? {backgroundImage: 'url("../../public/images/Tarot/' + slot[0].name + '.png")', backgroundSize:'cover'} 
-                                                      : {background:'rgba(green,0.3)'}}  
-                    
-                    />
+                    <Card row={rowIndex} col={colIndex} depth={0} card={layout[rowIndex][colIndex][0]} />
 
                     : <Card row={rowIndex} col={colIndex} depth={0} card={{isDummy:true}} />
                     )}
