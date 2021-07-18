@@ -8,6 +8,7 @@ import Card from './Card'
 const Layout = () => {
     const {state, setLayout, setDisplayCardName, setDisplayCardText} = useContext(FortuneContext)
     const {deck, layout, displayCardName, displayCardText} = state
+    const labels = [1,2,3,4,5,6,7,8,9]
     
     return (
         <div className='fortune-layout'>
@@ -17,9 +18,16 @@ const Layout = () => {
                     {
                     row.map((slot, colIndex) => layout[rowIndex][colIndex] !== 0 ? 
 
-                    <Card row={rowIndex} col={colIndex} depth={0} card={layout[rowIndex][colIndex][0]} />
+                    <Card 
+                        key={(rowIndex+1)*(colIndex+1) - 1} 
+                        row={rowIndex} 
+                        col={colIndex} 
+                        depth={0} 
+                        card={layout[rowIndex][colIndex][0]} 
+                        label={labels[(rowIndex+1)*(colIndex+1) - 1]}
+                    />
 
-                    : <Card row={rowIndex} col={colIndex} depth={0} card={{isDummy:true}} />
+                    : <Card key={(rowIndex+1)*(colIndex+1) - 1} row={rowIndex} col={colIndex} depth={0} card={{isDummy:true}} />
                     )}
                  </div>)
             }

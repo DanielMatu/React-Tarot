@@ -2,8 +2,8 @@ import React, { useState, useContext } from 'react'
 import { FortuneContext } from '../../contexts/fortune-context'
 
 const Card = (props) => {
-    const {state, setLayout, setDisplayCardName, setDisplayCardText} = useContext(FortuneContext)
-    const {deck, layout, displayCardName, displayCardText} = state
+    const {state, setLayout, setDisplayCardName, setDisplayCardText, setHoverCardHeld} = useContext(FortuneContext)
+    const {deck, layout, displayCardName, displayCardText, hoverCardHeld} = state
 
     const { row, col, depth, card } = props
     let { name, text, isDummy, isRevealed } = card
@@ -22,14 +22,24 @@ const Card = (props) => {
 
     }
 
+    const placeNewCard = () => {
+        if (hoverCardHeld){
+            console.log('placed new card')
+        }
+    }
+
+
     return (
-        <>  
-            <div className='card' onClick={() => revealCard()} 
-                                style={isRevealed ? {backgroundImage: 'url("../../public/images/Tarot/' + name + '.png")', backgroundSize:'cover'} 
-                                             : isDummy ? {background:'none'} : {backgroundImage: 'url("../../public/images/Tarot/cardback.png")', backgroundSize:'cover'} }  />
+
+        <div className={isDummy ? 'card' : 'card nonDummyCard'}
+                onMouseUp={() => isDummy ? () => {} : placeNewCard()}
+                onClick={() => revealCard()} 
+                style={isRevealed ? {backgroundImage: 'url("../../public/images/Tarot/' + name + '.png")', backgroundSize:'cover'} 
+                                : isDummy ? {background:'none'} 
+                                          : {backgroundImage: 'url("../../public/images/Tarot/cardback.png")', backgroundSize:'cover'} }  
+        />
 
 
-        </>
 
 
     )
