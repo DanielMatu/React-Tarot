@@ -24,8 +24,8 @@ const DateContextProvider = (props) => {
     let { calendar, children } = props
     const [ userState, login, logout ] = useContext(UserContext)
 
-    const [ entryState, setTitle, setDate, setBody, setEntryIndex, setFortuneExists, setIsEditing ] = useContext(EntryContext)
-    const [ title, entryDate, body, index, fortuneExists, isEditing, entry ] = entryState
+    const [ entryState, setTitle, setDate, setBody, setEntryIndex, setFortune, setIsEditing ] = useContext(EntryContext)
+    const [ title, entryDate, body, index, fortune, isEditing, entry ] = entryState
 
     let { uid } = userState
 
@@ -76,7 +76,9 @@ const DateContextProvider = (props) => {
         if (!todaysEntries){
             todaysEntries = []
         }
-
+        console.log('heres the fortune im pushing')
+        console.log(fortune)
+        console.log('there it was')
         todaysEntries.push({'preview': title, 'date': entryDate, 'body': body, 'fortune':fortune})
         calendar[currYear][stringCurrMonth][currDayNumber - 1]['entries'] = todaysEntries
         return firebase.database().ref(`users/${uid}/calendar/${currYear}/${stringCurrMonth}/${currDayNumber - 1}/entries`)

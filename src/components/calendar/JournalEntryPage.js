@@ -13,7 +13,7 @@ import TarotAlert from '../TarotAlert'
 const JournalEntryPage = () => {
 
     // needs component to accept props
-    // let {passedTitle, passedDate, passedBody, passedFortuneExists} = props 
+    // let {passedTitle, passedDate, passedBody, passedFortune} = props 
 
     window.onbeforeunload = function() {
         return 'sure?'
@@ -21,8 +21,8 @@ const JournalEntryPage = () => {
 
 
 
-    const [ entryState, setTitle, setDate, setBody, setEntryIndex, setFortuneExists, setIsEditing ] = useContext(EntryContext)
-    const [ title, date, body, index, fortuneExists, isEditing ] = entryState
+    const [ entryState, setTitle, setDate, setBody, setEntryIndex, setFortune, setIsEditing ] = useContext(EntryContext)
+    const [ title, date, body, index, fortune, isEditing ] = entryState
 
 
     const [state, monthInc, monthDec, yearInc, yearDec, removeEntry, saveTodaysEntry, editGivenEntry] = useContext(DateContext)
@@ -52,7 +52,7 @@ const JournalEntryPage = () => {
             setTitle("")
             setDate("")
             setBody("")
-            setFortuneExists(false)
+            setFortune({})
             setAlertActive(true)
         }
     }
@@ -87,14 +87,16 @@ const JournalEntryPage = () => {
                 </div>
                 <div className='book-spine'></div>
                 <div className='half-entry bottom-entry'>
+                    { console.log('navigating to fortune page from jep, heres fortune')}
+                    { console.log(fortune) }
                     {
-                        fortuneExists && 
+                        (Object.keys(fortune).length > 0) && 
                         <div className='entry-button view-fortune-button' onClick={() => setFastNavToFortune(true)}>
                             VIEW FORTUNE
                         </div>
                     }
                     {
-                        !fortuneExists && 
+                        (Object.keys(fortune).length === 0) && 
                         <div className='entry-button view-fortune-button' onClick={() => setFastNavToFortune(true)}>
                             ATTACH NEW FORTUNE
                         </div>

@@ -3,19 +3,14 @@ import FortuneReducer from './fortune-reducer'
 const FortuneContext = createContext()
 export { FortuneContext }
 import { getStandardDeck } from '../decks/StandardDeck'
-import { pullNCards } from '../decks/DeckHelpers'
+import { pullNCards, randomizeNewCelticCross } from '../decks/DeckHelpers'
 
 const FortuneContextProvider = (props) => {
     const { children } = props
-    const deck = getStandardDeck()
-    const initialCards = pullNCards(9, deck)
-    const celticCross = [[0,initialCards[0],0,initialCards[1]],
-                        [initialCards[3],initialCards[4],initialCards[5],initialCards[6]],
-                         [0,initialCards[7],0,initialCards[8]]]
 
+    const [celticCross, deck] = randomizeNewCelticCross()
     const initialState = {deck, layout: celticCross, displayCardName:'', displayCardText:'', hoverCardHeld: false}
-    const [state, dispatch] = useReducer(FortuneReducer, initialState)
-
+    const [fortuneState, dispatch] = useReducer(FortuneReducer, initialState)
 
     const setLayout = (newLayout) => { dispatch({type: 'UPDATE_LAYOUT', payload:{newLayout}})} 
     const setDisplayCardName = (newDisplayCardName) => dispatch({type: 'UPDATE_DISPLAY_CARD_NAME', payload:{newDisplayCardName}})
@@ -24,7 +19,7 @@ const FortuneContextProvider = (props) => {
 
 
     return (
-        <FortuneContext.Provider value={ {state, setLayout, setDisplayCardName, setDisplayCardText, setHoverCardHeld } }>
+        <FortuneContext.Provider value={ {fortuneState, setLayout, setDisplayCardName, setDisplayCardText, setHoverCardHeld } }>
             { 
                 children 
             }

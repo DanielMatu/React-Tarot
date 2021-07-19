@@ -10,8 +10,8 @@ import { getMonthAndNumDays } from '../../actions/calendarUpdatingFuncs'
 const Day = ( props ) => {
     const { dayNumber } = props
 
-    const [ entryState, setTitle, setDate, setBody, setEntryIndex, setFortuneExists, setIsEditing ] = useContext(EntryContext)
-    const [ title, entryDate, body, fortuneExists, isEditing ] = entryState
+    const [ entryState, setTitle, setDate, setBody, setEntryIndex, setFortune, setIsEditing ] = useContext(EntryContext)
+    const [ title, entryDate, body, fortune, isEditing ] = entryState
 
     const [state, monthInc, monthDec, yearInc, yearDec, removeEntry, saveTodaysEntry, editGivenEntry] = useContext(DateContext)
     let [ numericalMonth, year, calendar ] = state

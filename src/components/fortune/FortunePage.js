@@ -9,33 +9,30 @@ import { getMonthAndNumDays } from '../../actions/calendarUpdatingFuncs'
 import Layout from './Layout'
 
 const FortunePage = () => {
-    const {state, setLayout, setDisplayCardName, setDisplayCardText, setHoverCardHeld} = useContext(FortuneContext)
-    let {deck, layout, displayCardName, displayCardText, hoverCardHeld} = state
+    const {fortuneState, setLayout, setDisplayCardName, setDisplayCardText, setHoverCardHeld} = useContext(FortuneContext)
+    let {deck, layout, displayCardName, displayCardText, hoverCardHeld} = fortuneState
 
     const [dateState, monthInc, monthDec, yearInc, yearDec, removeEntry, saveTodaysEntry, editGivenEntry, setCalendar] = useContext(DateContext)
     let [ numericalMonth, year, calendar ] = dateState
 
-    const [ entryState, setTitle, setDate, setBody, setEntryIndex, setFortuneExists, setIsEditing ] = useContext(EntryContext)
-    const [ title, entryDate, body, index, fortuneExists, isEditing, entry ] = entryState
+    const [ entryState, setTitle, setDate, setBody, setEntryIndex, setFortune, setIsEditing ] = useContext(EntryContext)
+    const [ title, entryDate, body, index, fortune, isEditing, entry ] = entryState
 
-    const saveToEntry = () => {
-        setLayout(layout)
-
-        let date = new Date() 
-        let currDayNumber = date.getDate()
-        let currMonth = date.getMonth() + 1
-        let currYear = date.getFullYear()
-        let [ stringCurrMonth, numDays ] = getMonthAndNumDays(currMonth)
-        let todaysEntries = calendar[currYear][stringCurrMonth][currDayNumber - 1]['entries']
-        setFortuneExists(true)
-        setDate(stringCurrMonth + " " + (currDayNumber).toString() + " " + currYear.toString() )
+    const postInJournal = () => {
+        // setLayout(layout)
+        // let date = new Date() 
+        // let currDayNumber = date.getDate()
+        // let currMonth = date.getMonth() + 1
+        // let currYear = date.getFullYear()
+        // let [ stringCurrMonth, numDays ] = getMonthAndNumDays(currMonth)
+        // let todaysEntries = calendar[currYear][stringCurrMonth][currDayNumber - 1]['entries']
+        // setDate(stringCurrMonth + " " + (currDayNumber).toString() + " " + currYear.toString() )
         // setIsEditing(false)
+        setFortune(layout)
 
-        dispatch({ type: 'UPDATE_CALENDAR', payload: {calendar}})
-
-        if (!todaysEntries){
-            todaysEntries = []
-        }
+        // if (!todaysEntries){
+        //     todaysEntries = []
+        // }
 
         history.push('/create')
     }
@@ -61,8 +58,8 @@ const FortunePage = () => {
                 <div className='display-text-container'>
                     <textarea readOnly className='display-text' value={displayCardText}></textarea>
                 </div>
-                <div className='save-button-container' onClick={saveToEntry}>
-                    <div className='save-button-text' >SAVE AS JOURNAL ENTRY</div>
+                <div className='save-button-container' onClick={postInJournal}>
+                    <div className='save-button-text' >POST IN JOURNAL</div>
 
                 </div>
             </div>

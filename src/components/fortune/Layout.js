@@ -6,8 +6,10 @@ import { FortuneContext } from '../../contexts/fortune-context'
 import Card from './Card'
 
 const Layout = () => {
-    const {state, setLayout, setDisplayCardName, setDisplayCardText} = useContext(FortuneContext)
-    const {deck, layout, displayCardName, displayCardText} = state
+    const {fortuneState, setLayout, setDisplayCardName, setDisplayCardText} = useContext(FortuneContext)
+    const {deck, layout, displayCardName, displayCardText} = fortuneState
+    console.log('heres layout')
+    console.log(layout)
     const labels = [1,2,3,4,5,6,7,8,9]
     let realCardsId = 0
     let id = 0
@@ -16,7 +18,7 @@ const Layout = () => {
         <div className='fortune-layout'>
 
             {
-                layout.map((row, rowIndex) => <div key={rowIndex} className='row'>
+                Object.keys(layout).length === 0 ? <div>nah</div> : layout.map((row, rowIndex) => <div key={rowIndex} className='row'>
                     {
                     row.map((slot, colIndex) => layout[rowIndex][colIndex] !== 0 ? 
 

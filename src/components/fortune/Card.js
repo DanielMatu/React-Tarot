@@ -2,8 +2,8 @@ import React, { useState, useContext } from 'react'
 import { FortuneContext } from '../../contexts/fortune-context'
 
 const Card = (props) => {
-    const {state, setLayout, setDisplayCardName, setDisplayCardText, setHoverCardHeld} = useContext(FortuneContext)
-    const {deck, layout, displayCardName, displayCardText, hoverCardHeld} = state
+    const {fortuneState, setLayout, setDisplayCardName, setDisplayCardText, setHoverCardHeld} = useContext(FortuneContext)
+    const {deck, layout, displayCardName, displayCardText, hoverCardHeld} = fortuneState
 
     const { row, col, depth, card, label } = props
     let { name, text, isDummy, isRevealed } = card

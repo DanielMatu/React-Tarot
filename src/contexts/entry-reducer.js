@@ -20,8 +20,8 @@ const EntryReducer = (state, action) => {
             return [
                 ...state
             ]
-        case 'UPDATE_FORTUNE_EXISTS': 
-            state[4] = action.payload.newFortuneExists
+        case 'UPDATE_FORTUNE': 
+            state[4] = action.payload.newFortune
             return [
                 ...state
             ]
