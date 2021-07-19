@@ -57,9 +57,6 @@ const JournalEntryPage = () => {
     }, [fastNavToFortune])
 
     const submitJournalEntry = (submitFunction, ...submitFunctionArgs) => {
-        const restArgs = submitFunctionArgs 
-        console.log('heres the args')
-        console.log(restArgs)
         if (!title) {
             setReqErrActive(true)
         } else {
@@ -82,9 +79,8 @@ const JournalEntryPage = () => {
           <Prompt
             when={!alertActive && !fastNavToFortune }
             message={
-                location => `Your changes haven't been saved, are you sure you want to leave this page? also ${fastNavToFortune}`
+                location => `Your changes haven't been saved, are you sure you want to leave this page?`
              }
-
           />
             <div className='create-entry-container' >
                 <div className='half-entry text-entry'>

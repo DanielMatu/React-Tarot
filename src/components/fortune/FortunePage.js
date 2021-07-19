@@ -7,6 +7,8 @@ import { DateContext } from '../../contexts/date-context'
 import { EntryContext } from '../../contexts/entry-context'
 import { getMonthAndNumDays } from '../../actions/calendarUpdatingFuncs'
 import Layout from './Layout'
+import { Prompt } from 'react-router'
+
 
 const FortunePage = () => {
     const {fortuneState, setLayout, setDisplayCardName, setDisplayCardText, setHoverCardHeld} = useContext(FortuneContext)
@@ -17,17 +19,31 @@ const FortunePage = () => {
 
     const [ entryState, setTitle, setDate, setBody, setEntryIndex, setFortune, setIsEditing ] = useContext(EntryContext)
     const [ title, entryDate, body, index, fortune, isEditing, entry ] = entryState
+    
+    const [fastNavToJournalEntry, setFastNavToJournalEntry] = useState(false)
 
 
-    const postInJournal = () => {
-        setFortune(layout)
-        history.push('/create')
-    }
+    // const postInJournal = () => {
+    //     setFortune(layout)
+    //     history.push('/create')
+    // }
 
-
+    useEffect(() => {
+        if (fastNavToJournalEntry){
+            console.log('we fast naving')
+            setFortune(layout)
+            history.push('/create')
+        }
+    }, [fastNavToJournalEntry])
 
     return (
         <div className='fortune-container'>
+            <Prompt
+                when={!fastNavToJournalEntry }
+                message={
+                    location => `Your changes haven't been saved, are you sure you want to leave this page?`
+                }
+            />
             {/* <div className='deck-section'>
                 <div className='deck' id='deck' >   
 
@@ -45,7 +61,7 @@ const FortunePage = () => {
                 <div className='display-text-container'>
                     <textarea readOnly className='display-text' value={displayCardText}></textarea>
                 </div>
-                <div className='save-button-container' onClick={postInJournal}>
+                <div className='save-button-container' onClick={() => setFastNavToJournalEntry(true)}>
                     <div className='save-button-text' >POST IN JOURNAL</div>
 
                 </div>
