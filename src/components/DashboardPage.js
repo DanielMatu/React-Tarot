@@ -34,6 +34,8 @@ const DashboardPage = () =>  {
             setLayout(randomizeNewCelticCross()[0])
             setDate(stringCurrMonth + " " + (currDayNumber).toString() + " " + currYear.toString() )
             setIsEditing(false)
+            setDisplayCardName('')
+            setDisplayCardText('')
         // } else if (page == '/fortune'){
             
         // }
