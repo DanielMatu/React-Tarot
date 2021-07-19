@@ -52,6 +52,8 @@ const JournalEntryPage = () => {
                 // triggered by 'view fortune' case 
                 setLayout(fortune)
             }
+            setDisplayCardName('')
+            setDisplayCardText('')
             history.push('/fortune')
         }
     }, [fastNavToFortune])
