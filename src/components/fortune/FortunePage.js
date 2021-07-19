@@ -3,13 +3,42 @@ import { history } from '../../routers/AppRouter'
 import { getStandardDeck } from '../../decks/StandardDeck'
 import { pullNCards, dragHoverCard } from '../../decks/DeckHelpers'
 import { FortuneContext } from '../../contexts/fortune-context'
+import { DateContext } from '../../contexts/date-context'
+import { EntryContext } from '../../contexts/entry-context'
+import { getMonthAndNumDays } from '../../actions/calendarUpdatingFuncs'
 import Layout from './Layout'
 
 const FortunePage = () => {
     const {state, setLayout, setDisplayCardName, setDisplayCardText, setHoverCardHeld} = useContext(FortuneContext)
     let {deck, layout, displayCardName, displayCardText, hoverCardHeld} = state
 
+    const [dateState, monthInc, monthDec, yearInc, yearDec, removeEntry, saveTodaysEntry, editGivenEntry, setCalendar] = useContext(DateContext)
+    let [ numericalMonth, year, calendar ] = dateState
 
+    const [ entryState, setTitle, setDate, setBody, setEntryIndex, setFortuneExists, setIsEditing ] = useContext(EntryContext)
+    const [ title, entryDate, body, index, fortuneExists, isEditing, entry ] = entryState
+
+    const saveToEntry = () => {
+        setLayout(layout)
+
+        let date = new Date() 
+        let currDayNumber = date.getDate()
+        let currMonth = date.getMonth() + 1
+        let currYear = date.getFullYear()
+        let [ stringCurrMonth, numDays ] = getMonthAndNumDays(currMonth)
+        let todaysEntries = calendar[currYear][stringCurrMonth][currDayNumber - 1]['entries']
+        setFortuneExists(true)
+        setDate(stringCurrMonth + " " + (currDayNumber).toString() + " " + currYear.toString() )
+        // setIsEditing(false)
+
+        dispatch({ type: 'UPDATE_CALENDAR', payload: {calendar}})
+
+        if (!todaysEntries){
+            todaysEntries = []
+        }
+
+        history.push('/create')
+    }
 
 
 
@@ -32,8 +61,8 @@ const FortunePage = () => {
                 <div className='display-text-container'>
                     <textarea readOnly className='display-text' value={displayCardText}></textarea>
                 </div>
-                <div className='save-button-container'>
-                    <div className='save-button-text'>SAVE AS JOURNAL ENTRY</div>
+                <div className='save-button-container' onClick={saveToEntry}>
+                    <div className='save-button-text' >SAVE AS JOURNAL ENTRY</div>
 
                 </div>
             </div>

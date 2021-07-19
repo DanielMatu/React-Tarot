@@ -37,6 +37,7 @@ const DateContextProvider = (props) => {
     const [ state, dispatch ] = useReducer(DateReducer, initialState)
 
 
+    // useless?
     useEffect(() => {
         month = state[0]
         year = state[1]
@@ -47,6 +48,7 @@ const DateContextProvider = (props) => {
     const monthDec = () => dispatch({ type: 'MONTH_DEC',  payload: {newMonthAndYear: getDecrementedMonthAndYear(month, year)}})
     const yearInc = () => dispatch({ type: 'YEAR_INC', payload: {newYear: getIncrementedYear(year)}})
     const yearDec = () => dispatch({  type: 'YEAR_DEC',payload: { newYear: getDecrementedYear(year)}})
+    const setCalendar = () => dispatch({ type: 'UPDATE_CALENDAR', payload: {calendar}})
 
     const removeEntry = (dayNumber, index) => {
         const [stringMonth, numDays] = getMonthAndNumDays(month)
@@ -63,7 +65,7 @@ const DateContextProvider = (props) => {
         }
     }
 
-    const saveTodaysEntry = async (title, entryDate, body, calendar) => {
+    const saveTodaysEntry = async (title, entryDate, body, calendar, fortune={}) => {
         let date = new Date() 
         let currDayNumber = date.getDate()
         let currMonth = date.getMonth() + 1
@@ -75,7 +77,7 @@ const DateContextProvider = (props) => {
             todaysEntries = []
         }
 
-        todaysEntries.push({'preview': title, 'date': entryDate, 'body': body})
+        todaysEntries.push({'preview': title, 'date': entryDate, 'body': body, 'fortune':fortune})
         calendar[currYear][stringCurrMonth][currDayNumber - 1]['entries'] = todaysEntries
         return firebase.database().ref(`users/${uid}/calendar/${currYear}/${stringCurrMonth}/${currDayNumber - 1}/entries`)
                                   .set(todaysEntries)
@@ -103,7 +105,7 @@ const DateContextProvider = (props) => {
 
 
     return (
-        <DateContext.Provider value={ [state, monthInc, monthDec, yearInc, yearDec, removeEntry, saveTodaysEntry, editGivenEntry] }>
+        <DateContext.Provider value={ [state, monthInc, monthDec, yearInc, yearDec, removeEntry, saveTodaysEntry, editGivenEntry, setCalendar] }>
             {
                 children
             }

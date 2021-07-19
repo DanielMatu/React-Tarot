@@ -30,7 +30,7 @@ export const Header = () => {
                         <h2>HOME</h2> 
                     </Link>
                     <Link className='header__title main-nav' to='/journal'>
-                        <h2>JOURNAL</h2>
+                        <h2>CALENDAR</h2>
                     </Link>
                     <button className="button button--link main-nav" onClick={() => firebase.auth().signOut()}><h3>LOG OUT</h3></button>
                 </div>
@@ -44,7 +44,7 @@ export const Header = () => {
                     <h2>HOME</h2> 
                 </Link>
                 <Link className='header__title hamburger-dropdown-item' to='/journal'>
-                    <h2>JOURNAL</h2>
+                    <h2>CALENDAR</h2>
                 </Link>
                 <button 
                     className="button button--link hamburger-dropdown-item" 
