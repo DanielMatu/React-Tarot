@@ -88,12 +88,12 @@ const DateContextProvider = (props) => {
                                     })
     }
 
-    const editGivenEntry = (title, entryDate, body, id, calendar) => {
+    const editGivenEntry = (title, entryDate, body, id, calendar, fortune={}) => {
         let splitDates = entryDate.split(' ')
         splitDates[1] = parseInt(splitDates[1] - 1)
         let [ entryMonth, entryDay, entryYear ] = splitDates
         let todaysEntries = calendar[entryYear][entryMonth][entryDay]['entries']
-        todaysEntries[id] =  {'preview': title, 'date': entryDate, 'body': body}
+        todaysEntries[id] =  {'preview': title, 'date': entryDate, 'body': body, 'fortune':fortune}
         calendar[entryYear][entryMonth][entryDay]['entries'] = todaysEntries
         return firebase.database().ref(`users/${uid}/calendar/${entryYear}/${entryMonth}/${entryDay}/entries`)
                                   .set(todaysEntries)

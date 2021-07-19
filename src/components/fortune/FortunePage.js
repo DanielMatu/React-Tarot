@@ -18,22 +18,9 @@ const FortunePage = () => {
     const [ entryState, setTitle, setDate, setBody, setEntryIndex, setFortune, setIsEditing ] = useContext(EntryContext)
     const [ title, entryDate, body, index, fortune, isEditing, entry ] = entryState
 
+
     const postInJournal = () => {
-        // setLayout(layout)
-        // let date = new Date() 
-        // let currDayNumber = date.getDate()
-        // let currMonth = date.getMonth() + 1
-        // let currYear = date.getFullYear()
-        // let [ stringCurrMonth, numDays ] = getMonthAndNumDays(currMonth)
-        // let todaysEntries = calendar[currYear][stringCurrMonth][currDayNumber - 1]['entries']
-        // setDate(stringCurrMonth + " " + (currDayNumber).toString() + " " + currYear.toString() )
-        // setIsEditing(false)
         setFortune(layout)
-
-        // if (!todaysEntries){
-        //     todaysEntries = []
-        // }
-
         history.push('/create')
     }
 

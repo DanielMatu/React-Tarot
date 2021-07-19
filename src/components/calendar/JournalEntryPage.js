@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useContext } from 'react'
 import { DateContext } from '../../contexts/date-context'
 import { EntryContext } from '../../contexts/entry-context'
+import { FortuneContext } from '../../contexts/fortune-context'
 
 import { getMonthAndNumDays } from '../../actions/calendarUpdatingFuncs'
 import { firebase } from '../../firebase/firebase'
@@ -20,6 +21,8 @@ const JournalEntryPage = () => {
     }
 
 
+    const {fortuneState, setLayout, setDisplayCardName, setDisplayCardText, setHoverCardHeld} = useContext(FortuneContext)
+    const {deck, layout, displayCardName, displayCardText, hoverCardHeld} = fortuneState
 
     const [ entryState, setTitle, setDate, setBody, setEntryIndex, setFortune, setIsEditing ] = useContext(EntryContext)
     const [ title, date, body, index, fortune, isEditing ] = entryState
@@ -40,11 +43,15 @@ const JournalEntryPage = () => {
 
     useEffect(() => {
         if (fastNavToFortune){
+            setLayout(fortune)
             history.push('/fortune')
         }
     }, [fastNavToFortune])
 
     const submitJournalEntry = (submitFunction, ...submitFunctionArgs) => {
+        const restArgs = submitFunctionArgs 
+        console.log('heres the args')
+        console.log(restArgs)
         if (!title) {
             setReqErrActive(true)
         } else {
@@ -87,8 +94,6 @@ const JournalEntryPage = () => {
                 </div>
                 <div className='book-spine'></div>
                 <div className='half-entry bottom-entry'>
-                    { console.log('navigating to fortune page from jep, heres fortune')}
-                    { console.log(fortune) }
                     {
                         (Object.keys(fortune).length > 0) && 
                         <div className='entry-button view-fortune-button' onClick={() => setFastNavToFortune(true)}>
@@ -103,13 +108,13 @@ const JournalEntryPage = () => {
                     }
                     {
                         !isEditing && 
-                        <div className='entry-button save-button' onClick={() => submitJournalEntry(saveTodaysEntry, title, date, body, calendar)}>
+                        <div className='entry-button save-button' onClick={() => submitJournalEntry(saveTodaysEntry, title, date, body, calendar, fortune)}>
                             SAVE
                         </div>
                     }
                     {
                         isEditing && 
-                        <div className='entry-button save-button' onClick={() => submitJournalEntry(editGivenEntry, title, date, body, index, calendar)}>
+                        <div className='entry-button save-button' onClick={() => submitJournalEntry(editGivenEntry, title, date, body, index, calendar, fortune)}>
                             SAVE EDITS
                         </div>
                     }

@@ -8,8 +8,6 @@ import Card from './Card'
 const Layout = () => {
     const {fortuneState, setLayout, setDisplayCardName, setDisplayCardText} = useContext(FortuneContext)
     const {deck, layout, displayCardName, displayCardText} = fortuneState
-    console.log('heres layout')
-    console.log(layout)
     const labels = [1,2,3,4,5,6,7,8,9]
     let realCardsId = 0
     let id = 0
