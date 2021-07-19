@@ -2,7 +2,7 @@ import React, { useState, useEffect, useContext } from 'react'
 import { DateContext } from '../../contexts/date-context'
 import { EntryContext } from '../../contexts/entry-context'
 import { FortuneContext } from '../../contexts/fortune-context'
-
+import { randomizeNewCelticCross } from '../../decks/DeckHelpers'
 import { getMonthAndNumDays } from '../../actions/calendarUpdatingFuncs'
 import { firebase } from '../../firebase/firebase'
 import { history } from '../../routers/AppRouter'
@@ -21,7 +21,7 @@ const JournalEntryPage = () => {
     }
 
 
-    const {fortuneState, setLayout, setDisplayCardName, setDisplayCardText, setHoverCardHeld} = useContext(FortuneContext)
+    const {fortuneState, setLayout, setDisplayCardName, setDisplayCardText, setHoverCardHeld, setDeck} = useContext(FortuneContext)
     const {deck, layout, displayCardName, displayCardText, hoverCardHeld} = fortuneState
 
     const [ entryState, setTitle, setDate, setBody, setEntryIndex, setFortune, setIsEditing ] = useContext(EntryContext)
@@ -43,7 +43,15 @@ const JournalEntryPage = () => {
 
     useEffect(() => {
         if (fastNavToFortune){
-            setLayout(fortune)
+            if (Object.keys(fortune).length === 0) {
+                // triggered by 'attach new fortune' case
+                const [newRandomLayout, newDeck ] = randomizeNewCelticCross()
+                setLayout(newRandomLayout)
+                setDeck(newDeck)
+            } else {
+                // triggered by 'view fortune' case 
+                setLayout(fortune)
+            }
             history.push('/fortune')
         }
     }, [fastNavToFortune])

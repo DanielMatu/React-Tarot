@@ -20,6 +20,11 @@ const FortuneReducer = (state, action) => {
                 ...state,
                 hoverCardHeld: action.payload.newHoverCardHeld
             }
+        case "UPDATE_DECK":
+            return {
+                ...state,
+                deck: action.payload.newDeck
+            }
 
     }
 }

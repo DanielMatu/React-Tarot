@@ -24,8 +24,6 @@ const Day = ( props ) => {
         setDate(entry.date)
         setBody(entry.body)
         setFortune(entry.fortune)
-        console.log('heres fortssune')
-        console.log(entry.fortune)
         setEntryIndex(id)
         setIsEditing(true)
         history.push('/create')
