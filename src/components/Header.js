@@ -27,15 +27,12 @@ export const Header = () => {
                         <div className='hamburger-line'></div>
                     </div>
                     <Link className="header__title main-nav" to="/dashboard">
-                        <h1>HOME</h1> 
+                        <h2>HOME</h2> 
                     </Link>
                     <Link className='header__title main-nav' to='/journal'>
                         <h2>JOURNAL</h2>
                     </Link>
-                    <Link className='header__title main-nav' to='/fortunes'>
-                        <h2>FORTUNES</h2>
-                    </Link>
-                    <button className="button button--link main-nav" onClick={() => firebase.auth().signOut()}>LOG OUT</button>
+                    <button className="button button--link main-nav" onClick={() => firebase.auth().signOut()}><h3>LOG OUT</h3></button>
                 </div>
             </div>
 
@@ -44,13 +41,10 @@ export const Header = () => {
                 &&
                 <div className='hamburger-dropdown'>
                 <Link className="header__title hamburger-dropdown-item" to="/dashboard">
-                    <h1>HOME</h1> 
+                    <h2>HOME</h2> 
                 </Link>
                 <Link className='header__title hamburger-dropdown-item' to='/journal'>
                     <h2>JOURNAL</h2>
-                </Link>
-                <Link className='header__title hamburger-dropdown-item' to='/fortunes'>
-                    <h2>FORTUNES</h2>
                 </Link>
                 <button 
                     className="button button--link hamburger-dropdown-item" 

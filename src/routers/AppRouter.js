@@ -29,7 +29,6 @@ const AppRouter = () => (
                 <PrivateRoute path="/journal" component={JournalPage}/>
                 <PrivateRoute path='/create' component={JournalEntryPage}/>
                 <PrivateRoute path='/fortune' component={FortunePage}/>
-                <PrivateRoute path="/fortunes" component={DashboardPage}/>
 
                 <Route component= {NotFoundPage} />
             </Switch>

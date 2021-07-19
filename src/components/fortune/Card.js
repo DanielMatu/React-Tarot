@@ -5,19 +5,31 @@ const Card = (props) => {
     const {state, setLayout, setDisplayCardName, setDisplayCardText, setHoverCardHeld} = useContext(FortuneContext)
     const {deck, layout, displayCardName, displayCardText, hoverCardHeld} = state
 
-    const { row, col, depth, card } = props
+    const { row, col, depth, card, label } = props
     let { name, text, isDummy, isRevealed } = card
 
 
-    const revealCard = () => {
+    const revealCard = e => {
         if (!isDummy){
             if (!isRevealed){
+                e.target.style.backgroundColor = 'green'
+                e.target.style.transition = '0.5s' 
+                e.target.style.transform = 'rotateY(360deg)' 
+
                 isRevealed = true
                 layout[row][col][depth].isRevealed = isRevealed
                 setLayout(layout)
+
+                setTimeout(() => {
+                    setDisplayCardName(name)
+                    setDisplayCardText(text)
+    
+                }, 400)
+            } else {
+                setDisplayCardName(name)
+                setDisplayCardText(text)         
             }
-            setDisplayCardName(name)
-            setDisplayCardText(text)
+
         }
 
     }
@@ -31,13 +43,18 @@ const Card = (props) => {
 
     return (
 
-        <div className={isDummy ? 'card' : 'card nonDummyCard'}
-                onMouseUp={() => isDummy ? () => {} : placeNewCard()}
-                onClick={() => revealCard()} 
-                style={isRevealed ? {backgroundImage: 'url("../../public/images/Tarot/' + name + '.png")', backgroundSize:'cover'} 
-                                : isDummy ? {background:'none'} 
-                                          : {backgroundImage: 'url("../../public/images/Tarot/cardback.png")', backgroundSize:'cover'} }  
-        />
+        <div className='card-container'>
+            <div className={isDummy ? 'card' : 'card nonDummyCard'}
+                    label={label}
+                    onMouseUp={() => isDummy ? () => {} : placeNewCard()}
+                    onClick={(e) => revealCard(e)} 
+                    style={isRevealed ? {backgroundImage: 'url("../../public/images/Tarot/' + name + '.png")', backgroundSize:'cover'} 
+                                    : isDummy ? {background:'none'} 
+                                            : {backgroundImage: 'url("../../public/images/Tarot/cardback.png")', backgroundSize:'cover'} }  
+            />
+            <div className='card-label'>{label}</div>
+        </div>
+
 
 
 
