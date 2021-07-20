@@ -25,6 +25,12 @@ const FortuneReducer = (state, action) => {
                 ...state,
                 deck: action.payload.newDeck
             }
+        case "UPDATE_DISPLAY_CARD_POSITION":
+            
+            return {
+                ...state,
+                displayCardPosition: action.payload.newPosition
+            }
 
     }
 }

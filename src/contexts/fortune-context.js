@@ -17,10 +17,11 @@ const FortuneContextProvider = (props) => {
     const setDisplayCardText = (newDisplayCardText) => dispatch({type: 'UPDATE_DISPLAY_CARD_TEXT', payload:{newDisplayCardText}})
     const setHoverCardHeld = (newHoverCardHeld) => dispatch({type: 'UPDATE_HOVER_CARD_HELD', payload:{newHoverCardHeld}})
     const setDeck = (newDeck) => dispatch({type: 'UPDATE_DECK', payload:{newDeck}})
+    const setDisplayCardPosition = (newPosition) => dispatch({type: 'UPDATE_DISPLAY_CARD_POSITION', payload:{newPosition}})
 
 
     return (
-        <FortuneContext.Provider value={ {fortuneState, setLayout, setDisplayCardName, setDisplayCardText, setHoverCardHeld, setDeck } }>
+        <FortuneContext.Provider value={ {fortuneState, setLayout, setDisplayCardName, setDisplayCardText, setHoverCardHeld, setDeck, setDisplayCardPosition } }>
             { 
                 children 
             }

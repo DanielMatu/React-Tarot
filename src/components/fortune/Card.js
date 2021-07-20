@@ -2,7 +2,7 @@ import React, { useState, useContext } from 'react'
 import { FortuneContext } from '../../contexts/fortune-context'
 
 const Card = (props) => {
-    const {fortuneState, setLayout, setDisplayCardName, setDisplayCardText, setHoverCardHeld} = useContext(FortuneContext)
+    const {fortuneState, setLayout, setDisplayCardName, setDisplayCardText, setHoverCardHeld, setDisplayCardPosition} = useContext(FortuneContext)
     const {deck, layout, displayCardName, displayCardText, hoverCardHeld} = fortuneState
 
     const { row, col, depth, card, label } = props
@@ -23,11 +23,15 @@ const Card = (props) => {
                 setTimeout(() => {
                     setDisplayCardName(name)
                     setDisplayCardText(text)
+                    setDisplayCardPosition([row, col, depth])
     
                 }, 400)
             } else {
                 setDisplayCardName(name)
-                setDisplayCardText(text)         
+                setDisplayCardText(text)     
+                setDisplayCardPosition([row, col, depth])
+
+    
             }
 
         }

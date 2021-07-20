@@ -16,20 +16,25 @@ const Layout = () => {
         <div className='fortune-layout'>
 
             {
-                Object.keys(layout).length === 0 ? <div>nah</div> : layout.map((row, rowIndex) => <div key={rowIndex} className='row'>
+                layout.map((row, rowIndex) => <div key={rowIndex} className='row'>
                     {
-                    row.map((slot, colIndex) => layout[rowIndex][colIndex] !== 0 ? 
-
-                    <Card 
-                        key={id++} 
-                        row={rowIndex} 
-                        col={colIndex} 
-                        depth={0} 
-                        card={layout[rowIndex][colIndex][0]} 
-                        label={realCardsId++}
-                    />
-
-                    : <Card key={id++} row={rowIndex} col={colIndex} depth={0} card={{isDummy:true}} />
+                    row.map((slot, colIndex) => 
+                        
+                        slot !== 0 ? slot.map((card, depth) => (
+                            <Card 
+                                key={id++} 
+                                row={rowIndex} 
+                                col={colIndex} 
+                                depth={depth} 
+                                card={card} 
+                                label={realCardsId++}
+                                
+                            />
+                        ))
+                        
+                        :
+                        <Card key={id++} row={rowIndex} col={colIndex} depth={0} card={{isDummy:true}} />
+                        
                     )}
                  </div>)
             }

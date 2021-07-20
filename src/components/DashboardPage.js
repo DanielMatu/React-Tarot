@@ -14,7 +14,7 @@ const DashboardPage = () =>  {
     const [ entryState, setTitle, setDate, setBody, setEntryIndex, setFortune, setIsEditing ] = useContext(EntryContext)
     const [ title, entryDate, body, fortune, isEditing ] = entryState
 
-    const {fortuneState, setLayout, setDisplayCardName, setDisplayCardText, setHoverCardHeld} = useContext(FortuneContext)
+    const {fortuneState, setLayout, setDisplayCardName, setDisplayCardText, setHoverCardHeld, setDisplayCardPosition} = useContext(FortuneContext)
     const {deck, layout, displayCardName, displayCardText, hoverCardHeld} = fortuneState
 
     // let [ month, numDays ] = getMonthAndNumDays(numericalMonth)
@@ -36,6 +36,7 @@ const DashboardPage = () =>  {
             setIsEditing(false)
             setDisplayCardName('')
             setDisplayCardText('')
+            setDisplayCardPosition([-1,-1,-1])
         // } else if (page == '/fortune'){
             
         // }

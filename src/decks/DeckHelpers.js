@@ -22,3 +22,8 @@ export const randomizeNewCelticCross = () => {
     return [celticCross, deck]
 }
 
+export const pullOneCard = (deck) => {
+    const randomIndex = Math.floor(Math.random()*(deck.length))
+    const newCard = deck.splice(randomIndex, 1)
+    return [...newCard, deck]
+}

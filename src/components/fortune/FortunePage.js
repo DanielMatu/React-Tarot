@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useContext } from 'react'
 import { history } from '../../routers/AppRouter'
 import { getStandardDeck } from '../../decks/StandardDeck'
-import { pullNCards, dragHoverCard } from '../../decks/DeckHelpers'
+import { pullNCards, dragHoverCard, pullOneCard } from '../../decks/DeckHelpers'
 import { FortuneContext } from '../../contexts/fortune-context'
 import { DateContext } from '../../contexts/date-context'
 import { EntryContext } from '../../contexts/entry-context'
@@ -11,8 +11,8 @@ import { Prompt } from 'react-router'
 
 
 const FortunePage = () => {
-    const {fortuneState, setLayout, setDisplayCardName, setDisplayCardText, setHoverCardHeld} = useContext(FortuneContext)
-    let {deck, layout, displayCardName, displayCardText, hoverCardHeld} = fortuneState
+    const {fortuneState, setLayout, setDisplayCardName, setDisplayCardText, setHoverCardHeld, setDisplayCardPosition, setDeck} = useContext(FortuneContext)
+    let {deck, layout, displayCardName, displayCardText, hoverCardHeld, displayCardPosition} = fortuneState
 
     const [dateState, monthInc, monthDec, yearInc, yearDec, removeEntry, saveTodaysEntry, editGivenEntry, setCalendar] = useContext(DateContext)
     let [ numericalMonth, year, calendar ] = dateState
@@ -23,10 +23,14 @@ const FortunePage = () => {
     const [fastNavToJournalEntry, setFastNavToJournalEntry] = useState(false)
 
 
-    // const postInJournal = () => {
-    //     setFortune(layout)
-    //     history.push('/create')
-    // }
+    const startPull = () => {
+        const [newCard, newDeck] = pullOneCard(deck)
+        setDeck(newDeck)
+        const [row, col, depth] = displayCardPosition
+        newCard.depth = depth
+        layout[row][col].push(newCard)
+        setLayout(layout)
+    }
 
     useEffect(() => {
         if (fastNavToJournalEntry){
@@ -61,10 +65,12 @@ const FortunePage = () => {
                 <div className='display-text-container'>
                     <textarea readOnly className='display-text' value={displayCardText}></textarea>
                 </div>
-                <div className='save-button-container' onClick={() => setFastNavToJournalEntry(true)}>
-                    <div className='save-button-text' >POST IN JOURNAL</div>
+                <div className='fortune-buttons-container'>
 
+                    <button className='fortune-button fortune-button-add' onClick={() => startPull()} >ADD CARD</button>
+                    <button className='fortune-button fortune-button-post' onClick={() => setFastNavToJournalEntry(true)}>POST IN JOURNAL</button>
                 </div>
+
             </div>
         </div>
     )

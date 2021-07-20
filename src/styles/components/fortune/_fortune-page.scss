@@ -83,18 +83,29 @@
 
 
         }
-        .save-button-container{
+
+        .fortune-buttons-container {
             display: flex;
             justify-content:center;
             align-items:center;
-            background: rgba(#421395, 0.8);
-            width: 30vw;
+        }
+
+        .fortune-button {
+            width: 15vw;
             height: 14vh;
-            .save-button-text {
-                color: white;
-                font-size: 35px;
-                letter-spacing: 2px;
-            }
+            color: white;
+            font-size: 35px;
+            letter-spacing: 2px;
+            line-height:1.4;
+            border: none;
+        }
+
+        .fortune-button-post{
+            background: rgba(#421395, 0.8);
+        }
+
+        .fortune-button-add {
+            background:rgb(109 0 150 / 80%);
         }
 
     }

@@ -21,7 +21,7 @@ const JournalEntryPage = () => {
     }
 
 
-    const {fortuneState, setLayout, setDisplayCardName, setDisplayCardText, setHoverCardHeld, setDeck} = useContext(FortuneContext)
+    const {fortuneState, setLayout, setDisplayCardName, setDisplayCardText, setHoverCardHeld, setDeck, setDisplayCardPosition} = useContext(FortuneContext)
     const {deck, layout, displayCardName, displayCardText, hoverCardHeld} = fortuneState
 
     const [ entryState, setTitle, setDate, setBody, setEntryIndex, setFortune, setIsEditing ] = useContext(EntryContext)
@@ -54,6 +54,7 @@ const JournalEntryPage = () => {
             }
             setDisplayCardName('')
             setDisplayCardText('')
+            setDisplayCardPosition([-1, -1, -1])
             history.push('/fortune')
         }
     }, [fastNavToFortune])
