@@ -13,11 +13,11 @@ const Day = ( props ) => {
     const [ entryState, setTitle, setDate, setBody, setEntryIndex, setFortune, setIsEditing ] = useContext(EntryContext)
     const [ title, entryDate, body, fortune, isEditing ] = entryState
 
-    const [state, monthInc, monthDec, yearInc, yearDec, removeEntry, saveTodaysEntry, editGivenEntry] = useContext(DateContext)
-    let [ numericalMonth, year, calendar ] = state
-    let [ month, numDays ] = getMonthAndNumDays(numericalMonth)
+    const {dateState, monthInc, monthDec, yearInc, yearDec, removeEntry, saveTodaysEntry, editGivenEntry} = useContext(DateContext)
+    let { calendarMonth, calendarYear, calendar } = dateState
+    let [ month, numDays ] = getMonthAndNumDays(calendarMonth)
 
-    let entries = calendar[year][month][dayNumber - 1]['entries']
+    let entries = calendar[calendarYear][month][dayNumber - 1]['entries']
 
     const navigateToEditEntry = (id, entry) => {
         setTitle(entry.preview)

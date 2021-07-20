@@ -30,36 +30,37 @@ const DateContextProvider = (props) => {
     let { uid } = userState
 
     const date = new Date()
-    let month = date.getMonth() + 1
-    let year = date.getFullYear()
+    let calendarMonth = date.getMonth() + 1
+    let calendarYear = date.getFullYear()
 
-    const initialState = [month, year, calendar]
-    const [ state, dispatch ] = useReducer(DateReducer, initialState)
+    const initialState = {calendarMonth, calendarYear, calendar}
+    const [ dateState, dispatch ] = useReducer(DateReducer, initialState)
 
 
     // useless?
-    useEffect(() => {
-        month = state[0]
-        year = state[1]
-        calendar = state[2]
-    }, [state]);
+    // useEffect(() => {
+    //     month = state[0]
+    //     year = state[1]
+    //     calendar = state[2]
+    // }, [state]);
 
-    const monthInc = () => { dispatch({ type: 'MONTH_INC', payload: {newMonthAndYear: getIncrementedMonthAndYear(month, year)} })}
-    const monthDec = () => dispatch({ type: 'MONTH_DEC',  payload: {newMonthAndYear: getDecrementedMonthAndYear(month, year)}})
-    const yearInc = () => dispatch({ type: 'YEAR_INC', payload: {newYear: getIncrementedYear(year)}})
-    const yearDec = () => dispatch({  type: 'YEAR_DEC',payload: { newYear: getDecrementedYear(year)}})
+    const monthInc = (currMonth, currYear) => { dispatch({ type: 'MONTH_INC', payload: {newMonthAndYear: getIncrementedMonthAndYear(currMonth, currYear)} })}
+    const monthDec = (currMonth, currYear) => dispatch({ type: 'MONTH_DEC',  payload: {newMonthAndYear: getDecrementedMonthAndYear(currMonth, currYear)}})
+    const yearInc = (currYear) => dispatch({ type: 'YEAR_INC', payload: {newYear: getIncrementedYear(currYear)}})
+    const yearDec = (currYear) => dispatch({  type: 'YEAR_DEC',payload: { newYear: getDecrementedYear(currYear)}})
+
     const setCalendar = () => dispatch({ type: 'UPDATE_CALENDAR', payload: {calendar}})
 
     const removeEntry = (dayNumber, index) => {
-        const [stringMonth, numDays] = getMonthAndNumDays(month)
-        const entries = calendar[year][stringMonth][dayNumber - 1]['entries']
+        const [stringMonth, numDays] = getMonthAndNumDays(calendarMonth)
+        const entries = calendar[calendarYear][stringMonth][dayNumber - 1]['entries']
         let newEntries = [...entries]
         newEntries.splice(index, 1)
 
         const confirmed = confirm("Are you sure you want to delete this journal entry?");
         if (confirmed){
-            calendar[year][stringMonth][dayNumber - 1]['entries'] = newEntries
-            db.ref(`users/${uid}/calendar/${year}/${stringMonth}/${dayNumber - 1}/entries`).set(newEntries).then(() => {
+            calendar[calendarYear][stringMonth][dayNumber - 1]['entries'] = newEntries
+            db.ref(`users/${uid}/calendar/${calendarYear}/${stringMonth}/${dayNumber - 1}/entries`).set(newEntries).then(() => {
                 dispatch({ type: 'UPDATE_CALENDAR', payload: { calendar }})
             })
         }
@@ -76,9 +77,6 @@ const DateContextProvider = (props) => {
         if (!todaysEntries){
             todaysEntries = []
         }
-        console.log('heres the fortune im pushing')
-        console.log(fortune)
-        console.log('there it was')
         todaysEntries.push({'preview': title, 'date': entryDate, 'body': body, 'fortune':fortune})
         calendar[currYear][stringCurrMonth][currDayNumber - 1]['entries'] = todaysEntries
         return firebase.database().ref(`users/${uid}/calendar/${currYear}/${stringCurrMonth}/${currDayNumber - 1}/entries`)
@@ -107,7 +105,7 @@ const DateContextProvider = (props) => {
 
 
     return (
-        <DateContext.Provider value={ [state, monthInc, monthDec, yearInc, yearDec, removeEntry, saveTodaysEntry, editGivenEntry, setCalendar] }>
+        <DateContext.Provider value={ {dateState, monthInc, monthDec, yearInc, yearDec, removeEntry, saveTodaysEntry, editGivenEntry, setCalendar} }>
             {
                 children
             }

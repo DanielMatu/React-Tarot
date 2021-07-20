@@ -8,14 +8,15 @@ import { randomizeNewCelticCross } from '../decks/DeckHelpers'
 import { getMonthAndNumDays } from '../actions/calendarUpdatingFuncs';
 
 const DashboardPage = () =>  {
-    const [state, monthInc, monthDec, yearInc, yearDec, removeEntry, saveTodaysEntry, editGivenEntry] = useContext(DateContext)
-    let [ numericalMonth, year, calendar ] = state
+    const {dateState, monthInc, monthDec, yearInc, yearDec, removeEntry, saveTodaysEntry, editGivenEntry} = useContext(DateContext)
+    console.log(dateState)
+    let { calendarMonth, calendarYear, calendar } = dateState
 
-    const [ entryState, setTitle, setDate, setBody, setEntryIndex, setFortune, setIsEditing ] = useContext(EntryContext)
-    const [ title, entryDate, body, fortune, isEditing ] = entryState
+    const [ entryState, setTitle, setDate, setBody, setEntryIndex, setFortune, setIsEditing, setDeck ] = useContext(EntryContext)
+    const [ title, entryDate, body, fortune, isEditing, deck ] = entryState
 
-    const {fortuneState, setLayout, setDisplayCardName, setDisplayCardText, setHoverCardHeld, setDisplayCardPosition, setDeck} = useContext(FortuneContext)
-    const {deck, layout, displayCardName, displayCardText, hoverCardHeld} = fortuneState
+    const {fortuneState, setDisplayCardName, setDisplayCardText, setDisplayCardPosition } = useContext(FortuneContext)
+    const {displayCardName, displayCardText} = fortuneState
 
     // let [ month, numDays ] = getMonthAndNumDays(numericalMonth)
     let [ limitReachedVisible, setLimitReachedVisible ] = useState(false)
@@ -27,12 +28,11 @@ const DashboardPage = () =>  {
         let currYear = date.getFullYear()
         let [ stringCurrMonth, numDays ] = getMonthAndNumDays(currMonth)
         let todaysEntries = calendar[currYear][stringCurrMonth][currDayNumber - 1]['entries']
-        const [newLayout, newDeck] = randomizeNewCelticCross()
+        const [newFortune, newDeck] = randomizeNewCelticCross()
         // if (page == '/create'){
             setTitle('')
             setBody('')
-            setFortune({})
-            setLayout(newLayout)
+            setFortune(newFortune)
             setDeck(newDeck)
 
             setDate(stringCurrMonth + " " + (currDayNumber).toString() + " " + currYear.toString() )

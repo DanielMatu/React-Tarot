@@ -11,14 +11,14 @@ import { Prompt } from 'react-router'
 
 
 const FortunePage = () => {
-    const {fortuneState, setLayout, setDisplayCardName, setDisplayCardText, setHoverCardHeld, setDisplayCardPosition, setDeck} = useContext(FortuneContext)
-    let {deck, layout, displayCardName, displayCardText, hoverCardHeld, displayCardPosition} = fortuneState
+    const {fortuneState, setDisplayCardName, setDisplayCardText, setDisplayCardPosition} = useContext(FortuneContext)
+    let { displayCardName, displayCardText, displayCardPosition} = fortuneState
 
-    const [dateState, monthInc, monthDec, yearInc, yearDec, removeEntry, saveTodaysEntry, editGivenEntry, setCalendar] = useContext(DateContext)
-    let [ numericalMonth, year, calendar ] = dateState
+    const {dateState, monthInc, monthDec, yearInc, yearDec, removeEntry, saveTodaysEntry, editGivenEntry, setCalendar} = useContext(DateContext)
+    let { calendarMonth, calendarYear, calendar } = dateState
 
-    const [ entryState, setTitle, setDate, setBody, setEntryIndex, setFortune, setIsEditing ] = useContext(EntryContext)
-    const [ title, entryDate, body, index, fortune, isEditing, entry ] = entryState
+    const [ entryState, setTitle, setDate, setBody, setEntryIndex, setFortune, setIsEditing, setDeck ] = useContext(EntryContext)
+    const [ title, entryDate, body, index, fortune, isEditing, deck ] = entryState
     
     const [fastNavToJournalEntry, setFastNavToJournalEntry] = useState(false)
 

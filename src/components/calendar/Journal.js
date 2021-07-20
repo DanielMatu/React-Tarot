@@ -8,10 +8,10 @@ const Journal = () => {
 
     const [ userState, login, logout ] = useContext(UserContext)
     const { uid } = userState
-    const [state, monthInc, monthDec, yearInc, yearDec, removeEntry, saveTodaysEntry, editGivenEntry] = useContext(DateContext)
-    let [ numericalMonth, year, calendar ] = state
-    let [ month, numDays ] = getMonthAndNumDays(numericalMonth)
-    let daysOfMonth = calendar[year][month]
+    const { dateState, monthInc, monthDec, yearInc, yearDec } = useContext(DateContext)
+    let { calendarMonth, calendarYear, calendar } = dateState
+    let [ month, numDays ] = getMonthAndNumDays(calendarMonth)
+    let daysOfMonth = calendar[calendarYear][month]
 
     return (
 
@@ -20,15 +20,15 @@ const Journal = () => {
             <div className='calendar-header'>
                 <div className='calendar-year-display'>
                     <div className='year-label'>Year:</div>
-                    <button className='date-nav-button' onClick={yearDec}> &lt; </button>
-                    <div className='calendar-year'>{ year } </div>
-                    <button className='date-nav-button' onClick={yearInc}> &gt; </button>
+                    <button className='date-nav-button' onClick={() => yearDec(calendarYear)}> &lt; </button>
+                    <div className='calendar-year'>{ calendarYear } </div>
+                    <button className='date-nav-button' onClick={() => yearInc(calendarYear)}> &gt; </button>
                 </div>
                 <div className='calendar-month-display'>
                     <div className='month-label'>Month:</div>
-                    <button className='date-nav-button' onClick={monthDec}> &lt; </button>
+                    <button className='date-nav-button' onClick={() => monthDec(calendarMonth, calendarYear)}> &lt; </button>
                     <div className='calendar-month'>{ month } </div>
-                    <button className='date-nav-button' onClick={monthInc}> &gt; </button>
+                    <button className='date-nav-button' onClick={() => monthInc(calendarMonth, calendarYear)}> &gt; </button>
                 </div>
             </div>
 

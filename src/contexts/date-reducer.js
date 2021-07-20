@@ -6,33 +6,33 @@ const DateReducer = (state, action) => {
     switch (action.type){
         case "MONTH_INC":
             [newMonth, newYear] = action.payload.newMonthAndYear
-            state[0] = newMonth
-            state[1] = newYear
-            return [
+            return {
                 ...state,
-            ]
+                calendarMonth: newMonth,
+                calendarYear: newYear
+            }
         case "MONTH_DEC":
             [newMonth, newYear] = action.payload.newMonthAndYear
-            state[0] = newMonth
-            state[1] = newYear
-            return [
+            return {
                 ...state,
-            ]
+                calendarMonth: newMonth,
+                calendarYear: newYear
+            }
         case "YEAR_INC":
-            state[1] = action.payload.newYear
-            return [
-                ...state
-            ]
+            return {
+                ...state,
+                calendarYear: action.payload.newYear
+            }
         case "YEAR_DEC":
-            state[1] = action.payload.newYear
-            return [
-                ...state
-            ]
+            return {
+                ...state,
+                calendarYear: action.payload.newYear
+            }
         case "UPDATE_CALENDAR":
-            state[2] = action.payload.calendar
-            return [
-                ...state
-            ]
+            return {
+                ...state,
+                calendar: action.payload.calendar
+            }
     }
 }
 

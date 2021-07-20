@@ -30,6 +30,11 @@ const EntryReducer = (state, action) => {
             return [
                 ...state
             ]
+        case 'UPDATE_DECK': 
+            state[6] = action.payload.newDeck
+            return [
+                ...state
+            ]
 
     }
 }

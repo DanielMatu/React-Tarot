@@ -6,9 +6,9 @@ import { getMonthAndNumDays } from '../../actions/calendarUpdatingFuncs'
 
 const JournalPage = () => {
     // console.log(useContext(DateContext))
-    let [state, monthInc, monthDec, yearInc, yearDec, removeEntry, saveTodaysEntry, editGivenEntry] = useContext(DateContext)
-    let [ numericalMonth, year, calendar ] = state
-    let [ month, numDays ] = getMonthAndNumDays(numericalMonth) 
+    let {dateState, monthInc, monthDec, yearInc, yearDec, removeEntry, saveTodaysEntry, editGivenEntry} = useContext(DateContext)
+    let { calendarMonth, calendarYear, calendar } = dateState
+    let [ month, numDays ] = getMonthAndNumDays(calendarMonth) 
 
 
     const journalArgs = {"monthName": month, "numDays": numDays}

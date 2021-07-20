@@ -28,8 +28,8 @@ const JournalEntryPage = () => {
     const [ title, date, body, index, fortune, isEditing ] = entryState
 
 
-    const [state, monthInc, monthDec, yearInc, yearDec, removeEntry, saveTodaysEntry, editGivenEntry] = useContext(DateContext)
-    let [ numericalMonth, year, calendar ] = state
+    const {dateState, saveTodaysEntry, editGivenEntry} = useContext(DateContext)
+    let { calendar } = dateState
 
     // const updateTitle = (e) => (e.target.value.lengh == 8) ? console.log('lmao') : setTitle(e.target.value)
     // const updateTitle = (e) => (e.target.value.length < 8) ? setTitle(e.target.value) : console.log('its less than 8')
