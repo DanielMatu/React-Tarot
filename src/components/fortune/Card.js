@@ -12,7 +12,6 @@ const Card = (props) => {
     const revealCard = e => {
         if (!isDummy){
             if (!isRevealed){
-                e.target.style.backgroundColor = 'green'
                 e.target.style.transition = '0.5s' 
                 e.target.style.transform = 'rotateY(360deg)' 
 
@@ -30,31 +29,23 @@ const Card = (props) => {
                 setDisplayCardName(name)
                 setDisplayCardText(text)     
                 setDisplayCardPosition([row, col, depth])
-
-    
             }
-
-        }
-
-    }
-
-    const placeNewCard = () => {
-        if (hoverCardHeld){
-            console.log('placed new card')
         }
     }
+
+
 
 
     return (
 
-        <div className='card-container'>
-            <div className={isDummy ? 'card' : 'card nonDummyCard'}
+        <div className='card-container' style={(depth === 0) ? {} :{zIndex:'2'}}>
+            <div className={(isDummy ? 'card' : 'card nonDummyCard') + (depth === 0 ? '' : ' overlayed-card')}
                     label={label}
-                    onMouseUp={() => isDummy ? () => {} : placeNewCard()}
                     onClick={(e) => revealCard(e)} 
-                    style={isRevealed ? {backgroundImage: 'url("../../public/images/Tarot/' + name + '.png")', backgroundSize:'cover'} 
-                                    : isDummy ? {background:'none'} 
-                                            : {backgroundImage: 'url("../../public/images/Tarot/cardback.png")', backgroundSize:'cover'} }  
+                    style={
+                            isRevealed ? {backgroundImage: 'url("../../public/images/Tarot/' + name + '.png")', backgroundSize:'cover'} 
+                                       : isDummy ? {background:'none'} 
+                                                 : {backgroundImage: 'url("../../public/images/Tarot/cardback.png")', backgroundSize:'cover'} }  
             />
             <div className='card-label'>{label}</div>
         </div>

@@ -14,7 +14,7 @@ const DashboardPage = () =>  {
     const [ entryState, setTitle, setDate, setBody, setEntryIndex, setFortune, setIsEditing ] = useContext(EntryContext)
     const [ title, entryDate, body, fortune, isEditing ] = entryState
 
-    const {fortuneState, setLayout, setDisplayCardName, setDisplayCardText, setHoverCardHeld, setDisplayCardPosition} = useContext(FortuneContext)
+    const {fortuneState, setLayout, setDisplayCardName, setDisplayCardText, setHoverCardHeld, setDisplayCardPosition, setDeck} = useContext(FortuneContext)
     const {deck, layout, displayCardName, displayCardText, hoverCardHeld} = fortuneState
 
     // let [ month, numDays ] = getMonthAndNumDays(numericalMonth)
@@ -27,16 +27,20 @@ const DashboardPage = () =>  {
         let currYear = date.getFullYear()
         let [ stringCurrMonth, numDays ] = getMonthAndNumDays(currMonth)
         let todaysEntries = calendar[currYear][stringCurrMonth][currDayNumber - 1]['entries']
+        const [newLayout, newDeck] = randomizeNewCelticCross()
         // if (page == '/create'){
             setTitle('')
             setBody('')
             setFortune({})
-            setLayout(randomizeNewCelticCross()[0])
+            setLayout(newLayout)
+            setDeck(newDeck)
+
             setDate(stringCurrMonth + " " + (currDayNumber).toString() + " " + currYear.toString() )
             setIsEditing(false)
             setDisplayCardName('')
             setDisplayCardText('')
             setDisplayCardPosition([-1,-1,-1])
+
         // } else if (page == '/fortune'){
             
         // }

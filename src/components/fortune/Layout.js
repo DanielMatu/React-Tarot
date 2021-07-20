@@ -27,8 +27,9 @@ const Layout = () => {
                                 col={colIndex} 
                                 depth={depth} 
                                 card={card} 
-                                label={realCardsId++}
-                                
+                                label={(depth === 0) ? labels[realCardsId++] : ''}
+                                // style={(depth === 0) ? {marginLeft: '-15rem'} : {marginLeft: '-15rem'}}
+                                style={{marginLeft: '-135rem'}}
                             />
                         ))
                         

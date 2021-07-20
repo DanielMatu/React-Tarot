@@ -8,9 +8,11 @@ import { pullNCards, randomizeNewCelticCross } from '../decks/DeckHelpers'
 const FortuneContextProvider = (props) => {
     const { children } = props
 
-    const [celticCross, deck] = randomizeNewCelticCross()
-    const initialState = {deck, layout: celticCross, displayCardName:'', displayCardText:'', hoverCardHeld: false}
+
+    // const [celticCross, deck] = randomizeNewCelticCross()
+    const initialState = {deck:[], layout: {}, displayCardName:'', displayCardText:'', hoverCardHeld: false}
     const [fortuneState, dispatch] = useReducer(FortuneReducer, initialState)
+
 
     const setLayout = (newLayout) => { dispatch({type: 'UPDATE_LAYOUT', payload:{newLayout}})} 
     const setDisplayCardName = (newDisplayCardName) => dispatch({type: 'UPDATE_DISPLAY_CARD_NAME', payload:{newDisplayCardName}})
