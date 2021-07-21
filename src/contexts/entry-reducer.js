@@ -25,6 +25,11 @@ const EntryReducer = (state, action) => {
                 ...state,
                 fortune: action.payload.newFortune
             }
+        case 'UPDATE_UNMODIFIED_FORTUNE': 
+            return {
+                ...state,
+                unmodifiedFortune: action.payload.newUnmodifiedFortune
+            }
         case 'UPDATE_IS_EDITING': 
             return {
                 ...state,
@@ -34,6 +39,16 @@ const EntryReducer = (state, action) => {
             return {
                 ...state,
                 deck: action.payload.newDeck
+            }
+        case 'UPDATE_UNMODIFIED_DECK': 
+            return {
+                ...state,
+                unmodifiedDeck: action.payload.newUnmodifiedDeck
+            }
+        case 'UPDATE_DID_SAVE': 
+            return {
+                ...state,
+                didSave: action.payload.newDidSave
             }
 
     }

@@ -106,6 +106,10 @@
 
         .fortune-button-add {
             background:rgb(109 0 150 / 80%);
+            &:disabled {
+                background-color:grey;
+                cursor:not-allowed;
+            }
         }
 
     }

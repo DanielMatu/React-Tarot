@@ -11,9 +11,9 @@ const DashboardPage = () =>  {
     const {dateState} = useContext(DateContext)
     let { calendar } = dateState
 
-    const { setTitle, setDate, setBody, setFortune, setIsEditing, setDeck } = useContext(EntryContext)
+    const { setTitle, setDate, setBody, setFortune, setIsEditing, setDeck, setUnmodifiedFortune, setUnmodifiedDeck  } = useContext(EntryContext)
 
-    const { setDisplayCardName, setDisplayCardText, setDisplayCardPosition } = useContext(FortuneContext)
+    const { setDisplayCardName, setDisplayCardText, setDisplayCardPosition} = useContext(FortuneContext)
 
     // let [ month, numDays ] = getMonthAndNumDays(numericalMonth)
     let [ limitReachedVisible, setLimitReachedVisible ] = useState(false)
@@ -30,8 +30,9 @@ const DashboardPage = () =>  {
             setTitle('')
             setBody('')
             setFortune(newFortune)
+            setUnmodifiedFortune({})
             setDeck(newDeck)
-
+            setUnmodifiedDeck(newDeck)
             setDate(stringCurrMonth + " " + (currDayNumber).toString() + " " + currYear.toString() )
             setIsEditing(false)
             setDisplayCardName('')

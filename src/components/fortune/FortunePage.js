@@ -9,13 +9,12 @@ import { getMonthAndNumDays } from '../../actions/calendarUpdatingFuncs'
 import Layout from './Layout'
 import { Prompt } from 'react-router'
 
-
 const FortunePage = () => {
     const {fortuneState} = useContext(FortuneContext)
     let { displayCardName, displayCardText, displayCardPosition} = fortuneState
 
     const { entryState, setFortune, setDeck } = useContext(EntryContext)
-    const { fortune, deck } = entryState
+    const { fortune, deck, unmodifiedFortune, unmodifiedDeck } = entryState
     
     const [fastNavToJournalEntry, setFastNavToJournalEntry] = useState(false)
 
@@ -38,12 +37,12 @@ const FortunePage = () => {
     }, [fastNavToJournalEntry])
 
     return (
-        <div className='fortune-container'>
+        <div className='fortune-container' >
             <Prompt
                 when={!fastNavToJournalEntry }
-                message={
-                    location => `Your changes haven't been saved, are you sure you want to leave this page?`
-                }
+                message={(location, action) => {
+                    return "Your changes haven't been saved, are you sure you want to leave this page?"
+                }}
             />
             <div className='layout-section'>
                 <Layout />
@@ -57,7 +56,16 @@ const FortunePage = () => {
                 </div>
                 <div className='fortune-buttons-container'>
 
-                    <button className='fortune-button fortune-button-add' onClick={() => startPull()} >ADD CARD</button>
+                    <button className='fortune-button fortune-button-add' disabled = {deck.length === 0} onClick={() => startPull()} >
+                        {
+                            deck.length === 0 &&
+                            <div>NO CARDS REMAINING</div>
+                        }
+                        {
+                            deck.length !== 0 &&
+                            <div>ADD CARD</div>
+                        }
+                    </button>
                     <button className='fortune-button fortune-button-post' onClick={() => setFastNavToJournalEntry(true)}>POST IN JOURNAL</button>
                 </div>
 

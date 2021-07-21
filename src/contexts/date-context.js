@@ -52,7 +52,9 @@ const DateContextProvider = (props) => {
         }
     }
 
-    const saveTodaysEntry = async (title, entryDate, body, calendar, fortune={}) => {
+    const saveTodaysEntry = async (title, entryDate, body, calendar, fortune={}, deck, unmodifiedFortune, unmodifiedDeck) => {
+        console.log('unmodifiedfortune')
+        console.log(unmodifiedFortune)
         let date = new Date() 
         let currDayNumber = date.getDate()
         let currMonth = date.getMonth() + 1
@@ -63,7 +65,7 @@ const DateContextProvider = (props) => {
         if (!todaysEntries){
             todaysEntries = []
         }
-        todaysEntries.push({'preview': title, 'date': entryDate, 'body': body, 'fortune':fortune})
+        todaysEntries.push({'preview': title, 'date': entryDate, 'body': body, 'fortune':fortune, 'deck':deck, 'unmodifiedFortune':unmodifiedFortune, 'unmodifiedDeck': unmodifiedDeck})
         calendar[currYear][stringCurrMonth][currDayNumber - 1]['entries'] = todaysEntries
         return firebase.database().ref(`users/${uid}/calendar/${currYear}/${stringCurrMonth}/${currDayNumber - 1}/entries`)
                                   .set(todaysEntries)
@@ -72,12 +74,12 @@ const DateContextProvider = (props) => {
                                     })
     }
 
-    const editGivenEntry = (title, entryDate, body, id, calendar, fortune={}) => {
+    const editGivenEntry = (title, entryDate, body, id, calendar, fortune={}, deck, unmodifiedFortune, unmodifiedDeck) => {
         let splitDates = entryDate.split(' ')
         splitDates[1] = parseInt(splitDates[1] - 1)
         let [ entryMonth, entryDay, entryYear ] = splitDates
         let todaysEntries = calendar[entryYear][entryMonth][entryDay]['entries']
-        todaysEntries[id] =  {'preview': title, 'date': entryDate, 'body': body, 'fortune':fortune}
+        todaysEntries[id] =  {'preview': title, 'date': entryDate, 'body': body, 'fortune':fortune, 'deck': deck, 'unmodifiedFortune':unmodifiedFortune, 'unmodifiedDeck': unmodifiedDeck}
         calendar[entryYear][entryMonth][entryDay]['entries'] = todaysEntries
         return firebase.database().ref(`users/${uid}/calendar/${entryYear}/${entryMonth}/${entryDay}/entries`)
                                   .set(todaysEntries)

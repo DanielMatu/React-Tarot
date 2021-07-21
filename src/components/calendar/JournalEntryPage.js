@@ -2,9 +2,7 @@ import React, { useState, useEffect, useContext } from 'react'
 import { DateContext } from '../../contexts/date-context'
 import { EntryContext } from '../../contexts/entry-context'
 import { FortuneContext } from '../../contexts/fortune-context'
-import { randomizeNewCelticCross } from '../../decks/DeckHelpers'
-import { getMonthAndNumDays } from '../../actions/calendarUpdatingFuncs'
-import { firebase } from '../../firebase/firebase'
+import { randomizeNewCelticCross, fortuneIsFresh } from '../../decks/DeckHelpers'
 import { history } from '../../routers/AppRouter'
 import { Prompt } from 'react-router'
 import TarotAlert from '../TarotAlert'
@@ -21,9 +19,10 @@ const JournalEntryPage = () => {
     }
 
 
+    const { setDisplayCardName, setDisplayCardText, setDisplayCardPosition} = useContext(FortuneContext)
 
-    const { entryState, setTitle, setDate, setBody, setFortune, setDeck } = useContext(EntryContext)
-    const { entryTitle, entryDate, entryBody, entryIndex, fortune, isEditing } = entryState
+    const { entryState, setTitle, setDate, setBody, setFortune, setDeck, setUnmodifiedFortune, setUnmodifiedDeck, setDidSave } = useContext(EntryContext)
+    const { entryTitle, entryDate, entryBody, entryIndex, fortune, isEditing, deck, unmodifiedDeck, unmodifiedFortune, didSave } = entryState
 
 
     const {dateState, saveTodaysEntry, editGivenEntry} = useContext(DateContext)
@@ -44,11 +43,34 @@ const JournalEntryPage = () => {
             if (Object.keys(fortune).length === 0) {
                 // triggered by 'attach new fortune' case
                 const [newRandomFortune, newDeck ] = randomizeNewCelticCross()
-                setFortune(newRandomFortune)
-                setDeck(newDeck)
+                    setFortune(newRandomFortune)
+                    setUnmodifiedFortune(newRandomFortune)
+                    setDeck(newDeck)
+                    setUnmodifiedDeck(newDeck)
             } else {
                 // triggered by 'view fortune' case 
-                setFortune(fortune)
+                if (didSave){
+                    setFortune(fortune)
+                    setDeck(deck)
+                } else {
+                    // if (Object.keys(unmodifiedFortune).length === 0){
+                    //     console.log('emptpy unmod fortune')
+                    //     console.log(deck)
+
+                    //     setFortune(fortune)
+                    //     setDeck(deck)
+                    // } else {
+                    //     console.log('nonempty unmod fortune')
+                    //     console.log(deck)
+                    //     setFortune(unmodifiedFortune)
+                    //     setDeck(unmodifiedDeck)
+                    // }
+                    console.log('heres unmodifiedfortune')
+                    console.log(unmodifiedFortune)
+                    setFortune(unmodifiedFortune)
+                    setDeck(unmodifiedDeck)
+
+                }
             }
             setDisplayCardName('')
             setDisplayCardText('')
@@ -58,6 +80,18 @@ const JournalEntryPage = () => {
     }, [fastNavToFortune])
 
     const submitJournalEntry = (submitFunction, ...submitFunctionArgs) => {
+        setDidSave(true)
+        setUnmodifiedDeck(deck)
+        setUnmodifiedFortune(fortune)
+        
+        console.log('set unmodified fortune to ')
+        console.log(fortune)
+        console.log('heres unmodifiedfortune in submitjounralerntry')
+        console.log(unmodifiedFortune)
+        console.log('heres the args')
+        console.log(submitFunctionArgs)
+        submitFunctionArgs[6] = fortune 
+        submitFunctionArgs[7] = deck
         if (!entryTitle) {
             setReqErrActive(true)
         } else {
@@ -112,13 +146,13 @@ const JournalEntryPage = () => {
                     }
                     {
                         !isEditing && 
-                        <div className='entry-button save-button' onClick={() => submitJournalEntry(saveTodaysEntry, entryTitle, entryDate, entryBody, calendar, fortune)}>
+                        <div className='entry-button save-button' onClick={() => submitJournalEntry(saveTodaysEntry, entryTitle, entryDate, entryBody, calendar, fortune, deck, unmodifiedFortune, unmodifiedDeck)}>
                             SAVE
                         </div>
                     }
                     {
                         isEditing && 
-                        <div className='entry-button save-button' onClick={() => submitJournalEntry(editGivenEntry, entryTitle, entryDate, entryBody, entryIndex, calendar, fortune)}>
+                        <div className='entry-button save-button' onClick={() => submitJournalEntry(editGivenEntry, entryTitle, entryDate, entryBody, entryIndex, calendar, fortune, deck, unmodifiedFortune, unmodifiedDeck)}>
                             SAVE EDITS
                         </div>
                     }

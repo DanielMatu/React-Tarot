@@ -31,3 +31,16 @@ export const pullOneCard = (deck) => {
     const newCard = deck.splice(randomIndex, 1)
     return [...newCard, deck]
 }
+
+
+export const fortuneIsFresh = (fortune) => {
+    let foundRevealedCard = false
+    fortune.map((row, rowIndex) => (
+        row.map((slot, colIndex) => (
+            row.map((card, depth) => (
+                foundRevealedCard = card.isRevealed
+            ))
+        ))
+    ))
+    return !foundRevealedCard
+}
