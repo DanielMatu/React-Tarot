@@ -7,9 +7,6 @@ import { EntryContext } from '../../contexts/entry-context'
 import Card from './Card'
 
 const Layout = () => {
-    const {fortuneState, setDisplayCardName, setDisplayCardText} = useContext(FortuneContext)
-    const {displayCardName, displayCardText} = fortuneState
-
     const { entryState } = useContext(EntryContext)
     const { fortune } = entryState
     const labels = [1,2,3,4,5,6,7,8,9]

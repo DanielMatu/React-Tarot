@@ -21,11 +21,9 @@ const JournalEntryPage = () => {
     }
 
 
-    const {fortuneState, setDisplayCardName, setDisplayCardText, setDisplayCardPosition} = useContext(FortuneContext)
-    const {displayCardName, displayCardText} = fortuneState
 
-    const { entryState, setTitle, setDate, setBody, setEntryIndex, setFortune, setIsEditing, setDeck } = useContext(EntryContext)
-    const { entryTitle, entryDate, entryBody, entryIndex, fortune, isEditing, deck } = entryState
+    const { entryState, setTitle, setDate, setBody, setFortune, setDeck } = useContext(EntryContext)
+    const { entryTitle, entryDate, entryBody, entryIndex, fortune, isEditing } = entryState
 
 
     const {dateState, saveTodaysEntry, editGivenEntry} = useContext(DateContext)

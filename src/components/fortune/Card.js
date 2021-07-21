@@ -1,10 +1,9 @@
-import React, { useState, useContext } from 'react'
+import React, { useContext } from 'react'
 import { FortuneContext } from '../../contexts/fortune-context'
 import { EntryContext } from '../../contexts/entry-context'
 
 const Card = (props) => {
-    const {fortuneState, setDisplayCardName, setDisplayCardText, setDisplayCardPosition} = useContext(FortuneContext)
-    const { displayCardName, displayCardText } = fortuneState
+    const { setDisplayCardName, setDisplayCardText, setDisplayCardPosition} = useContext(FortuneContext)
 
     const { entryState, setFortune } = useContext(EntryContext)
     const { fortune } = entryState

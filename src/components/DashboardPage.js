@@ -8,15 +8,12 @@ import { randomizeNewCelticCross } from '../decks/DeckHelpers'
 import { getMonthAndNumDays } from '../actions/calendarUpdatingFuncs';
 
 const DashboardPage = () =>  {
-    const {dateState, monthInc, monthDec, yearInc, yearDec, removeEntry, saveTodaysEntry, editGivenEntry} = useContext(DateContext)
-    console.log(dateState)
-    let { calendarMonth, calendarYear, calendar } = dateState
+    const {dateState} = useContext(DateContext)
+    let { calendar } = dateState
 
-    const { entryState, setTitle, setDate, setBody, setEntryIndex, setFortune, setIsEditing, setDeck } = useContext(EntryContext)
-    const { entryTitle, entryDate, entryBody, fortune, isEditing, deck } = entryState
+    const { setTitle, setDate, setBody, setFortune, setIsEditing, setDeck } = useContext(EntryContext)
 
-    const {fortuneState, setDisplayCardName, setDisplayCardText, setDisplayCardPosition } = useContext(FortuneContext)
-    const {displayCardName, displayCardText} = fortuneState
+    const { setDisplayCardName, setDisplayCardText, setDisplayCardPosition } = useContext(FortuneContext)
 
     // let [ month, numDays ] = getMonthAndNumDays(numericalMonth)
     let [ limitReachedVisible, setLimitReachedVisible ] = useState(false)

@@ -15,7 +15,7 @@ const FortunePage = () => {
     let { displayCardName, displayCardText, displayCardPosition} = fortuneState
 
     const { entryState, setFortune, setDeck } = useContext(EntryContext)
-    const { entryTitle, entryDate, entryBody, entryIndex, fortune, isEditing, deck } = entryState
+    const { fortune, deck } = entryState
     
     const [fastNavToJournalEntry, setFastNavToJournalEntry] = useState(false)
 
