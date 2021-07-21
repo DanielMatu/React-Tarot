@@ -1,5 +1,3 @@
-import { firebase, googleAuthProvider } from '../firebase/firebase'
-
 const UserReducer = (state, action) => {
     switch (action.type){
         case "LOGIN":

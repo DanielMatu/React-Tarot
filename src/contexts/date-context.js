@@ -1,17 +1,14 @@
-import React, { useEffect, useReducer, useContext, createContext } from 'react'
+import React, { useReducer, useContext, createContext } from 'react'
 import DateReducer from './date-reducer'
 import { 
     getIncrementedMonthAndYear, 
     getDecrementedMonthAndYear,
     getIncrementedYear,
     getDecrementedYear,
-    initializeCalendar,
     getMonthAndNumDays,
 } from '../actions/calendarUpdatingFuncs'
 import { firebase } from '../firebase/firebase'
 import { UserContext } from './user-context'
-import { EntryContext } from './entry-context'
-import { history } from '../routers/AppRouter'
 const db = firebase.database()
 const DateContext = createContext()
 export { DateContext }
@@ -32,14 +29,6 @@ const DateContextProvider = (props) => {
 
     const initialState = {calendarMonth, calendarYear, calendar}
     const [ dateState, dispatch ] = useReducer(DateReducer, initialState)
-
-
-    // useless?
-    // useEffect(() => {
-    //     month = state[0]
-    //     year = state[1]
-    //     calendar = state[2]
-    // }, [state]);
 
     const monthInc = (currMonth, currYear) => { dispatch({ type: 'MONTH_INC', payload: {newMonthAndYear: getIncrementedMonthAndYear(currMonth, currYear)} })}
     const monthDec = (currMonth, currYear) => dispatch({ type: 'MONTH_DEC',  payload: {newMonthAndYear: getDecrementedMonthAndYear(currMonth, currYear)}})
