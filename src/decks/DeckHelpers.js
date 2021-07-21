@@ -9,8 +9,6 @@ export const pullNCards = (n, deck) => {
         randomIndex = Math.floor(Math.random()*(len--))
         removedCard = deck.splice(randomIndex, 1)
         nCards.push(removedCard)
-        // console.log('the removed card is ')
-        // console.log(removedCard)
 
     }
     return nCards

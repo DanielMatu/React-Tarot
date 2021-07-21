@@ -5,7 +5,6 @@ import { getMonthAndNumDays } from '../../actions/calendarUpdatingFuncs'
 
 
 const JournalPage = () => {
-    // console.log(useContext(DateContext))
     let {dateState, monthInc, monthDec, yearInc, yearDec, removeEntry, saveTodaysEntry, editGivenEntry} = useContext(DateContext)
     let { calendarMonth, calendarYear, calendar } = dateState
     let [ month, numDays ] = getMonthAndNumDays(calendarMonth) 

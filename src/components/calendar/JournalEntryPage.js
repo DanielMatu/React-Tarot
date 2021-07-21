@@ -53,20 +53,6 @@ const JournalEntryPage = () => {
                     setFortune(fortune)
                     setDeck(deck)
                 } else {
-                    // if (Object.keys(unmodifiedFortune).length === 0){
-                    //     console.log('emptpy unmod fortune')
-                    //     console.log(deck)
-
-                    //     setFortune(fortune)
-                    //     setDeck(deck)
-                    // } else {
-                    //     console.log('nonempty unmod fortune')
-                    //     console.log(deck)
-                    //     setFortune(unmodifiedFortune)
-                    //     setDeck(unmodifiedDeck)
-                    // }
-                    console.log('heres unmodifiedfortune')
-                    console.log(unmodifiedFortune)
                     setFortune(unmodifiedFortune)
                     setDeck(unmodifiedDeck)
 
@@ -83,13 +69,6 @@ const JournalEntryPage = () => {
         setDidSave(true)
         setUnmodifiedDeck(deck)
         setUnmodifiedFortune(fortune)
-        
-        console.log('set unmodified fortune to ')
-        console.log(fortune)
-        console.log('heres unmodifiedfortune in submitjounralerntry')
-        console.log(unmodifiedFortune)
-        console.log('heres the args')
-        console.log(submitFunctionArgs)
         submitFunctionArgs[6] = fortune 
         submitFunctionArgs[7] = deck
         if (!entryTitle) {

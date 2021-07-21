@@ -53,8 +53,6 @@ const DateContextProvider = (props) => {
     }
 
     const saveTodaysEntry = async (title, entryDate, body, calendar, fortune={}, deck, unmodifiedFortune, unmodifiedDeck) => {
-        console.log('unmodifiedfortune')
-        console.log(unmodifiedFortune)
         let date = new Date() 
         let currDayNumber = date.getDate()
         let currMonth = date.getMonth() + 1
