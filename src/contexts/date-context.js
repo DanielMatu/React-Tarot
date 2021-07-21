@@ -24,8 +24,8 @@ const DateContextProvider = (props) => {
     let { calendar, children } = props
     const [ userState, login, logout ] = useContext(UserContext)
 
-    const [ entryState, setTitle, setDate, setBody, setEntryIndex, setFortune, setIsEditing ] = useContext(EntryContext)
-    const [ title, entryDate, body, index, fortune, isEditing, entry ] = entryState
+    const { entryState, setTitle, setDate, setBody, setEntryIndex, setFortune, setIsEditing } = useContext(EntryContext)
+    const { entryTitle, entryDate, entryBody, entryIndex, fortune, isEditing, deck } = entryState
 
     let { uid } = userState
 

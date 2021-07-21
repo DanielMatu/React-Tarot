@@ -21,11 +21,11 @@ const JournalEntryPage = () => {
     }
 
 
-    const {fortuneState, setLayout, setDisplayCardName, setDisplayCardText, setHoverCardHeld, setDeck, setDisplayCardPosition} = useContext(FortuneContext)
-    const {deck, layout, displayCardName, displayCardText, hoverCardHeld} = fortuneState
+    const {fortuneState, setDisplayCardName, setDisplayCardText, setDisplayCardPosition} = useContext(FortuneContext)
+    const {displayCardName, displayCardText} = fortuneState
 
-    const [ entryState, setTitle, setDate, setBody, setEntryIndex, setFortune, setIsEditing ] = useContext(EntryContext)
-    const [ title, date, body, index, fortune, isEditing ] = entryState
+    const { entryState, setTitle, setDate, setBody, setEntryIndex, setFortune, setIsEditing, setDeck } = useContext(EntryContext)
+    const { entryTitle, entryDate, entryBody, entryIndex, fortune, isEditing, deck } = entryState
 
 
     const {dateState, saveTodaysEntry, editGivenEntry} = useContext(DateContext)
@@ -45,12 +45,12 @@ const JournalEntryPage = () => {
         if (fastNavToFortune){
             if (Object.keys(fortune).length === 0) {
                 // triggered by 'attach new fortune' case
-                const [newRandomLayout, newDeck ] = randomizeNewCelticCross()
-                setLayout(newRandomLayout)
+                const [newRandomFortune, newDeck ] = randomizeNewCelticCross()
+                setFortune(newRandomFortune)
                 setDeck(newDeck)
             } else {
                 // triggered by 'view fortune' case 
-                setLayout(fortune)
+                setFortune(fortune)
             }
             setDisplayCardName('')
             setDisplayCardText('')
@@ -60,14 +60,13 @@ const JournalEntryPage = () => {
     }, [fastNavToFortune])
 
     const submitJournalEntry = (submitFunction, ...submitFunctionArgs) => {
-        if (!title) {
+        if (!entryTitle) {
             setReqErrActive(true)
         } else {
             submitFunction(...submitFunctionArgs)
             setTitle("")
             setDate("")
             setBody("")
-            setFortune({})
             setAlertActive(true)
         }
     }
@@ -87,15 +86,15 @@ const JournalEntryPage = () => {
           />
             <div className='create-entry-container' >
                 <div className='half-entry text-entry'>
-                    <textarea className='entry-text-area entry-title' placeholder="Enter a title:" value={title} onChange={updateTitle} required></textarea>
+                    <textarea className='entry-text-area entry-title' placeholder="Enter a title:" value={entryTitle} onChange={updateTitle} required></textarea>
                     {
                         reqErrActive &&
                         <div className='error-message'>Please enter a title</div>
                     }
-                    <textarea className='entry-text-area entry-date' value={date} readOnly></textarea>
+                    <textarea className='entry-text-area entry-date' value={entryDate} readOnly></textarea>
 
 
-                    <textarea className='entry-text-area text-area-body' value={body} onChange={updateBody} >
+                    <textarea className='entry-text-area text-area-body' value={entryBody} onChange={updateBody} >
 
                     </textarea>
                 </div>
@@ -115,13 +114,13 @@ const JournalEntryPage = () => {
                     }
                     {
                         !isEditing && 
-                        <div className='entry-button save-button' onClick={() => submitJournalEntry(saveTodaysEntry, title, date, body, calendar, fortune)}>
+                        <div className='entry-button save-button' onClick={() => submitJournalEntry(saveTodaysEntry, entryTitle, entryDate, entryBody, calendar, fortune)}>
                             SAVE
                         </div>
                     }
                     {
                         isEditing && 
-                        <div className='entry-button save-button' onClick={() => submitJournalEntry(editGivenEntry, title, date, body, index, calendar, fortune)}>
+                        <div className='entry-button save-button' onClick={() => submitJournalEntry(editGivenEntry, entryTitle, entryDate, entryBody, entryIndex, calendar, fortune)}>
                             SAVE EDITS
                         </div>
                     }

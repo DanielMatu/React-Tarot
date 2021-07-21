@@ -6,8 +6,8 @@ export { EntryContext }
 const EntryContextProvider = (props) => {
     const { children } = props
                 //     title, date, body, index, fortune, isEditing, deck
-    const initialState = ['', '', '', 0, {}, false, {}]
-    const [state, dispatch] = useReducer(EntryReducer, initialState)
+    const initialState = {entryTitle:'', entryDate:'', entryBody:'', entryIndex:0, fortune:{}, isEditing:false, deck:[]}
+    const [entryState, dispatch] = useReducer(EntryReducer, initialState)
     const setTitle = (newTitle) => { dispatch({type: 'UPDATE_TITLE', payload:{newTitle}})} 
     const setDate = (newDate) => dispatch({type: 'UPDATE_DATE', payload:{newDate}})
     const setBody = (newBody) => dispatch({type: 'UPDATE_BODY', payload:{newBody}})
@@ -18,7 +18,7 @@ const EntryContextProvider = (props) => {
 
 
     return (
-        <EntryContext.Provider value={ [state, setTitle, setDate, setBody, setEntryIndex, setFortune, setIsEditing, setDeck] }>
+        <EntryContext.Provider value={ {entryState, setTitle, setDate, setBody, setEntryIndex, setFortune, setIsEditing, setDeck} }>
             { 
                 children 
             }

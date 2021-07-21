@@ -3,11 +3,15 @@ import { history } from '../../routers/AppRouter'
 import { getStandardDeck } from '../../decks/StandardDeck'
 import { pullNCards } from '../../decks/DeckHelpers'
 import { FortuneContext } from '../../contexts/fortune-context'
+import { EntryContext } from '../../contexts/entry-context'
 import Card from './Card'
 
 const Layout = () => {
     const {fortuneState, setDisplayCardName, setDisplayCardText} = useContext(FortuneContext)
     const {displayCardName, displayCardText} = fortuneState
+
+    const { entryState } = useContext(EntryContext)
+    const { fortune } = entryState
     const labels = [1,2,3,4,5,6,7,8,9]
     let realCardsId = 0
     let id = 0
@@ -16,7 +20,7 @@ const Layout = () => {
         <div className='fortune-layout'>
 
             {
-                layout.map((row, rowIndex) => <div key={rowIndex} className='row'>
+                fortune.map((row, rowIndex) => <div key={rowIndex} className='row'>
                     {
                     row.map((slot, colIndex) => 
                         

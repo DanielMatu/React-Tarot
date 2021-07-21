@@ -1,40 +1,40 @@
 const EntryReducer = (state, action) => {
     switch(action.type) {
         case 'UPDATE_TITLE': 
-            state[0] = action.payload.newTitle
-            return [
-                ...state
-            ]
+            return {
+                ...state,
+                entryTitle: action.payload.newTitle
+            }
         case 'UPDATE_DATE': 
-            state[1] = action.payload.newDate
-            return [
-                ...state
-            ]
+            return {
+                ...state,
+                entryDate: action.payload.newDate
+            }
         case 'UPDATE_BODY': 
-            state[2] = action.payload.newBody
-            return [
-                ...state
-            ]
+            return {
+                ...state,
+                entryBody: action.payload.newBody
+            }
         case 'UPDATE_ENTRY_INDEX': 
-            state[3] = action.payload.newIndex
-            return [
-                ...state
-            ]
+            return {
+                ...state,
+                entryIndex: action.payload.newIndex
+            }
         case 'UPDATE_FORTUNE': 
-            state[4] = action.payload.newFortune
-            return [
-                ...state
-            ]
+            return {
+                ...state,
+                fortune: action.payload.newFortune
+            }
         case 'UPDATE_IS_EDITING': 
-            state[5] = action.payload.newIsEditing
-            return [
-                ...state
-            ]
+            return {
+                ...state,
+                isEditing: action.payload.newIsEditing
+            }
         case 'UPDATE_DECK': 
-            state[6] = action.payload.newDeck
-            return [
-                ...state
-            ]
+            return {
+                ...state,
+                deck: action.payload.newDeck
+            }
 
     }
 }

@@ -11,14 +11,11 @@ import { Prompt } from 'react-router'
 
 
 const FortunePage = () => {
-    const {fortuneState, setDisplayCardName, setDisplayCardText, setDisplayCardPosition} = useContext(FortuneContext)
+    const {fortuneState} = useContext(FortuneContext)
     let { displayCardName, displayCardText, displayCardPosition} = fortuneState
 
-    const {dateState, monthInc, monthDec, yearInc, yearDec, removeEntry, saveTodaysEntry, editGivenEntry, setCalendar} = useContext(DateContext)
-    let { calendarMonth, calendarYear, calendar } = dateState
-
-    const [ entryState, setTitle, setDate, setBody, setEntryIndex, setFortune, setIsEditing, setDeck ] = useContext(EntryContext)
-    const [ title, entryDate, body, index, fortune, isEditing, deck ] = entryState
+    const { entryState, setFortune, setDeck } = useContext(EntryContext)
+    const { entryTitle, entryDate, entryBody, entryIndex, fortune, isEditing, deck } = entryState
     
     const [fastNavToJournalEntry, setFastNavToJournalEntry] = useState(false)
 
@@ -28,14 +25,14 @@ const FortunePage = () => {
         setDeck(newDeck)
         const [row, col, depth] = displayCardPosition
         newCard.depth = depth
-        layout[row][col].push(newCard)
-        setLayout(layout)
+        fortune[row][col].push(newCard)
+        setFortune(fortune)
     }
 
     useEffect(() => {
         if (fastNavToJournalEntry){
             console.log('we fast naving')
-            setFortune(layout)
+            setFortune(fortune)
             history.push('/create')
         }
     }, [fastNavToJournalEntry])

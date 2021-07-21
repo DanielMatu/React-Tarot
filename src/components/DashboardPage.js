@@ -12,8 +12,8 @@ const DashboardPage = () =>  {
     console.log(dateState)
     let { calendarMonth, calendarYear, calendar } = dateState
 
-    const [ entryState, setTitle, setDate, setBody, setEntryIndex, setFortune, setIsEditing, setDeck ] = useContext(EntryContext)
-    const [ title, entryDate, body, fortune, isEditing, deck ] = entryState
+    const { entryState, setTitle, setDate, setBody, setEntryIndex, setFortune, setIsEditing, setDeck } = useContext(EntryContext)
+    const { entryTitle, entryDate, entryBody, fortune, isEditing, deck } = entryState
 
     const {fortuneState, setDisplayCardName, setDisplayCardText, setDisplayCardPosition } = useContext(FortuneContext)
     const {displayCardName, displayCardText} = fortuneState

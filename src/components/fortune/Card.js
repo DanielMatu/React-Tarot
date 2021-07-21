@@ -1,9 +1,13 @@
 import React, { useState, useContext } from 'react'
 import { FortuneContext } from '../../contexts/fortune-context'
+import { EntryContext } from '../../contexts/entry-context'
 
 const Card = (props) => {
-    const {fortuneState, setLayout, setDisplayCardName, setDisplayCardText, setHoverCardHeld, setDisplayCardPosition} = useContext(FortuneContext)
-    const {deck, layout, displayCardName, displayCardText, hoverCardHeld} = fortuneState
+    const {fortuneState, setDisplayCardName, setDisplayCardText, setDisplayCardPosition} = useContext(FortuneContext)
+    const { displayCardName, displayCardText } = fortuneState
+
+    const { entryState, setFortune } = useContext(EntryContext)
+    const { fortune } = entryState
 
     const { row, col, depth, card, label } = props
     let { name, text, isDummy, isRevealed } = card
@@ -16,8 +20,8 @@ const Card = (props) => {
                 e.target.style.transform = 'rotateY(360deg)' 
 
                 isRevealed = true
-                layout[row][col][depth].isRevealed = isRevealed
-                setLayout(layout)
+                fortune[row][col][depth].isRevealed = isRevealed
+                setFortune(fortune)
 
                 setTimeout(() => {
                     setDisplayCardName(name)
