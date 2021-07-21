@@ -56,13 +56,13 @@ const FortunePage = () => {
                 </div>
                 <div className='fortune-buttons-container'>
 
-                    <button className='fortune-button fortune-button-add' disabled = {deck.length === 0} onClick={() => startPull()} >
+                    <button className='fortune-button fortune-button-add' disabled = {deck.length === 1} onClick={() => startPull()} >
                         {
-                            deck.length === 0 &&
+                            deck.length === 1 &&
                             <div>NO CARDS REMAINING</div>
                         }
                         {
-                            deck.length !== 0 &&
+                            deck.length !== 1 &&
                             <div>ADD CARD</div>
                         }
                     </button>

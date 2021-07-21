@@ -24,6 +24,8 @@ const Day = ( props ) => {
         setBody(entry.body)
         setFortune(entry.fortune)
         setDeck(entry.deck)
+        console.log('set the deeck to')
+        console.log(entry.deck)
         setUnmodifiedFortune(entry.unmodifiedFortune)
         setUnmodifiedDeck(entry.unmodifiedDeck)
         setEntryIndex(id)
