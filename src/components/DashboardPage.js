@@ -27,17 +27,21 @@ const DashboardPage = () =>  {
         let todaysEntries = calendar[currYear][stringCurrMonth][currDayNumber - 1]['entries']
         const [newFortune, newDeck] = randomizeNewCelticCross()
         // if (page == '/create'){
-            setTitle('')
-            setBody('')
+        if (page == '/fortune'){
             setFortune(newFortune)
             setUnmodifiedFortune({})
             setDeck(newDeck)
             setUnmodifiedDeck(newDeck)
-            setDate(stringCurrMonth + " " + (currDayNumber).toString() + " " + currYear.toString() )
-            setIsEditing(false)
-            setDisplayCardName('')
-            setDisplayCardText('')
-            setDisplayCardPosition([-1,-1,-1])
+        } else {
+            setFortune({})
+        }
+        setTitle('')
+        setBody('')
+        setDate(stringCurrMonth + " " + (currDayNumber).toString() + " " + currYear.toString() )
+        setIsEditing(false)
+        setDisplayCardName('')
+        setDisplayCardText('')
+        setDisplayCardPosition([-1,-1,-1])
 
         // } else if (page == '/fortune'){
             
