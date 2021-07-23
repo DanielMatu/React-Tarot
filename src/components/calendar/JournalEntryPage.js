@@ -6,6 +6,7 @@ import { randomizeNewCelticCross, fortuneIsFresh } from '../../decks/DeckHelpers
 import { history } from '../../routers/AppRouter'
 import { Prompt } from 'react-router'
 import TarotAlert from '../TarotAlert'
+import LoadingPage from '../LoadingPage'
 
 
 
@@ -21,7 +22,7 @@ const JournalEntryPage = () => {
 
     const { setDisplayCardName, setDisplayCardText, setDisplayCardPosition} = useContext(FortuneContext)
 
-    const { entryState, setTitle, setDate, setBody, setFortune, setDeck, setUnmodifiedFortune, setUnmodifiedDeck, setDidSave } = useContext(EntryContext)
+    const { entryState, setTitle, setDate, setBody, setFortune, setDeck, setUnmodifiedFortune, setUnmodifiedDeck, setDidSave, setSaveConfirmationVisible } = useContext(EntryContext)
     const { entryTitle, entryDate, entryBody, entryIndex, fortune, isEditing, deck, unmodifiedDeck, unmodifiedFortune, didSave } = entryState
 
 
@@ -80,28 +81,31 @@ const JournalEntryPage = () => {
             setDate("")
             setBody("")
             setSavingLoaderActive(true)
+            setSaveConfirmationVisible(true)
+
         }
 
     }
 
+    // go to journal after submitted entry
+    useEffect(() => {
+        if (savingLoaderActive) {
+            history.push('/journal')
+        }
+    }, [savingLoaderActive])
      
 
     return (
         <div className = 'create-entry-wrapper'>
-            { console.log(savingLoaderActive)}
             {
                 savingLoaderActive && 
-                <TarotAlert alertText={"Journal entry saved successfully!"} />
+                <LoadingPage />
 
             }
-            {/* {
-                alertActive && 
-                history.push('/Journal')
-            } */}
           <Prompt
             when={!savingLoaderActive && !fastNavToFortune }
             message={
-                location => `Your changes haven't been saved, are you sure you want to leave this page?`
+                location => `Yourr changes haven't been saved, are you sure you want to leave this page? also savingloaderactive: ${savingLoaderActive}`
              }
           />
             <div className='create-entry-container' >

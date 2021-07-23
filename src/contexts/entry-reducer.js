@@ -50,6 +50,12 @@ const EntryReducer = (state, action) => {
                 ...state,
                 didSave: action.payload.newDidSave
             }
+        case 'UPDATE_SAVE_CONFIRMATION_VISIBLE':
+            return {
+                ...state, 
+                saveConfirmationVisible: action.payload.newSaveConfirmationVisible
+            }
+        
 
     }
 }

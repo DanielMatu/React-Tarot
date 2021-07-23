@@ -2,12 +2,16 @@ import React, { useContext } from 'react';
 import Day from './Day.js'
 import { DateContext } from '../../contexts/date-context'
 import { UserContext } from '../../contexts/user-context'
+import { EntryContext } from '../../contexts/entry-context'
 import { getMonthAndNumDays } from '../../actions/calendarUpdatingFuncs'
+import TarotAlert from '../TarotAlert.js';
 
 const Journal = () => {
 
     const [ userState, login, logout ] = useContext(UserContext)
     const { uid } = userState
+    const { entryState, setSaveConfirmationVisible } = useContext(EntryContext)
+    const { saveConfirmationVisible } = entryState
     const { dateState, monthInc, monthDec, yearInc, yearDec } = useContext(DateContext)
     let { calendarMonth, calendarYear, calendar } = dateState
     let [ month, numDays ] = getMonthAndNumDays(calendarMonth)
@@ -32,7 +36,13 @@ const Journal = () => {
                 </div>
             </div>
 
+            {
+                saveConfirmationVisible && 
+                <TarotAlert alertText="Journal Entry Saved Succesfully!" buttonText="OK" goBackHandler={() => setSaveConfirmationVisible(false)} />
+            }
+
             <div className="calendar">
+
                 {
                     daysOfMonth.map((day, id) => (
                         <Day key={id} {...day}/>
