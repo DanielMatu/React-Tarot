@@ -4,15 +4,19 @@ import { connect } from 'react-redux'
 import AppRouter, { history } from '../routers/AppRouter'
 import { UserContext } from '../contexts/user-context'
 import { firebase, googleAuthProvider } from '../firebase/firebase'
+import { DateContext } from '../contexts/date-context';
 
 export const Header = () => {
     const [ state, login, logout ] = useContext(UserContext)
+
+    const { setCalendar } = useContext(DateContext)
 
 
     const [dropdownActive, setDropdownActive] = useState(false)
     firebase.auth().onAuthStateChanged((user) => {
         if (user){
         } else {
+            setCalendar({})
             logout()
             history.push('/')
         }
@@ -47,7 +51,7 @@ export const Header = () => {
                     <h2>CALENDAR</h2>
                 </Link>
                 <button 
-                    className="button button--link hamburger-dropdown-item" 
+                    className="button button--link hamburger-dropdown-item dropdown-logout" 
                     onClick={() => firebase.auth().signOut()}
                     >
                     <h3>LOG OUT</h3>

@@ -9,7 +9,7 @@ import Card from './Card'
 const Layout = () => {
     const { entryState } = useContext(EntryContext)
     const { fortune } = entryState
-    const labels = [1,2,3,4,5,6,7,8,9]
+    const labels = ['The Mind','The Final Outcome','The Surprise','The Soul','The Future','The Heart','The Problem','The Family',9]
     let realCardsId = 0
     let id = 0
 

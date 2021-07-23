@@ -25,8 +25,7 @@ const JournalEntryPage = () => {
     const { entryTitle, entryDate, entryBody, entryIndex, fortune, isEditing, deck, unmodifiedDeck, unmodifiedFortune, didSave } = entryState
 
 
-    const {dateState, saveTodaysEntry, editGivenEntry} = useContext(DateContext)
-    let { calendar } = dateState
+    const { saveTodaysEntry, editGivenEntry} = useContext(DateContext)
 
     // const updateTitle = (e) => (e.target.value.lengh == 8) ? console.log('lmao') : setTitle(e.target.value)
     // const updateTitle = (e) => (e.target.value.length < 8) ? setTitle(e.target.value) : console.log('its less than 8')
@@ -80,15 +79,23 @@ const JournalEntryPage = () => {
             setBody("")
             setAlertActive(true)
         }
+
     }
 
     return (
         <div className = 'create-entry-wrapper'>
+
+
+
             {
                 alertActive && 
-                <TarotAlert alertText={"Journal entry saved successfully!"} goBackHandler={() => history.push('/Journal')}/>
+                <TarotAlert alertText={"Journal entry saved successfully!"} />
 
             }
+            {/* {
+                alertActive && 
+                history.push('/Journal')
+            } */}
           <Prompt
             when={!alertActive && !fastNavToFortune }
             message={
@@ -125,13 +132,13 @@ const JournalEntryPage = () => {
                     }
                     {
                         !isEditing && 
-                        <div className='entry-button save-button' onClick={() => submitJournalEntry(saveTodaysEntry, entryTitle, entryDate, entryBody, calendar, fortune, deck, unmodifiedFortune, unmodifiedDeck)}>
+                        <div className='entry-button save-button' onClick={() => submitJournalEntry(saveTodaysEntry, entryTitle, entryDate, entryBody, fortune, deck, unmodifiedFortune, unmodifiedDeck)}>
                             SAVE
                         </div>
                     }
                     {
                         isEditing && 
-                        <div className='entry-button save-button' onClick={() => submitJournalEntry(editGivenEntry, entryTitle, entryDate, entryBody, entryIndex, calendar, fortune, deck, unmodifiedFortune, unmodifiedDeck)}>
+                        <div className='entry-button save-button' onClick={() => submitJournalEntry(editGivenEntry, entryTitle, entryDate, entryBody, entryIndex, fortune, deck, unmodifiedFortune, unmodifiedDeck)}>
                             SAVE EDITS
                         </div>
                     }

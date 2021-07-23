@@ -32,6 +32,11 @@
     background: rga($dark-purple, 0.96);
 }
 
+.dropdown-logout {
+    font-size:28px;
+    margin-top:-2.5rem;
+}
+
 @media only screen and (max-width : 1024px) {
     .hamburger{
         padding: $m-size;

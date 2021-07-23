@@ -15,18 +15,17 @@ import FortuneContextProvider from './contexts/fortune-context'
 
 import { initializeCalendar } from './actions/calendarUpdatingFuncs'
 
-window.onload = function () {
-    history.push('/dashboard')
-}
+// window.onload = function () {
+//     history.push('/dashboard')
+// }
 
 const store = configureStore()
 
-const generateJSX = (uid, calendar) => (
-    
+const generateJSX = () => (
     <Provider store={store}>
-        <UserContextProvider uid={uid}>
+        <UserContextProvider>
             <EntryContextProvider>
-                <DateContextProvider calendar={calendar}>
+                <DateContextProvider>
                     <FortuneContextProvider>
                         <AppRouter />
                     </FortuneContextProvider>
@@ -49,35 +48,6 @@ ReactDOM.render(<LoadingPage /> , document.getElementById('app'))
 
 
 
-firebase.auth().onAuthStateChanged((user) => {
-    if (user) {
-        let uid = user.uid
-        let calendar
-
-        // firebase.database().ref(`users/${uid}`).once('value', (snapshot) => {
-        //     if (snapshot.exists()){
-        //     } else {
-        //         firebase.database().ref(`users`).set(uid)
-        //     }
-
-            firebase.database().ref(`users/${uid}/calendar`).once('value', (snapshot) => {
-                if (snapshot.exists()){
-                    calendar = snapshot.val()
-                } else {
-                    calendar = initializeCalendar()
-                    console.log('just set the calendar')
-                    firebase.database().ref(`users/${uid}/calendar`).set(calendar)
-                }
-                renderApp(uid, calendar)
-                if (history.location.pathname === '/') {
-                    history.push('/dashboard')
-                }
-            })
-        // })
-    } else {
-        renderApp()
-        history.push('/')
-    }
-})
+renderApp()
 
 

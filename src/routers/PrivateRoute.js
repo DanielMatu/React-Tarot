@@ -1,15 +1,24 @@
-import React, { useContext } from 'react'
+import React, { useState, useContext } from 'react'
 import { connect } from 'react-redux'
 import { Route, Redirect } from 'react-router-dom'
 import Header from '../components/Header';
+import LoadingPage from '../components/LoadingPage';
 import { UserContext } from '../contexts/user-context'
-
+import { DateContext } from '../contexts/date-context'
+import { firebase, googleAuthProvider } from '../firebase/firebase'
+import { initializeCalendar } from '../actions/calendarUpdatingFuncs';
 
 export const PrivateRoute = ({  
                                 component: Component,
                                 ...rest
                             }) => 
     {
+        const { dateState } = useContext(DateContext)
+        let { calendar } = dateState
+
+
+
+
         const [ state, login, logout ] = useContext(UserContext)
         const { uid } = state 
         return (

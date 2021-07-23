@@ -11,6 +11,9 @@ const DashboardPage = () =>  {
     const {dateState} = useContext(DateContext)
     let { calendar } = dateState
 
+    console.log('heres calendar')
+    console.log(calendar)
+
     const { setTitle, setDate, setBody, setFortune, setIsEditing, setDeck, setUnmodifiedFortune, setUnmodifiedDeck  } = useContext(EntryContext)
 
     const { setDisplayCardName, setDisplayCardText, setDisplayCardPosition} = useContext(FortuneContext)
@@ -58,6 +61,7 @@ const DashboardPage = () =>  {
         }
     }
     return (
+
         <div>
             <div className='dashboard-center-container'>
                 <div className='dashboard-center-option' onClick={() => navigateToCreateIfUnderLimit('/fortune')}>

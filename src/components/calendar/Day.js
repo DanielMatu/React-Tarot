@@ -16,6 +16,8 @@ const Day = ( props ) => {
     let { calendarMonth, calendarYear, calendar } = dateState
     let [ month, numDays ] = getMonthAndNumDays(calendarMonth)
 
+
+
     let entries = calendar[calendarYear][month][dayNumber - 1]['entries']
 
     const navigateToEditEntry = (id, entry) => {
