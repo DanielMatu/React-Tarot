@@ -13,7 +13,7 @@ const FortunePage = () => {
     const {fortuneState} = useContext(FortuneContext)
     let { displayCardName, displayCardText, displayCardPosition} = fortuneState
 
-    const { entryState, setFortune, setDeck } = useContext(EntryContext)
+    const { entryState, setFortune, setDeck, setUnmodifiedFortune } = useContext(EntryContext)
     const { fortune, deck, unmodifiedFortune, unmodifiedDeck } = entryState
     
     const [fastNavToJournalEntry, setFastNavToJournalEntry] = useState(false)
@@ -32,6 +32,7 @@ const FortunePage = () => {
         if (fastNavToJournalEntry){
             console.log('we fast naving')
             setFortune(fortune)
+            setUnmodifiedFortune(fortune)
             history.push('/create')
         }
     }, [fastNavToJournalEntry])

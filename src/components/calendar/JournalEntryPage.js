@@ -33,7 +33,7 @@ const JournalEntryPage = () => {
 
     const updateBody = (e) => setBody(e.target.value);
 
-    const [alertActive, setAlertActive] = useState(false) 
+    const [alertActive, setAlertActive] = useState(false)
     const [reqErrActive, setReqErrActive] = useState(false)
     const [fastNavToFortune, setFastNavToFortune] = useState(false)
 
@@ -47,11 +47,13 @@ const JournalEntryPage = () => {
                     setDeck(newDeck)
                     setUnmodifiedDeck(newDeck)
             } else {
-                // triggered by 'view fortune' case 
+                // triggered by 'view fortune' case
                 if (didSave){
                     setFortune(fortune)
                     setDeck(deck)
                 } else {
+                    console.log('setting fortune to ')
+                    console.log(unmodifiedFortune)
                     setFortune(unmodifiedFortune)
                     setDeck(unmodifiedDeck)
 
@@ -82,8 +84,11 @@ const JournalEntryPage = () => {
 
     }
 
+     
+
     return (
         <div className = 'create-entry-wrapper'>
+            <div>heres alertActive {alertActive}</div>
 
 
 
