@@ -31,12 +31,14 @@ export const PrivateRoute = ({
             }
         })
 
-        // again, if a refresh happens, the private route still have calendar 
+        // again, if a refresh happens, the private route still have calendar
         firebase.database().ref(`users/${uid}/calendar`).once('value', (snapshot) => {
-            if (snapshot.exists()){
-                setCalendar(snapshot.val())
-            } else {
-                setCalendar(initializeCalendar())
+            if (Object.keys(calendar).length === 0){
+                if (snapshot.exists()){
+                    setCalendar(snapshot.val())
+                } else {
+                    setCalendar(initializeCalendar())
+                }
             }
         })
 
