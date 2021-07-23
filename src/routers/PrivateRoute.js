@@ -13,24 +13,49 @@ export const PrivateRoute = ({
                                 ...rest
                             }) => 
     {
-        const { dateState } = useContext(DateContext)
-        let { calendar } = dateState
 
-
-
+        const { dateState, setCalendar } = useContext(DateContext)
+        const { calendar } = dateState 
+        console.log('private route has the calendar')
+        console.log(calendar)
 
         const [ state, login, logout ] = useContext(UserContext)
         const { uid } = state 
+        console.log('private route has this uid')
+        console.log(uid)
+
+        // this makes it so if someone refreshes while logged in, the uid is set again so it wont be lost
+        firebase.auth().onAuthStateChanged((user) => {
+            if (state.uid === ''){
+                login(user.uid)
+            }
+        })
+
+        // again, if a refresh happens, the private route still have calendar 
+        firebase.database().ref(`users/${uid}/calendar`).once('value', (snapshot) => {
+            if (snapshot.exists()){
+                setCalendar(snapshot.val())
+            } else {
+                setCalendar(initializeCalendar())
+            }
+        })
+
         return (
+            (Object.keys(calendar).length === 0) ? 
+            <LoadingPage /> :
+
             <Route {...rest} component={(props) => (
                 uid ? (
                     <div>
+                        {/* <div style={{color: 'white'}}>found uid</div> */}
                         <Header />
-
+                        
                         <Component {...props}/>
                     </div>
                 ) : (
                     <Redirect to="/" />
+                    // <div style={{color: 'white'}}> MISSING UId</div>
+
                 )
             )}/>
         )

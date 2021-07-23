@@ -8,7 +8,7 @@ const UserReducer = (state, action) => {
         case "LOGOUT":
             return {
                 ...state,
-                uid: null
+                uid: ''
             }
         case "UPDATE_CALENAR":
             return {

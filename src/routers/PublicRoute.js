@@ -3,13 +3,14 @@ import { connect } from 'react-redux'
 import { Route, Redirect } from 'react-router-dom'
 import { UserContext } from '../contexts/user-context'
 
-
 export const PublicRoute = ({ 
     component: Component,
     ...rest
 }) => {
     const [ state, login, logout ] = useContext(UserContext)
     const { uid } = state 
+
+
     return (
     <Route {...rest} component={(props) => (
         uid ? (

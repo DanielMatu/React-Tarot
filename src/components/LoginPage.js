@@ -3,13 +3,13 @@ import { connect } from 'react-redux'
 import AppRouter, { history } from '../routers/AppRouter'
 import { UserContext } from '../contexts/user-context'
 import { DateContext } from '../contexts/date-context'
+import { initializeCalendar } from '../actions/calendarUpdatingFuncs'
 import { firebase, googleAuthProvider } from '../firebase/firebase'
 // import user context for uid to pass into startlogin
 
 
 export const LoginPage = () => {
     const [ state, login, logout ] = useContext(UserContext)
-    let { uid } = state
 
 
     let { dateState, setCalendar } = useContext(DateContext)
@@ -18,18 +18,28 @@ export const LoginPage = () => {
     
     firebase.auth().onAuthStateChanged((user) => {
         if (user){
-            uid = user.uid
-            login(uid)
-            firebase.database().ref(`users/${uid}/calendar`).once('value', (snapshot) => {
+            // update the state to know what the uid is
+            login(user.uid)
+
+            // set the user in the database if there isnt one
+            firebase.database().ref(`users/${user.uid}`).once('value', (snapshot) => {
+                if (snapshot.exists()){
+                } else {
+                    firebase.database().ref(`users/${user.uid}`).set({})
+                }
+            })
+
+
+            // read calendar from database and set calendar in state
+            firebase.database().ref(`users/${user.uid}/calendar`).once('value', (snapshot) => {
                 if (snapshot.exists()){
                     setCalendar(snapshot.val())
-                    console.log('set calendar to ')
+                    console.log('loginpage set calendar to ')
                     console.log(snapshot.val())
-                    // console.log('from the snapshot val')
-                    // console.log(snapshot.val())
+
                 } else {
                     newCalendar = initializeCalendar()
-                    firebase.database().ref(`users/${uid}/calendar`).set(newCalendar).then(() => {
+                    firebase.database().ref(`users/${user.uid}/calendar`).set(newCalendar).then(() => {
                     })
                 }
                 if (history.location.pathname === '/') {

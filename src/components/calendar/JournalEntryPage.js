@@ -33,7 +33,7 @@ const JournalEntryPage = () => {
 
     const updateBody = (e) => setBody(e.target.value);
 
-    const [alertActive, setAlertActive] = useState(false)
+    const [savingLoaderActive, setSavingLoaderActive] = useState(false)
     const [reqErrActive, setReqErrActive] = useState(false)
     const [fastNavToFortune, setFastNavToFortune] = useState(false)
 
@@ -79,7 +79,7 @@ const JournalEntryPage = () => {
             setTitle("")
             setDate("")
             setBody("")
-            setAlertActive(true)
+            setSavingLoaderActive(true)
         }
 
     }
@@ -88,12 +88,9 @@ const JournalEntryPage = () => {
 
     return (
         <div className = 'create-entry-wrapper'>
-            <div>heres alertActive {alertActive}</div>
-
-
-
+            { console.log(savingLoaderActive)}
             {
-                alertActive && 
+                savingLoaderActive && 
                 <TarotAlert alertText={"Journal entry saved successfully!"} />
 
             }
@@ -102,7 +99,7 @@ const JournalEntryPage = () => {
                 history.push('/Journal')
             } */}
           <Prompt
-            when={!alertActive && !fastNavToFortune }
+            when={!savingLoaderActive && !fastNavToFortune }
             message={
                 location => `Your changes haven't been saved, are you sure you want to leave this page?`
              }
