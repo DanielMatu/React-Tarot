@@ -105,7 +105,7 @@ const JournalEntryPage = () => {
           <Prompt
             when={!savingLoaderActive && !fastNavToFortune }
             message={
-                location => `Yourr changes haven't been saved, are you sure you want to leave this page? also savingloaderactive: ${savingLoaderActive}`
+                location => `Your changes haven't been saved, are you sure you want to leave this page?`
              }
           />
             <div className='create-entry-container' >

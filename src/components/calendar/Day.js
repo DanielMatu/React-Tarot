@@ -24,10 +24,12 @@ const Day = ( props ) => {
         setTitle(entry.preview)
         setDate(entry.date)
         setBody(entry.body)
-        setFortune(entry.fortune)
+        if (entry.fortune){
+            setFortune(entry.fortune)
+        } else {
+            setFortune({})
+        }
         setDeck(entry.deck)
-        console.log('set the deeck to')
-        console.log(entry.deck)
         setUnmodifiedFortune(entry.unmodifiedFortune)
         setUnmodifiedDeck(entry.unmodifiedDeck)
         setEntryIndex(id)

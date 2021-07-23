@@ -21,6 +21,8 @@ const EntryReducer = (state, action) => {
                 entryIndex: action.payload.newIndex
             }
         case 'UPDATE_FORTUNE': 
+            console.log('REDUCER new fortune')
+            console.log(action.payload.newFortune)
             return {
                 ...state,
                 fortune: action.payload.newFortune

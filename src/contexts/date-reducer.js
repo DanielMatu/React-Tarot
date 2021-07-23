@@ -29,8 +29,7 @@ const DateReducer = (state, action) => {
                 calendarYear: action.payload.newYear
             }
         case "UPDATE_CALENDAR":
-            console.log('got to update calendar with this calendar payload')
-            console.log(action.payload.newCalendar)
+
             return {
                 ...state,
                 calendar: action.payload.newCalendar
