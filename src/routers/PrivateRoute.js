@@ -44,7 +44,8 @@ export const PrivateRoute = ({
             if (Object.keys(calendar).length === 0){
                 if (snapshot.exists()){
                     setCalendar(snapshot.val())
-                } else {
+                }
+                else {
                     setCalendar(initializeCalendar())
                 }
             }

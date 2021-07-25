@@ -13,8 +13,6 @@ import UserContextProvider from './contexts/user-context'
 import EntryContextProvider from './contexts/entry-context'
 import FortuneContextProvider from './contexts/fortune-context'
 
-import { initializeCalendar } from './actions/calendarUpdatingFuncs'
-
 window.onload = function () {
     history.push('/dashboard')
 }
