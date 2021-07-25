@@ -37,6 +37,8 @@ const FortunePage = () => {
         }
     }, [fastNavToJournalEntry])
 
+    let cardImagePath = process.env.NODE_ENV === 'development' ? '"../../public/images/Tarot/' : '"dist/img/'
+
     return (
         <div className='fortune-container' >
             <Prompt
@@ -50,7 +52,7 @@ const FortunePage = () => {
              </div>
             <div className='display-section'>
                 <div className='display-card-container'>
-                    <div className='display-card' style={{backgroundImage: 'url("../../public/images/Tarot/' + displayCardName + '.png")', backgroundSize:'cover'}} />
+                    <div className='display-card' style={{backgroundImage: 'url(' + cardImagePath + displayCardName + '.png")', backgroundSize:'cover'}} />
                 </div>
                 <div className='display-text-container' onClick={() => console.log(deck)}>
                     <textarea readOnly className='display-text' value={displayCardText}></textarea>
