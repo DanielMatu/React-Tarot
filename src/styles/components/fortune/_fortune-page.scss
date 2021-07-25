@@ -88,6 +88,7 @@
             display: flex;
             justify-content:center;
             align-items:center;
+
         }
 
         .fortune-button {
@@ -102,6 +103,9 @@
 
         .fortune-button-post{
             background: rgba(#421395, 0.8);
+            &:hover {
+                background-color: rgba(86, 27, 191, 0.8);
+            }
         }
 
         .fortune-button-add {
@@ -109,6 +113,9 @@
             &:disabled {
                 background-color:grey;
                 cursor:not-allowed;
+            }
+            &:hover {
+                background-color: rgba(143, 0, 197, 0.8);
             }
         }
 

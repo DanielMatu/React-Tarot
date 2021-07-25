@@ -46,10 +46,13 @@ const Day = ( props ) => {
                 entries
                 &&
                 entries.map((entry, id) => (
-                    <div key={id} className='entry-preview'  onClick={() => navigateToEditEntry(id, entry)}>
-                        <div className='entry-title'>{entry.preview}</div>
+                    <div className='entry-preview-container'>
+                        <div key={id} className='entry-preview'  onClick={() => navigateToEditEntry(id, entry)}>
+                            <div className='entry-title'>{entry.preview}</div>
+                        </div>
                         <button className='remove-entry-button' onClick={(e) => { removeEntry(dayNumber, id); e.stopPropagation()}}>&#8722;</button>
                     </div>
+
                 ))
             }
         </div>

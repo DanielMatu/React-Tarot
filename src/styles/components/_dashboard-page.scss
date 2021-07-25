@@ -15,6 +15,10 @@
         background: rgba(30,10,60, 0.8);
         border: 1px solid $turqoise;
 
+        &:hover{
+            background:rgba(131, 75, 12, 0.8);
+        }
+
         .dashboard-center-option-header{
             color:$turqoise;
             font-size: 36px;

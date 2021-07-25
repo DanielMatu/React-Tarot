@@ -15,9 +15,9 @@ import FortuneContextProvider from './contexts/fortune-context'
 
 import { initializeCalendar } from './actions/calendarUpdatingFuncs'
 
-// window.onload = function () {
-//     history.push('/dashboard')
-// }
+window.onload = function () {
+    history.push('/dashboard')
+}
 
 const store = configureStore()
 

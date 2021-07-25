@@ -78,11 +78,17 @@
 
     .view-fortune-button {
         background-color:$dark-purple;
+        &:hover {
+            background-color:#5b00a882;
+        }
     }
 
     .save-button {
         background-color: $dark-blue;
         border-top: 1px solid $turqoise;
+        &:hover {
+            background-color: #0013b2cf;
+        }
 
     }
 }
