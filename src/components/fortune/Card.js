@@ -46,7 +46,7 @@ const Card = (props) => {
                     label={label}
                     onClick={(e) => revealCard(e)} 
                     style={
-                            isRevealed ? {backgroundImage: 'url("../../public/images/Tarot/' + name + '.png")', backgroundSize:'cover'} 
+                            isRevealed ? {backgroundImage: 'url("dist/img/eye-look.png")', backgroundSize:'cover'} 
                                        : isDummy ? {background:'none'} 
                                                  : {backgroundImage: 'url("../../public/images/Tarot/cardback.png")', backgroundSize:'cover'} }  
             />
