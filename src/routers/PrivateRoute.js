@@ -7,6 +7,7 @@ import { UserContext } from '../contexts/user-context'
 import { DateContext } from '../contexts/date-context'
 import { firebase, googleAuthProvider } from '../firebase/firebase'
 import { initializeCalendar } from '../actions/calendarUpdatingFuncs';
+import { history } from '../routers/AppRouter'
 
 export const PrivateRoute = ({  
                                 component: Component,
@@ -25,10 +26,17 @@ export const PrivateRoute = ({
         console.log(uid)
 
         // this makes it so if someone refreshes while logged in, the uid is set again so it wont be lost
+        // or it logs out if the uid timed out
         firebase.auth().onAuthStateChanged((user) => {
-            if (state.uid === ''){
-                login(user.uid)
+            if (user) {
+                if (state.uid === ''){
+                    login(user.uid)
+                }
+            }  else {   
+                logout()
+                history.push('/')
             }
+
         })
 
         // again, if a refresh happens, the private route still have calendar
