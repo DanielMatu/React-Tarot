@@ -36,7 +36,8 @@ const Card = (props) => {
         }
     }
     let cardImagePath = process.env.NODE_ENV === 'development' ? '"../../public/images/Tarot/' : '"dist/img/'
-
+    let cardbackBackgroundImageUrl = process.env.NODE_ENV === 'development' ? 'url("../../public/images/Tarot/cardback.png")' 
+                                                                       : 'url("dist/img/cardback.png")'
 
 
 
@@ -49,7 +50,7 @@ const Card = (props) => {
                     style={
                             isRevealed ? {backgroundImage: 'url(' + cardImagePath + name + '.png")', backgroundSize:'cover'} 
                                        : isDummy ? {background:'none'} 
-                                                 : {backgroundImage: 'url("../../public/images/Tarot/cardback.png")', backgroundSize:'cover'} }  
+                                                 : {backgroundImage: cardbackBackgroundImageUrl, backgroundSize:'cover'} }  
             />
             <div className='card-label'>{label}</div>
         </div>
