@@ -54,6 +54,7 @@ const config = {
     new CopyPlugin({
       patterns: [
         { from: path.join(__dirname, "public/videos"), to: path.join(__dirname, "public/dist/videos")},
+        { from: path.join(__dirname, "public/images/bg.jpg"), to:path.join(__dirname, "public/dist/img")}
       ],
     }),
 
