@@ -32,15 +32,19 @@ export const LoginPage = () => {
 
             // read calendar from database and set calendar in state
             firebase.database().ref(`users/${user.uid}/calendar`).once('value', (snapshot) => {
-                if (snapshot.exists()){
-                    setCalendar(snapshot.val())
-                    console.log('loginpage set calendar to ')
-                    console.log(snapshot.val())
+                console.log('after firebase read calendar its calendar in state is ')
+                console.log(calendar)
+                if (Object.keys(calendar).length === 0){
+                    if (snapshot.exists()){
+                        setCalendar(snapshot.val())
+                        console.log('loginpage set calendar to ')
+                        console.log(snapshot.val())
 
-                } else {
-                    newCalendar = initializeCalendar()
-                    firebase.database().ref(`users/${user.uid}/calendar`).set(newCalendar).then(() => {
-                    })
+                    } else {
+                        newCalendar = initializeCalendar()
+                        firebase.database().ref(`users/${user.uid}/calendar`).set(newCalendar).then(() => {
+                        })
+                    }
                 }
                 if (history.location.pathname === '/') {
                     history.push('/dashboard')

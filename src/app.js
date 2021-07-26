@@ -13,9 +13,9 @@ import UserContextProvider from './contexts/user-context'
 import EntryContextProvider from './contexts/entry-context'
 import FortuneContextProvider from './contexts/fortune-context'
 
-window.onload = function () {
-    history.push('/dashboard')
-}
+// window.onload = function () {
+//     history.push('/dashboard')
+// }
 
 const store = configureStore()
 
@@ -45,7 +45,9 @@ const renderApp = (uid, calendar) => {
 ReactDOM.render(<LoadingPage /> , document.getElementById('app'))
 
 
+if (!hasRendered){
+    renderApp()
 
-renderApp()
+}
 
 
