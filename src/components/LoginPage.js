@@ -17,6 +17,10 @@ export const LoginPage = () => {
     let { dateState, setCalendar } = useContext(DateContext)
     let { calendar } = dateState
 
+    console.log('current user?')
+    console.log(firebase.auth().currentUser)
+    console.log(firebase.auth())
+
     firebase.auth().onAuthStateChanged((user) => {
 
         if (user){

@@ -4,7 +4,7 @@ import { DateContext } from '../contexts/date-context'
 import { EntryContext } from '../contexts/entry-context'
 import { FortuneContext } from '../contexts/fortune-context'
 import { randomizeNewCelticCross } from '../decks/DeckHelpers'
-
+import { firebase } from '../firebase/firebase'
 import { getMonthAndNumDays } from '../actions/calendarUpdatingFuncs';
 
 const DashboardPage = () =>  {
@@ -13,6 +13,10 @@ const DashboardPage = () =>  {
 
     // console.log('heres calendar')
     // console.log(calendar)
+
+    console.log('dash - current user?')
+    console.log(firebase.auth().currentUser)
+    console.log(firebase.auth())
 
     const { setTitle, setDate, setBody, setFortune, setIsEditing, setDeck, setUnmodifiedFortune, setUnmodifiedDeck  } = useContext(EntryContext)
 

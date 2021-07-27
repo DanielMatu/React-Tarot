@@ -26,8 +26,9 @@ export const PrivateRoute = ({
         firebase.auth().onAuthStateChanged((user) => {
             if (user){
             } else {
-                setCalendar({})
                 logout()
+                setCalendar({})
+
                 // history.push('/')
             }
         })
