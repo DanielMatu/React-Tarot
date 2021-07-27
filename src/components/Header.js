@@ -29,7 +29,9 @@ export const Header = () => {
                     <Link className='header__title main-nav' to='/journal'>
                         <h2>CALENDAR</h2>
                     </Link>
-                    <button className="button button--link main-nav" onClick={() => firebase.auth().signOut()}><h3>LOG OUT</h3></button>
+                    <button className="button button--link main-nav" 
+                            onClick={() => firebase.auth().signOut().then(() => {logout()})}
+                            ><h3>LOG OUT</h3></button>
                 </div>
             </div>
 
@@ -45,7 +47,7 @@ export const Header = () => {
                 </Link>
                 <button 
                     className="button button--link hamburger-dropdown-item dropdown-logout" 
-                    onClick={() => firebase.auth().signOut()}
+                    onClick={() => firebase.auth().signOut().then(() => {logout()})}
                     >
                     <h3>LOG OUT</h3>
                 </button>

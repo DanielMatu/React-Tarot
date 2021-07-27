@@ -23,15 +23,15 @@ export const PrivateRoute = ({
         const { uid } = state 
 
 
-        firebase.auth().onAuthStateChanged((user) => {
-            if (user){
-            } else {
-                logout()
-                setCalendar({})
+        // firebase.auth().onAuthStateChanged((user) => {
+        //     if (user){
+        //     } else {
+        //         logout()
+        //         setCalendar({})
 
-                // history.push('/')
-            }
-        })
+        //         // history.push('/')
+        //     }
+        // })
 
         return (
             <Route {...rest} component={(props) => (

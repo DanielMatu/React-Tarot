@@ -21,39 +21,43 @@ export const LoginPage = () => {
     console.log(firebase.auth().currentUser)
     console.log(firebase.auth())
 
-    firebase.auth().onAuthStateChanged((user) => {
+    const loadAccDetails = (loginRes) => {
+        login(loginRes.user.uid)
+    }
 
-        if (user){
-            login(user.uid)
-            // set the user in the database if there isnt one
-            firebase.database().ref(`users/${user.uid}`).once('value', (snapshot) => {
-                if (snapshot.exists()){
-                } else {
-                    firebase.database().ref(`users/${user.uid}`).set({})
-                }
-            })
+    // firebase.auth().onAuthStateChanged((user) => {
+
+    //     if (user){
+    //         login(user.uid)
+    //         // set the user in the database if there isnt one
+    //         firebase.database().ref(`users/${user.uid}`).once('value', (snapshot) => {
+    //             if (snapshot.exists()){
+    //             } else {
+    //                 firebase.database().ref(`users/${user.uid}`).set({})
+    //             }
+    //         })
 
 
-            // read calendar from database and set calendar in state
-            firebase.database().ref(`users/${user.uid}/calendar`).once('value', (snapshot) => {
-                if (calendar){
-                    if (Object.keys(calendar).length === 0){
-                        if (snapshot.exists()){
-                            setCalendar(snapshot.val())
+    //         // read calendar from database and set calendar in state
+    //         firebase.database().ref(`users/${user.uid}/calendar`).once('value', (snapshot) => {
+    //             if (calendar){
+    //                 if (Object.keys(calendar).length === 0){
+    //                     if (snapshot.exists()){
+    //                         setCalendar(snapshot.val())
     
-                        } else {
-                            setCalendar(initializeCalendar())
-                            firebase.database().ref(`users/${user.uid}/calendar`).set(newCalendar).then(() => {
-                            })
-                        }
-                    }
+    //                     } else {
+    //                         setCalendar(initializeCalendar())
+    //                         firebase.database().ref(`users/${user.uid}/calendar`).set(newCalendar).then(() => {
+    //                         })
+    //                     }
+    //                 }
 
-                }
-            })
+    //             }
+    //         })
 
 
-        }
-    })
+    //     }
+    // })
 
     // unsubscribe()
 
@@ -62,7 +66,7 @@ export const LoginPage = () => {
             <div className="box-layout__box">
                 <h1 className="box-layout__title">React Tarot</h1>
                 <p>fortunes and journal</p>
-                <button className="button" onClick={() => firebase.auth().signInWithPopup(googleAuthProvider)}>Login with google</button>
+                <button className="button" onClick={() => firebase.auth().signInWithPopup(googleAuthProvider).then((loginRes) => loadAccDetails(loginRes))}>Login with google</button>
 
             </div>
         </div>
