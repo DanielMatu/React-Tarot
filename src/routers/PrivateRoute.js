@@ -28,7 +28,7 @@ export const PrivateRoute = ({
             } else {
                 setCalendar({})
                 logout()
-                history.push('/')
+                // history.push('/')
             }
         })
 

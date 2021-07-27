@@ -18,12 +18,14 @@ export { DateContext }
 
 const DateContextProvider = (props) => {
 
-    let { children, initialCalendar } = props
+    let { children } = props
     const [ userState, login, logout ] = useContext(UserContext)
 
     let { uid } = userState
 
     const date = new Date()
+
+    let initialCalendar = {}
     let initialCalendarMonth = date.getMonth() + 1
     let initialCalendarYear = date.getFullYear()
 
