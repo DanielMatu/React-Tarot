@@ -18,13 +18,12 @@ export { DateContext }
 
 const DateContextProvider = (props) => {
 
-    let { children } = props
+    let { children, initialCalendar } = props
     const [ userState, login, logout ] = useContext(UserContext)
 
     let { uid } = userState
 
     const date = new Date()
-    let initialCalendar = {}
     let initialCalendarMonth = date.getMonth() + 1
     let initialCalendarYear = date.getFullYear()
 
@@ -37,7 +36,6 @@ const DateContextProvider = (props) => {
     const yearDec = (currYear) => dispatch({  type: 'YEAR_DEC',payload: { newYear: getDecrementedYear(currYear)}})
 
     const setCalendar = (newCalendar) => dispatch({ type: 'UPDATE_CALENDAR', payload: {newCalendar}})
-
 
 
     const removeEntry = (dayNumber, index) => {

@@ -12,6 +12,7 @@ import DateContextProvider from './contexts/date-context'
 import UserContextProvider from './contexts/user-context'
 import EntryContextProvider from './contexts/entry-context'
 import FortuneContextProvider from './contexts/fortune-context'
+import { initializeCalendar } from './actions/calendarUpdatingFuncs'
 
 // window.onload = function () {
 //     history.push('/dashboard')
@@ -19,11 +20,11 @@ import FortuneContextProvider from './contexts/fortune-context'
 
 const store = configureStore()
 
-const generateJSX = () => (
+const generateJSX = (uid, initialCalendar) => (
     <Provider store={store}>
-        <UserContextProvider>
-            <EntryContextProvider>
-                <DateContextProvider>
+        <UserContextProvider uid={uid}>
+            <EntryContextProvider >
+                <DateContextProvider initialCalendar={initialCalendar}>
                     <FortuneContextProvider>
                         <AppRouter />
                     </FortuneContextProvider>
@@ -34,9 +35,10 @@ const generateJSX = () => (
 )
 let jsx
 let hasRendered = false;
-const renderApp = (uid, calendar) => {
+const renderApp = (uid, initialCalendar) => {
     if (!hasRendered) {
-        jsx = generateJSX(uid, calendar)
+        console.log('rerendering')
+        jsx = generateJSX(uid, initialCalendar)
         ReactDOM.render(jsx, document.getElementById('app'))
         hasRendered = true
     }
@@ -45,9 +47,32 @@ const renderApp = (uid, calendar) => {
 ReactDOM.render(<LoadingPage /> , document.getElementById('app'))
 
 
-if (!hasRendered){
-    renderApp()
+// this makes it so if someone refreshes while logged in, the uid is set again so it wont be lost
+// or it logs out if the uid timed out
 
-}
+firebase.auth().onAuthStateChanged((user) => {
+    if (user){
+        let uid = user.uid
+        let initialCalendar 
+        firebase.database().ref(`users/${uid}/calendar`).once('value', (snapshot) => {
+            if (snapshot.exists()){
+                initialCalendar = snapshot.val()
+            }
+            else {
+                initialCalendar = initializeCalendar()
+            }
+        }).then(() => {
+            console.log('onauth triggered with the uid ')
+            console.log(uid)
+            console.log('onauth triggered with the calendar ')
+            console.log(initialCalendar)
+            hasRendered = false
+            renderApp(uid, initialCalendar)
+        })
+    } else {
+        renderApp()
+    }
 
+
+})
 

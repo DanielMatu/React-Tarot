@@ -10,7 +10,8 @@ export const PublicRoute = ({
     const [ state, login, logout ] = useContext(UserContext)
     const { uid } = state 
 
-
+    console.log('public route has this user state')
+    console.log(state)
     return (
     <Route {...rest} component={(props) => (
         uid ? (
