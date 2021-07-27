@@ -13,14 +13,7 @@ export const Header = () => {
 
 
     const [dropdownActive, setDropdownActive] = useState(false)
-    firebase.auth().onAuthStateChanged((user) => {
-        if (user){
-        } else {
-            setCalendar({})
-            logout()
-            history.push('/')
-        }
-    })
+
     return (
         <header className="header">
             <div className = "content-container">
