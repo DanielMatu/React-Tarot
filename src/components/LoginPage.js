@@ -17,49 +17,35 @@ export const LoginPage = () => {
     let { dateState, setCalendar } = useContext(DateContext)
     let { calendar } = dateState
 
-    console.log('current user?')
-    console.log(firebase.auth().currentUser)
-    console.log(firebase.auth())
-
     const loadAccDetails = (loginRes) => {
-        login(loginRes.user.uid)
+        let uid = loginRes.user.uid
+        login(uid)
+
+        firebase.database().ref(`users/${uid}`).once('value', (snapshot) => {
+            if (snapshot.exists()){
+            } else {
+                firebase.database().ref(`users/${uid}`).set({})
+            }
+        })
+
+
+        // read calendar from database and set calendar in state
+        firebase.database().ref(`users/${uid}/calendar`).once('value', (snapshot) => {
+            if (calendar){
+                if (Object.keys(calendar).length === 0){
+                    if (snapshot.exists()){
+                        setCalendar(snapshot.val())
+
+                    } else {
+                        setCalendar(initializeCalendar())
+                        firebase.database().ref(`users/${uid}/calendar`).set(newCalendar).then(() => {
+                        })
+                    }
+                }
+
+            }
+        })
     }
-
-    // firebase.auth().onAuthStateChanged((user) => {
-
-    //     if (user){
-    //         login(user.uid)
-    //         // set the user in the database if there isnt one
-    //         firebase.database().ref(`users/${user.uid}`).once('value', (snapshot) => {
-    //             if (snapshot.exists()){
-    //             } else {
-    //                 firebase.database().ref(`users/${user.uid}`).set({})
-    //             }
-    //         })
-
-
-    //         // read calendar from database and set calendar in state
-    //         firebase.database().ref(`users/${user.uid}/calendar`).once('value', (snapshot) => {
-    //             if (calendar){
-    //                 if (Object.keys(calendar).length === 0){
-    //                     if (snapshot.exists()){
-    //                         setCalendar(snapshot.val())
-    
-    //                     } else {
-    //                         setCalendar(initializeCalendar())
-    //                         firebase.database().ref(`users/${user.uid}/calendar`).set(newCalendar).then(() => {
-    //                         })
-    //                     }
-    //                 }
-
-    //             }
-    //         })
-
-
-    //     }
-    // })
-
-    // unsubscribe()
 
     return (
         <div className="box-layout">
