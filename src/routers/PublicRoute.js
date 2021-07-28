@@ -15,9 +15,21 @@ export const PublicRoute = ({
     const [ state, login, logout ] = useContext(UserContext)
     const { uid } = state 
 
+    const { setCalendar } = useContext(DateContext)
 
+    if (!uid){
+        let persistedUid = localStorage.getItem('uid')
+        let persistedSerializedCalendar = localStorage.getItem('serializedCalendar')
+        let persistedCalendar = JSON.parse(persistedSerializedCalendar)
+        if (persistedUid){
+            login(persistedUid)
 
-
+            setCalendar(persistedCalendar)
+        }
+        console.log(persistedUid)
+        // login(persistedUid)
+        // setCalendar(persistedCalendar)
+    }
 
     return (
     <Route {...rest} component={(props) => (

@@ -2,6 +2,10 @@ const UserReducer = (state, action) => {
     switch (action.type){
         case "LOGIN":
             console.log('login triggered')
+            console.log('state before')
+            console.log(state)
+            console.log('new uid')
+            console.log(action.payload.uid)
             return {
                 ...state,
                 uid: action.payload.uid

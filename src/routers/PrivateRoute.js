@@ -22,16 +22,15 @@ export const PrivateRoute = ({
         const [ state, login, logout ] = useContext(UserContext)
         const { uid } = state 
 
-
-        // firebase.auth().onAuthStateChanged((user) => {
-        //     if (user){
-        //     } else {
-        //         logout()
-        //         setCalendar({})
-
-        //         // history.push('/')
-        //     }
-        // })
+        if (!uid){
+            let persistedUid = localStorage.getItem('uid')
+            let persistedSerializedCalendar = localStorage.getItem('serializedCalendar')
+            let persistedCalendar = JSON.parse(persistedSerializedCalendar)
+            console.log('heres persisted serialized calendar')
+            console.log(persistedCalendar)
+            login(persistedUid)
+            setCalendar(persistedCalendar)
+        }
 
         return (
             <Route {...rest} component={(props) => (

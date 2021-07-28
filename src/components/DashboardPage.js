@@ -11,12 +11,9 @@ const DashboardPage = () =>  {
     const {dateState} = useContext(DateContext)
     let { calendar } = dateState
 
-    // console.log('heres calendar')
-    // console.log(calendar)
+    console.log('heres calendar')
+    console.log(calendar)
 
-    console.log('dash - current user?')
-    console.log(firebase.auth().currentUser)
-    console.log(firebase.auth())
 
     const { setTitle, setDate, setBody, setFortune, setIsEditing, setDeck, setUnmodifiedFortune, setUnmodifiedDeck  } = useContext(EntryContext)
 

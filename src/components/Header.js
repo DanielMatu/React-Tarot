@@ -47,7 +47,13 @@ export const Header = () => {
                 </Link>
                 <button 
                     className="button button--link hamburger-dropdown-item dropdown-logout" 
-                    onClick={() => firebase.auth().signOut().then(() => {logout()})}
+                    onClick={() => firebase.auth().signOut().then(() => {
+                                        localStorage.removeItem('serializedCalendar')
+                                        localStorage.removeItem('uid')
+                                        logout()
+                                        setCalendar({})
+
+                                    })}
                     >
                     <h3>LOG OUT</h3>
                 </button>
