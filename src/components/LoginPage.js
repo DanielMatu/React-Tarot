@@ -40,7 +40,7 @@ export const LoginPage = () => {
                         localStorage.setItem('serializedCalendar', JSON.stringify(snapshot.val()))
 
                     } else {
-                        let newCalendar = initializeCalendar
+                        let newCalendar = initializeCalendar()
                         setCalendar(newCalendar)
                         firebase.database().ref(`users/${uid}/calendar`).set(calendar).then(() => {
                             localStorage.setItem('serializedCalendar', JSON.stringify(newCalendar))
