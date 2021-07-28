@@ -22,19 +22,20 @@
 
     .fortune-layout {
         width: 70vw;
-        height: 90.5vh;
+        height: 88.5vh;
     }
 
     .display-section {
-        width: 30vw; 
-        height: 90.5vh;
+        width: 35vw; 
+        height: 88.5vh;
         display: flex;
         flex-direction:column;
         align-items: center;
 
         .display-card-container {
+            zoom: 85%;
             background-color: rgba(blue, 0.3);
-            width: 30vw;
+            width: 35vw;
             height: 50rem;
             display:flex;
             justify-content:center;
@@ -93,7 +94,7 @@
 
         .fortune-button {
             width: 15vw;
-            height: 14vh;
+            height: 15vh;
             color: white;
             font-size: 35px;
             letter-spacing: 2px;
