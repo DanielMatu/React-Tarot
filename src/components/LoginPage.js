@@ -17,18 +17,6 @@ export const LoginPage = () => {
     let { dateState, setCalendar } = useContext(DateContext)
     let { calendar } = dateState
 
-    // React.useEffect(() => {
-    //     const serializedCalendar = JSON.stringify(calendar);
-    //     console.log('serialized calendar')
-    //     console.log(serializedCalendar)
-    //     console.log('nonserialized calendar')
-    //     console.log(calendar)
-    //     localStorage.setItem('serializedCalendar', serializedCalendar);
-    //     console.log('heres the calendar i just stored')
-    //     console.log(localStorage.getItem('serializedCalendar'))
-
-    // }, [calendar])
-
     const loadAccDetails = (loginRes) => {
         let uid = loginRes.user.uid
         console.log('the uid is ')

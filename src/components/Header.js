@@ -30,7 +30,12 @@ export const Header = () => {
                         <h2>CALENDAR</h2>
                     </Link>
                     <button className="button button--link main-nav" 
-                            onClick={() => firebase.auth().signOut().then(() => {logout()})}
+                            onClick={() => firebase.auth().signOut().then(() => {
+                                localStorage.removeItem('serializedCalendar')
+                                localStorage.removeItem('uid')
+                                logout()
+                                setCalendar({})
+                            })}
                             ><h3>LOG OUT</h3></button>
                 </div>
             </div>
