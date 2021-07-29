@@ -25,11 +25,17 @@ export const PrivateRoute = ({
         if (!uid){
             let persistedUid = localStorage.getItem('uid')
             let persistedSerializedCalendar = localStorage.getItem('serializedCalendar')
-            let persistedCalendar = JSON.parse(persistedSerializedCalendar)
-            console.log('heres persisted serialized calendar')
-            console.log(persistedCalendar)
-            login(persistedUid)
-            setCalendar(persistedCalendar)
+            try {
+                let persistedCalendar = JSON.parse(persistedSerializedCalendar)
+                setCalendar(persistedCalendar)
+            } catch (e) {
+            }
+    
+            try {
+                login(persistedUid)
+            } catch (e) {
+            }
+    
         }
 
         return (
