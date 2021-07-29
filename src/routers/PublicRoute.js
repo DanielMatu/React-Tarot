@@ -20,11 +20,12 @@ export const PublicRoute = ({
     if (!uid){
         let persistedUid = localStorage.getItem('uid')
         let persistedSerializedCalendar = localStorage.getItem('serializedCalendar')
-        let persistedCalendar = JSON.parse(persistedSerializedCalendar)
+        if (persistedSerializedCalendar) {
+            let persistedCalendar = JSON.parse(persistedSerializedCalendar)
+            setCalendar(persistedCalendar)
+        }
         if (persistedUid){
             login(persistedUid)
-
-            setCalendar(persistedCalendar)
         }
         console.log(persistedUid)
         // login(persistedUid)
