@@ -34,9 +34,14 @@
 
         .display-card-container {
             zoom: 85%;
-            background-color: rgba(blue, 0.3);
+            background-color: rgba(#0000ff, 0.3);
+
             width: 35vw;
-            height: 50rem;
+            // height: 50rem;
+
+            // height: 40vh;
+            // width: 35vw;
+
             display:flex;
             justify-content:center;
             .add-card-button{
@@ -53,8 +58,11 @@
                 font-size: 25px;
             }
             .display-card {
-                width: 29rem;
-                height: 50rem;
+                // width: 29rem;
+                // height: 50rem;
+
+                height: 45vh;
+                width: calc(45vh * 0.58);
             }
         }
 

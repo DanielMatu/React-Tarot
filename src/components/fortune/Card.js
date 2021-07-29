@@ -42,7 +42,7 @@ const Card = (props) => {
 
 
     return (
-
+        
         <div className='card-container' style={(depth === 0) ? {} :{zIndex:'2'}}>
             <div className={(isDummy ? 'card' : 'card nonDummyCard') + (depth === 0 ? '' : ' overlayed-card')}
                     label={label}
@@ -52,7 +52,11 @@ const Card = (props) => {
                                        : isDummy ? {background:'none'} 
                                                  : {backgroundImage: cardbackBackgroundImageUrl, backgroundSize:'cover'} }  
             />
-            <div className='card-label'>{label}</div>
+            {
+                (depth === 0) && 
+                <div className='card-label'>{label}</div>
+
+            }
         </div>
 
 
