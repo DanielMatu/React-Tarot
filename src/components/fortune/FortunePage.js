@@ -10,6 +10,11 @@ import Layout from './Layout'
 import { Prompt } from 'react-router'
 
 const FortunePage = () => {
+
+    window.onbeforeunload = function() {
+        return ''
+    }
+
     const {fortuneState} = useContext(FortuneContext)
     let { displayCardName, displayCardText, displayCardPosition} = fortuneState
 

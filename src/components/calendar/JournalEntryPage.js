@@ -16,7 +16,7 @@ const JournalEntryPage = () => {
     // let {passedTitle, passedDate, passedBody, passedFortune} = props 
 
     window.onbeforeunload = function() {
-        return 'sure?'
+        return ''
     }
 
 

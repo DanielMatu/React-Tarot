@@ -8,6 +8,10 @@ import TarotAlert from '../TarotAlert.js';
 
 const Journal = () => {
 
+    window.onbeforeunload = function() {
+        return 
+    }
+
     const [ userState, login, logout ] = useContext(UserContext)
     const { uid } = userState
     const { entryState, setSaveConfirmationVisible } = useContext(EntryContext)

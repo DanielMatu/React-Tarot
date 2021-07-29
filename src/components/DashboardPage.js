@@ -14,6 +14,10 @@ const DashboardPage = () =>  {
     console.log('heres calendar')
     console.log(calendar)
 
+    window.onbeforeunload = function() {
+        return 
+    }
+
 
     const { setTitle, setDate, setBody, setFortune, setIsEditing, setDeck, setUnmodifiedFortune, setUnmodifiedDeck  } = useContext(EntryContext)
 
