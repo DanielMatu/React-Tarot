@@ -11,7 +11,8 @@ const Card = (props) => {
     const { row, col, depth, card, label } = props
     let { name, text, isDummy, isRevealed } = card
 
-
+    console.log('rendered this card')
+    console.log(card)
     const revealCard = e => {
         if (!isDummy){
             if (!isRevealed){
@@ -42,10 +43,9 @@ const Card = (props) => {
 
 
     return (
-        
+
         <div className='card-container' style={(depth === 0) ? {} :{zIndex:'2'}}>
             <div className={(isDummy ? 'card' : 'card nonDummyCard') + (depth === 0 ? '' : ' overlayed-card')}
-                    label={label}
                     onClick={(e) => revealCard(e)} 
                     style={
                             isRevealed ? {backgroundImage: 'url(' + cardImagePath + name + '.png")', backgroundSize:'cover'} 
