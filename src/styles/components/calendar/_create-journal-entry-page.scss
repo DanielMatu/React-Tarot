@@ -1,8 +1,8 @@
 .create-entry-wrapper {
+    margin-top:2rem;
     display: flex;
     flex-direction: column;
     min-width:100vw;
-    min-height:100vh;
     align-items: center;
     justify-content: center;
 }
@@ -68,7 +68,7 @@
     color: $turqoise;
 
     .entry-button {
-        height:41.25vh;
+        height:42vh;
         display: flex;
         align-items:center;
         justify-content: center;

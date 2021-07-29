@@ -2,9 +2,9 @@
 
 .card{
     zoom: 85%;
-    margin-top: 2rem;
-    height: 25vh;
-    width: calc(25vh * 0.58)
+    margin-top: 2vh;
+    height: 28vh;
+    width: calc(28vh * 0.58)
 
 
     // background:url('../../public/images/Tarot/cardback1.png')
@@ -17,13 +17,12 @@
 
 .overlayed-card {
     margin-left:-2rem;
-    // margin-left: -15vw;
     z-index:2;
 }
 
 .card-label {
     zoom: 85%;
-    min-width: calc(25vh * 0.58);
+    min-width: calc(28vh * 0.58);
     font-family: cursive;
     color:rgba(white, 0.9);
     letter-spacing:2;

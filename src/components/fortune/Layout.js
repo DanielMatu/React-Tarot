@@ -10,8 +10,7 @@ import Slot from './Slot'
 const Layout = () => {
     const { entryState } = useContext(EntryContext)
     const { fortune } = entryState
-    const labels = ['The Mind','Final Outcome','The Surprise','The Soul','The Future','The Heart','The Problem','The Family',9]
-    let realCardsId = 0
+    const labels = ['The Mind','The Mind','Final Outcome','The Surprise','The Soul','The Future','The Heart','The Problem', 'The Family']
     let id = 0
     let slotId = 0
 
@@ -23,22 +22,8 @@ const Layout = () => {
                     {
                     row.map((slot, colIndex) => 
                         
-                    // slot !== 0 ? slot.map((card, depth) => (
-
                         slot !== 0 ? 
-                            <Slot slot={slot} row={rowIndex} col={colIndex} slotId={slotId++} label={labels[slotId]}/>
-                            // <Card 
-                            //     key={id++} 
-                            //     row={rowIndex} 
-                            //     col={colIndex} 
-                            //     depth={depth} 
-                            //     card={card} 
-                            //     label={(depth === 0) ? labels[realCardsId++] : ''}
-                            //     // style={(depth === 0) ? {marginLeft: '-15rem'} : {marginLeft: '-15rem'}}
-                            //     style={{marginLeft: '-135rem'}}
-                            // />
-                        
-                        
+                        <Slot slot={slot} row={rowIndex} col={colIndex} slotId={slotId++} label={labels[slotId]}/>
                         :
                         <Card key={id++} row={rowIndex} col={colIndex} depth={0} card={{isDummy:true}} />
                         
