@@ -28,13 +28,11 @@ export const PrivateRoute = ({
             try {
                 let persistedCalendar = JSON.parse(persistedSerializedCalendar)
                 setCalendar(persistedCalendar)
-            } catch (e) {
-            }
-    
-            try {
                 login(persistedUid)
+
             } catch (e) {
             }
+
     
         }
 

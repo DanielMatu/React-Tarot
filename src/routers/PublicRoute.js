@@ -23,13 +23,11 @@ export const PublicRoute = ({
         try {
             let persistedCalendar = JSON.parse(persistedSerializedCalendar)
             setCalendar(persistedCalendar)
+            login(persistedUid)
+
         } catch (e) {
         }
 
-        try {
-            login(persistedUid)
-        } catch (e) {
-        }
 
     }
 
