@@ -17,19 +17,23 @@ export const PublicRoute = ({
 
     const { setCalendar } = useContext(DateContext)
 
-    // if (!uid){
-    //     let persistedUid = localStorage.getItem('uid')
-    //     let persistedSerializedCalendar = localStorage.getItem('serializedCalendar')
-    //     try {
-    //         let persistedCalendar = JSON.parse(persistedSerializedCalendar)
-    //         setCalendar(persistedCalendar)
-    //         login(persistedUid)
+    if (!uid){
+        let persistedUid = localStorage.getItem('uid')
+        let persistedSerializedCalendar = localStorage.getItem('serializedCalendar')
+        try {
+            let persistedCalendar = JSON.parse(persistedSerializedCalendar)
+            if (persistedCalendar){
+                setCalendar(persistedCalendar)
+            }
+            if (persistedUid){
+                login(persistedUid)
+            }
 
-    //     } catch (e) {
-    //     }
-
-
-    // }
+        } catch (e) {
+            console.log('error')
+            console.log(e)
+        }
+    }
 
     return (
     <Route {...rest} component={(props) => (

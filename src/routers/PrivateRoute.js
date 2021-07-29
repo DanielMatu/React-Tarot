@@ -22,19 +22,23 @@ export const PrivateRoute = ({
         const [ state, login, logout ] = useContext(UserContext)
         const { uid } = state 
 
-        // if (!uid){
-        //     let persistedUid = localStorage.getItem('uid')
-        //     let persistedSerializedCalendar = localStorage.getItem('serializedCalendar')
-        //     try {
-        //         let persistedCalendar = JSON.parse(persistedSerializedCalendar)
-        //         setCalendar(persistedCalendar)
-        //         login(persistedUid)
-
-        //     } catch (e) {
-        //     }
-
+        if (!uid){
+            let persistedUid = localStorage.getItem('uid')
+            let persistedSerializedCalendar = localStorage.getItem('serializedCalendar')
+            try {
+                let persistedCalendar = JSON.parse(persistedSerializedCalendar)
+                if (persistedCalendar){
+                    setCalendar(persistedCalendar)
+                }
+                if (persistedUid){
+                    login(persistedUid)
+                }
     
-        // }
+            } catch (e) {
+                console.log('error')
+                console.log(e)
+            }
+        }
 
         return (
             <Route {...rest} component={(props) => (
