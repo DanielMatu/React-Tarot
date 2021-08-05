@@ -29,6 +29,8 @@ export const PrivateRoute = ({
                 let persistedCalendar = JSON.parse(persistedSerializedCalendar)
                 if (persistedCalendar){
                     setCalendar(persistedCalendar)
+                    console.log('heres the persisted clanedar i guess')
+                    console.log(persistedCalendar)
                 }
                 if (persistedUid){
                     login(persistedUid)

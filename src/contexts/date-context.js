@@ -51,6 +51,7 @@ const DateContextProvider = (props) => {
             dateState.calendar[dateState.calendarYear][stringMonth][dayNumber - 1]['entries'] = newEntries
             db.ref(`users/${uid}/calendar/${dateState.calendarYear}/${stringMonth}/${dayNumber - 1}/entries`).set(newEntries).then(() => {
                 dispatch({ type: 'UPDATE_CALENDAR', payload: { newCalendar: dateState.calendar }})
+                localStorage.setItem('serializedCalendar', JSON.stringify(dateState.calendar))
             })
         }
     }
@@ -72,6 +73,7 @@ const DateContextProvider = (props) => {
                                   .set(todaysEntries)
                                   .then(() => {
                                         dispatch({ type: 'UPDATE_CALENDAR', payload: {newCalendar: dateState.calendar }})
+                                        localStorage.setItem('serializedCalendar', JSON.stringify(dateState.calendar))
                                     })
     }
 
@@ -86,6 +88,7 @@ const DateContextProvider = (props) => {
                                   .set(todaysEntries)
                                   .then(() => {
                                         dispatch({ type: 'UPDATE_CALENDAR', payload: {newCalendar: dateState.calendar }})
+                                        localStorage.setItem('serializedCalendar', JSON.stringify(dateState.calendar))
                                     })
     }
 
