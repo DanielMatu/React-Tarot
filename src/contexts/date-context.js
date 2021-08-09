@@ -56,7 +56,9 @@ const DateContextProvider = (props) => {
         }
     }
 
-    const saveTodaysEntry = async (title, entryDate, body, fortune={}, deck, unmodifiedFortune, unmodifiedDeck) => {
+    const saveTodaysEntry = async (title, entryDate, body, id, fortune={}, deck, unmodifiedFortune, unmodifiedDeck) => {
+        console.log('gonna save with this unmodified deck')
+        console.log(unmodifiedDeck)
         let date = new Date() 
         let currDayNumber = date.getDate()
         let currMonth = date.getMonth() + 1

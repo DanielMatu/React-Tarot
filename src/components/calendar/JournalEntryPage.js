@@ -69,10 +69,14 @@ const JournalEntryPage = () => {
 
     const submitJournalEntry = (submitFunction, ...submitFunctionArgs) => {
         setDidSave(true)
+        console.log('set unmodified deck to ')
+        console.log(deck)
         setUnmodifiedDeck(deck)
         setUnmodifiedFortune(fortune)
         submitFunctionArgs[6] = fortune 
         submitFunctionArgs[7] = deck
+        console.log('these are the submit function args')
+        console.log(submitFunctionArgs)
         if (!entryTitle) {
             setReqErrActive(true)
         } else {
@@ -138,7 +142,7 @@ const JournalEntryPage = () => {
                     }
                     {
                         !isEditing && 
-                        <div className='entry-button save-button' onClick={() => submitJournalEntry(saveTodaysEntry, entryTitle, entryDate, entryBody, fortune, deck, unmodifiedFortune, unmodifiedDeck)}>
+                        <div className='entry-button save-button' onClick={() => submitJournalEntry(saveTodaysEntry, entryTitle, entryDate, entryBody, 0, fortune, deck, unmodifiedFortune, unmodifiedDeck)}>
                             SAVE
                         </div>
                     }
