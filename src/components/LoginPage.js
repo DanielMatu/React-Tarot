@@ -17,22 +17,14 @@ export const LoginPage = () => {
     let { dateState, setCalendar } = useContext(DateContext)
     let { calendar } = dateState
 
-    const loadAccDetails = (loginRes) => {
+    const loadAccDetails = async (loginRes) => {
         let uid = loginRes.user.uid
         console.log('the uid is ')
         console.log(uid)
         login(uid)
 
-        firebase.database().ref(`users/${uid}`).once('value', (snapshot) => {
-            if (snapshot.exists()){
-            } else {
-                firebase.database().ref(`users/${uid}`).set({})
-            }
-        })
-
-
         // read calendar from database and set calendar in state
-        firebase.database().ref(`users/${uid}/calendar`).once('value', (snapshot) => {
+        await firebase.database().ref(`users/${uid}/calendar`).once('value', (snapshot) => {
             if (calendar){
                 if (Object.keys(calendar).length === 0){
                     if (snapshot.exists()){
@@ -40,11 +32,10 @@ export const LoginPage = () => {
                         localStorage.setItem('serializedCalendar', JSON.stringify(snapshot.val()))
 
                     } else {
+                        console.log('saving calendar in database')
                         let newCalendar = initializeCalendar()
                         setCalendar(newCalendar)
-                        firebase.database().ref(`users/${uid}/calendar`).set(calendar).then(() => {
-                            localStorage.setItem('serializedCalendar', JSON.stringify(newCalendar))
-                        })
+                        firebase.database().ref(`users/${uid}/calendar`).set(newCalendar)
                     }
                 }
 
